@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Application | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/tag/application/</link>
+      <atom:link href="https://example.com/tag/application/index.xml" rel="self" type="application/rss+xml" />
+    <description>Application</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>Application</title>
+      <link>https://example.com/tag/application/</link>
+    </image>
+    
+    <item>
+      <title>Application season of 2022 fall for me is over, I decided to go to ETH Zurich to obtain higher degree!</title>
+      <link>https://example.com/post/20220301_application/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/20220301_application/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;In 2022 Fall, I received many offers from prestigious universities as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Master of computational science and engineering, ETH Zurich&lt;/li&gt;
+&lt;li&gt;PhD of mechanical engineering (full scholarship), National University of Singapore&lt;/li&gt;
+&lt;li&gt;Master of mechanical engineering (full scholarship), University of British Columbia&lt;/li&gt;
+&lt;li&gt;Mphil of mechanical engineering (full scholarship), University of Hong Kong&lt;/li&gt;
+&lt;li&gt;Master of mechanical engineering (full scholarship), King Abdullah University of Science and Technology)&lt;/li&gt;
+&lt;li&gt;Master of InterMaths (full scholarship), Erasmus Mundus Programme&lt;/li&gt;
+&lt;li&gt;Master of mechanical engineering, University of Waterloo&lt;/li&gt;
+&lt;li&gt;Master of aeronautics, University of Toronto&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also, I really appreciate Prof. Jiarong Hong for giving me the PhD offer of University of Minnesota, two cities again, although I cannot obtain the visa of the USA.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/project/</link>
+      <atom:link href="https://example.com/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 27 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>Projects</title>
+      <link>https://example.com/project/</link>
+    </image>
+    
+    <item>
+      <title>Ultra-low Energy Loss in Biomolecular Motor</title>
+      <link>https://example.com/project/bacterial-flagellar-motor/</link>
+      <pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/bacterial-flagellar-motor/</guid>
+      <description>&lt;p&gt;In our nature, there are many fascinating motor machines in biological systems. These motor machines can be divided into two parts: linear motors and rotary motors. Generally, linear motors including kinesin, dynein, myosin generate energy for locomotion by ATP hydrolysis. Rotary motors including bacterial flagellar motor (BFM) and ATPase generate energy by the electrochemical potential difference of cations across the cell membrane. Here, in our project, the protagonist is bacterial flagellar motor.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/100.gif&#34; alt=&#34;1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The first swimming bacterium was observed by Leeuwenhoek in the seventheeth century. However, due to the reason that details of bacteria were too small to be observed by optical microscope, people didn&amp;rsquo;t noticed the flagellar filament and spins of motor in the following 300 years. Until the mid-1900s, people restarted to notice the movement of flagellar motor.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.gif&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Here, I summarized the important milestones of BFM in experiments and theories. If you are interested, you can read references in this figure.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Although the bacterial flagellar motor has been studied early, for a long time, detailed modeling efforts have been stymied by the lack of atomic-level structural information. Before 2020, all studies related to structural analysis had been summarized in the review of Liu Jun&amp;rsquo;s group at Yale. In 2020, two important papers that got the atom-level structural information of statics in BFM had been published, which was important to help us understand how BFM transform the chemical gradient energy into mechanical energy. But this is not the focus in my research project. In May 2021, flagellar basal body has been analyzed at the atomic accuracy by cryo-EM. And groups in Zhejiang University and Oxford nearly published their articles at the same time. And that is the motive of my project. I found this structure very intriguing and may exist some important mechanisms. Let&amp;rsquo;s me further explain to you what I am thinking.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In the structure they revealed, I found a very interesting part. The basal body of the bacterial flagellum is a rotary motor that consists of several rings (C, MS and LP) and a rod. What makes this part amazing is that the LP ring acts as a bushing supporting the distal rod for its rapid and stable rotation without much friction. &lt;strong&gt;It should be noted that the maximum rotation speed has been measured to be 1700 revolutions per second (rps), which is much faster than that of the Aero Engine. It also should be noted that the rod is is asymmetric. However, under these circumstances, the system is very stable and can convert the electrochemical potential difference of cations across the cell membrane to mechanical work with almost 100% efficiency. So amazing! Isn&amp;rsquo;t it?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.gif&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;This question can be viewed as a problem of liquid-solid and solid-solid interfaces. According to the structure in their paper, I found:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the outer surface of the rod and inner surface of the L ring form a small gap between them that is large enough  (~ 6 - 7 Angstrom)  to accommodate one or two layers of water molecules. These water molecules is highly confined and have the different properties comparing with bulk water. This is a liquid-solid interface.&lt;/li&gt;
+&lt;li&gt;the distance between outer surface of the rod and inner surface of the P ring is much smaller. The narrowest part will reach 2-3 Angstrom, and this is a solid-solid interface without any water.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Therefore, I am trying to figure out the potential mechanism of this question. I think this problem is very meaningful, which can guide us design new super-lubricant interface. What&amp;rsquo;s more, I think it may also tell us how microorganism not only interact with the environment but even control the the environment!&lt;/p&gt;
+&lt;p&gt;Currently, I have two ideas about how deal with this question:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Firstly, I am trying to run the all-atom molecular dynamics simulation for the whole system. And I already have some results of equilibrium. I will show you in the following. But this path is facing some obstacles now. Due to the reason that the whole system is very large (about 2 million atoms), we cannot get a long enough simulation to analyze. &lt;strong&gt;You should know that time scale of microsecond is needed, but our hardware can only support us to reach the time scale of nanosecond. I am thinking whether I can accelerate my simulation by using machine learning.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Secondly, I am thinking if I can build a model from the perspective of thermodynamics. I found the energy scale of the biological motor is comparable to that of thermal fluctuation in the environment. Therefore, I am thinking if there is a possibility that the motor can make use of the energy of thermal fluctuation and counteract the friction. I think I can use a simple and abstract model to verify this concept, which is much more innovative and time-saving.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Following are some of results of my simulation. Because this work is still on the march, I can&amp;rsquo;t post more details. Please look forward to our future paper!&lt;/p&gt;
+&lt;img src=&#34;./photo/5.gif&#34; alt=&#34;5&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;img src=&#34;./photo/3.gif&#34; alt=&#34;7&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;p&gt;This work is totally proposed by myself, and is highly acknowledged by my current supervisor Prof. Wanlin Guo, Prof. Min Yi and Prof. Hu Qiu. Prof. Guo is Academician of Chinese Academy of Sciences and the founder and director of Institute of Nanoscience. Prof. Yi is the recipient of the 15th Thousand Youth Talents Program of China. Prof. Qiu is the full professor of NUAA.&lt;/p&gt;
+&lt;p&gt;I have also contacted the first author of the structure analysis paper &lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/S009286742100430X&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;(Cell)&lt;/a&gt; written by group in Zhejiang University, they gave me their huge interest and high recognition about my idea.&lt;/p&gt;
+&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;7&#34; style=&#34;zoom:50%;&#34; /&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning for Aeroelastic Applications</title>
+      <link>https://example.com/project/ml-aeroelasticity/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/ml-aeroelasticity/</guid>
+      <description>&lt;mark&gt;The testimonial video is at the bottom of this page.&lt;/mark&gt;
+&lt;p&gt;In recent years, due to the development of high-performance computations and experimental measurement capabilities. Researchers are able to obtain high precision and high-resolution spatiotemporal data from large-scale fluid simulations and experiments.&lt;/p&gt;
+&lt;p&gt;At the same time, the advancement of sophisticated algorithms and open source software enables researchers to apply ML to address many challenges. Among them, neural networks is a powerful tool to simulate nonlinear mapping relationship. Therefore, in fluid mechanics community, turbulence modeling and more generally, nonlinear fluid dynamics has been one proving ground for neural networks. Recent advancements on ML-assisted fluids can see these reviews in Annual Review of Fluid Mechanics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.annualreviews.org/doi/10.1146/annurev-fluid-010518-040547&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Turbulence modeling in the age of data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.annualreviews.org/doi/abs/10.1146/annurev-fluid-010719-060214&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Machine learning for fluid mechanics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Unsteady flows are high-dimensional, nonlinear and multiscale in nature. Understanding the complex flow physics relies on the extraction of main features known as coherent structures or modes. Coherent structures are characteristic and recurrent flow patterns that not only reveal the essential flow physics, but also provide subspaces to construct low-dimensional flow modes. Currently, flow modes can be extracted based on either energy or frequency, resulting in two main mode decomposition methods: Proper Orthogonal Decompostion (POD) and Dynamic Mode Decomposition (DMD). Details about mode decompostion can see this paper:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arc.aiaa.org/doi/10.2514/1.J056060&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Modal Analysis of Fluid Flows: An overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In our work, we applied machine learning for pattern recognition to a subsonic airfoil experiencing buffet at a high incidence angle and a range of Reynolds numbers. While previous research has applied machine learning to nonlinear fluid flows, little attention has been paid to the coherent structures constructed as part of the neural network. In the context of subsonic buffet flows, this new focus is of particular value.&lt;/p&gt;
+&lt;p&gt;The significance of our work lies in the alignment of the learned flow patterns with existing theories on the dynamics of subsonic buffet flows. By extracting the convolutional kernels and corresponding feature maps, it was verified that the convolutional neural network employed in this research had identified large-scale coherent structures believed to drive the buffet phenomenon. The model was able to accomplish this feat without any provided kinematic, or even temporal, information.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Here, I did an animation to better help the reader understand the power of these kernels.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/3.gif&#34; alt=&#34;3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Next, we consider to introduce temporal information into the neural model so that it can compute characteristic time scales associated with these coherent structures. Here, we employed the CNN-LSTM neural network. And further insight is gained into the dynamics of the airfoil buffet. The LSTM architecture is good at processing the sequence input, like video. Here is the architecture of the neural network.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The resulting classification accuracy was also near-perfect. These figure shows kernels and their corresponding feature maps in the convolution layer for the trained model. Compared with figure before, it is clearly that the number of dynamically significant kernels increased when temporal information was considered. The edge and useless kernels, which had low ratios of weight in the CNN, disappeared entirely in the CNN-LSTM model. Therefore, with the inclusion of temporal information, the CNN-LSTM model employed only kernels which captured dynamically significant characteristics; no “edge” or “useless” kernels were constructed. But it should be noted that the CNN-LSTM involves solving within a much larger parameter space and therefore requires significantly more computational resources to train.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;5&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In summary, a convolutional neural network was trained for a simple identification task and the learned coherent structures used by the model for pattern recognition were then studied for dynamical significance. The coherent structures were found to align with current theories on the nature of high-incidence subsonic buffet flows. In our paper, we have more details to discuss, you can view this paper in my &lt;a href=&#34;publication/duke_2019_mlfluid&#34;&gt;Publications page&lt;/a&gt;. Currently, this paper is under revision for publication.&lt;/p&gt;
+&lt;p&gt;This work was finished when I was a visiting student at Duke University in 2019 Fall, under the advisement of Prof.Earl Dowll and Michale W. Lee.&lt;/p&gt;
+&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;7&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;img src=&#34;./photo/6.jpg&#34; alt=&#34;6&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;p&gt;Here, Prof. Dowell recorded a testimonial video for me. He is the elected member of National Academy of Engineering and honorary fellow of AIAA. He was the former dean of the school of engineering at duke university and former professor at MIT and Princeton. In 2016, he received the highest individual honor for achievement in aeronautics.&lt;/p&gt;
+&lt;p&gt;&lt;video src=&#34;./photo/dowellforshizheng.mp4&#34; controls = &#34;yes&#34;&gt;&lt;/video&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Near-field Radiation-based Thermal Rectifiers</title>
+      <link>https://example.com/project/thermal-rectifier/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/thermal-rectifier/</guid>
+      <description>&lt;p&gt;Thermal radiation is one of the most common phenomena in nature. Any object with a temperature greater than 0 K can spontaneously radiate electromagnetic waves (thermal radiation) all the time. In last century, when quantum mechanics was first established, people believed that the thermal emission of objects was governed by Planck&amp;rsquo;s law at large scale, modified by the corresponding surface emissivity.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;However, in recent twenty years, experimental researchers have found that when the geometric dimension of object is comparable to the characteristic wavelength of thermal radiation, the resulting radiative energy exchange can greatly &lt;a href=&#34;https://physicsworld.com/a/exposing-the-flaw-in-plancks-law/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;exceed the limit set by Planck&amp;rsquo;s blackbody law&lt;/a&gt;. And this phenomena is what we called near-field radiative heat transfer.&lt;/p&gt;
+&lt;p&gt;Near-field radiative heat transfer has many promising applications  due to its high efficiency of energy transmission, including &lt;a href=&#34;https://shizhengwen.netlify.app/publication/jqsrt_2020_ntpv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;near-field thermophotovoltaics&lt;/a&gt; and &lt;a href=&#34;https://shizhengwen.netlify.app/publication/jqsrt_2019_thermal_rectifer/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;thermal rectifiers&lt;/a&gt;. Here, I want to introduce more about the thermal rectifiers.&lt;/p&gt;
+&lt;p&gt;As we all know, the development of modern electronics and information processing industries depends on the invention of electric diodes, which relies on the rectification of electrons flow. Nevertheless, due to the higher integration of circuits, the heat flux density has increased significantly. Subsequently, a high-temperature working condition may be resulted in, where electronic diodes tend to have low efficiency and even fail. On the other hand, heat flow can also be controlled, which may provide alternative ways to process information at harsh conditions. Thermal rectification is a phenomenon that allows heat flow in a more favorable direction. This phenomenon is promising to pave the way for the realization of future thermal diode/rectifier devices, even thermal computers, and thus is attracting extensive attention.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The performance of thermal rectifier can be characterized by the thermal rectification ratio as:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/6.jpg&#34; alt=&#34;6&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;where Qf and Qr represent net heat fluxes in the forward and reverse scenarios, respectively.&lt;/p&gt;
+&lt;p&gt;As we all know, heat transfer can be realized by three approaches: conduction, convection and radiation. Previous researches on thermal rectification were primarily based on conduction and convection. Alternatively, Radiation-based thermal diodes, which can avoid contact and intrusion, have been proposed.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/3.jpg&#34; alt=&#34;3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Although previous researches have been done on this field, radiation-based thermal rectifiers, as shown in this figure, still have a low rectification ratio compared with conduction-based counterparts, which can be as high as 100. Therefore, investigations on further improving the performance of radiation-based rectifiers are very imperative.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In order to cause the asymmetry for heat flux, the radiative properties of the material should be sensitive with the temperature. Here, I consider the intrinsic silicon as the main material to construct the rectifier. According to semiconductor physics, radiative properties of silicon can be easily tailored by changing temperatures due to thermally excited carriers. See the following figures.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;5&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Therefore, when we constructed the thermal rectifier based on intrinsic Si and a dissimilar material. In the forward bias, electrons of Si will be excited at high temperatures, which gives rise to the enhancement of radiative heat transfer. In reverse bias, electrons won’t be excited, the heat transfer will be constrained. This asymmetry of heat flux will give rise to a high rectification ratio. And this is the key idea of this work.&lt;/p&gt;
+&lt;p&gt;Further, effects of gap distances, materials and configurations of nanoparticles on the rectification ratio were also investigated. And we used dipole approximation to unveil the underlying mechanisms. Details information can be viewed in my paper.&lt;/p&gt;
+&lt;p&gt;This work was finished when I was a junior student at NUAA in 2019 Spring, under the advisement of Prof. Xianglei Liu. He is now the vice dean of College of Energy and Power Engineering. He won the Sigma Xi Best Ph.D. Thesis Award in Georgia Institute of Technology (TOP 2%),  Raymond Viskanta Young Scientist Award (1-2 people in the field of thermal radiation every year) and so on. It should be noted that this work helped me won the highest honor of research in NUAA.&lt;/p&gt;
+&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;5&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;Following are part comments from reviewers:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;In this paper, the authors proposed a high-performance thermal rectification approach based on the thermal effect of intrinsic and doped Si. The thermal rectification ratio can be enhanced to exceeding 10K, which is record-breaking. I found the results very interesting, and therefore recommend its acceptance after a minor revision.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;In this work the authors described a thermal rectification mechanism between two different nanoparticles with respect to their separation distance. They highlight a high (potentially record) rectification coefficient both in near-field and in far field regime with a maximum of rectification in extreme near-field regime around 10nm and explain the physical origin of this strong rectification. The manuscript is pretty well written and the involved physical mechanisms are well described.&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Machine Learning Strategy for Modeling and Optimal Design of Near-Field Radiative Heat Transfer</title>
+      <link>https://example.com/project/ml-nanoscale-heat-transfer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/ml-nanoscale-heat-transfer/</guid>
+      <description>&lt;p&gt;When the vacuum gap distance between two objects is comparable to or smaller than the characteristic wavelength of thermal radiation, near-field effects become significant in radiative heat transfer process. A plethora of researches have theoretically and experimentally investigated that the radiative heat exchange in the near field can surpass the limit governed by Stefan-Boltzmann law, as a result of tunneling of evanescent waves between two bodies. This is called “near-field radiative heat transfer (NFRHT) problem”.&lt;/p&gt;
+&lt;p&gt;Currently, NFRHT is facing two fatal obstacles.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Traditional methods for calculating near-field radiative heat transfer mainly include accurate scattering matrix theory based on Rigorous Coupled-Wave Analysis (RWCA) and Dyadic green&amp;rsquo;s function. However, these accurate methods often require huge computational costs when calculating the NFRHT of complex structures. Otherwise, approximate solving algorithms including Effective Medium Theory (EMT) and Dipole Approximation (DA), although having high efficiency, can be accurate only when the characteristic length of the microstructure is related to the characteristic wavelength of radiation. Therefore, finding a better strategy incorporating merits of these two methods is very meaningful.&lt;/li&gt;
+&lt;li&gt;Researchers in NFRHT community is always seeking for new materials/structures to further enhance the energy transfer rate by evoking corresponding evanescent modes. Such process of enhancing NFRHT is denoted by ‘direct design’. Although this method is considered feasible and can be solved via simulation, it very often relies on the intuition and expertise of the researcher, ultimately limiting the development of structure for desired radiative properties. Inverse design of system’s structures, i.e. obtaining geometric and physical parameter for the desired solution, has been a promising research focus for recent years.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this work, by combining two data-driven ML methods, viz. artificial neural networks (ANNs) and genetic algorithms (GAs), we propose a flowchart for the modeling and optimal design of near-field thermal devices as shown in the head figure. The adopted workflow is enabled by the following innovative points: first, a sampling method based on Latin hypercube sampling (LHS) and sensitivity analysis (SA) is used for the design parameters of the problem to be studied. These sampled points are calculated with accurate NFRHT method so as to build our training dataset. Second, a surrogate ANN model was trained to construct a functional model from an input feature vector to a corresponding output feature vector, which can be used to predict the NFRHT and rectification ratio of corresponding structures. Finally, GA was applied to the surrogate ANN model to identify the optimal solution for the problem, based on emulating biological evolutionary theories. Detailed description and settings of ANN and GA for this research can see the supplementary material.&lt;/p&gt;
+&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;The errors of different testing structures predicted by ANN and effective medium theory (EMT) are shown in the following figure.&lt;/p&gt;
+&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;Currently, this paper was published by &lt;em&gt;Applied Physics Letters&lt;/em&gt;. Additionally, this work is highly acknowledged by my advisor and helped me win the award of best undergraduate thesis (Top 1%).&lt;/p&gt;
+&lt;p&gt;This work was started when I was still an undergraduate student at NUAA in 2020 Spring, under the advisement of Prof. Xianglei Liu. He is now the vice dean of College of Energy and Power Engineering. He won the Sigma Xi Best Ph.D. Thesis Award in Georgia Institute of Technology (TOP 2%),  Raymond Viskanta Young Scientist Award (1-2 people in the field of thermal radiation every year) and so on.&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;7&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Machine learning for Partial Differential Equations</title>
+      <link>https://example.com/project/ml4pdes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/ml4pdes/</guid>
+      <description>&lt;p&gt;This work is ongoing&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

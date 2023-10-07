@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nanoscale Heat Transfer | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/tag/nanoscale-heat-transfer/</link>
+      <atom:link href="https://example.com/tag/nanoscale-heat-transfer/index.xml" rel="self" type="application/rss+xml" />
+    <description>Nanoscale Heat Transfer</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 16 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>Nanoscale Heat Transfer</title>
+      <link>https://example.com/tag/nanoscale-heat-transfer/</link>
+    </image>
+    
+    <item>
+      <title>A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</title>
+      <link>https://example.com/publication/apl_2022_ml4nf/</link>
+      <pubDate>Tue, 16 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/apl_2022_ml4nf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>High-performance three-body near-field thermophotovoltaic energy conversion</title>
+      <link>https://example.com/publication/jqsrt_2020_ntpv/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/jqsrt_2020_ntpv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles</title>
+      <link>https://example.com/publication/jqsrt_2019_thermal_rectifer/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/jqsrt_2019_thermal_rectifer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Near-field Radiation-based Thermal Rectifiers</title>
+      <link>https://example.com/project/thermal-rectifier/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/thermal-rectifier/</guid>
+      <description>&lt;p&gt;Thermal radiation is one of the most common phenomena in nature. Any object with a temperature greater than 0 K can spontaneously radiate electromagnetic waves (thermal radiation) all the time. In last century, when quantum mechanics was first established, people believed that the thermal emission of objects was governed by Planck&amp;rsquo;s law at large scale, modified by the corresponding surface emissivity.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;However, in recent twenty years, experimental researchers have found that when the geometric dimension of object is comparable to the characteristic wavelength of thermal radiation, the resulting radiative energy exchange can greatly &lt;a href=&#34;https://physicsworld.com/a/exposing-the-flaw-in-plancks-law/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;exceed the limit set by Planck&amp;rsquo;s blackbody law&lt;/a&gt;. And this phenomena is what we called near-field radiative heat transfer.&lt;/p&gt;
+&lt;p&gt;Near-field radiative heat transfer has many promising applications  due to its high efficiency of energy transmission, including &lt;a href=&#34;https://shizhengwen.netlify.app/publication/jqsrt_2020_ntpv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;near-field thermophotovoltaics&lt;/a&gt; and &lt;a href=&#34;https://shizhengwen.netlify.app/publication/jqsrt_2019_thermal_rectifer/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;thermal rectifiers&lt;/a&gt;. Here, I want to introduce more about the thermal rectifiers.&lt;/p&gt;
+&lt;p&gt;As we all know, the development of modern electronics and information processing industries depends on the invention of electric diodes, which relies on the rectification of electrons flow. Nevertheless, due to the higher integration of circuits, the heat flux density has increased significantly. Subsequently, a high-temperature working condition may be resulted in, where electronic diodes tend to have low efficiency and even fail. On the other hand, heat flow can also be controlled, which may provide alternative ways to process information at harsh conditions. Thermal rectification is a phenomenon that allows heat flow in a more favorable direction. This phenomenon is promising to pave the way for the realization of future thermal diode/rectifier devices, even thermal computers, and thus is attracting extensive attention.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The performance of thermal rectifier can be characterized by the thermal rectification ratio as:&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/6.jpg&#34; alt=&#34;6&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;where Qf and Qr represent net heat fluxes in the forward and reverse scenarios, respectively.&lt;/p&gt;
+&lt;p&gt;As we all know, heat transfer can be realized by three approaches: conduction, convection and radiation. Previous researches on thermal rectification were primarily based on conduction and convection. Alternatively, Radiation-based thermal diodes, which can avoid contact and intrusion, have been proposed.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/3.jpg&#34; alt=&#34;3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Although previous researches have been done on this field, radiation-based thermal rectifiers, as shown in this figure, still have a low rectification ratio compared with conduction-based counterparts, which can be as high as 100. Therefore, investigations on further improving the performance of radiation-based rectifiers are very imperative.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In order to cause the asymmetry for heat flux, the radiative properties of the material should be sensitive with the temperature. Here, I consider the intrinsic silicon as the main material to construct the rectifier. According to semiconductor physics, radiative properties of silicon can be easily tailored by changing temperatures due to thermally excited carriers. See the following figures.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;5&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Therefore, when we constructed the thermal rectifier based on intrinsic Si and a dissimilar material. In the forward bias, electrons of Si will be excited at high temperatures, which gives rise to the enhancement of radiative heat transfer. In reverse bias, electrons won’t be excited, the heat transfer will be constrained. This asymmetry of heat flux will give rise to a high rectification ratio. And this is the key idea of this work.&lt;/p&gt;
+&lt;p&gt;Further, effects of gap distances, materials and configurations of nanoparticles on the rectification ratio were also investigated. And we used dipole approximation to unveil the underlying mechanisms. Details information can be viewed in my paper.&lt;/p&gt;
+&lt;p&gt;This work was finished when I was a junior student at NUAA in 2019 Spring, under the advisement of Prof. Xianglei Liu. He is now the vice dean of College of Energy and Power Engineering. He won the Sigma Xi Best Ph.D. Thesis Award in Georgia Institute of Technology (TOP 2%),  Raymond Viskanta Young Scientist Award (1-2 people in the field of thermal radiation every year) and so on. It should be noted that this work helped me won the highest honor of research in NUAA.&lt;/p&gt;
+&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;5&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;Following are part comments from reviewers:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;In this paper, the authors proposed a high-performance thermal rectification approach based on the thermal effect of intrinsic and doped Si. The thermal rectification ratio can be enhanced to exceeding 10K, which is record-breaking. I found the results very interesting, and therefore recommend its acceptance after a minor revision.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;In this work the authors described a thermal rectification mechanism between two different nanoparticles with respect to their separation distance. They highlight a high (potentially record) rectification coefficient both in near-field and in far field regime with a maximum of rectification in extreme near-field regime around 10nm and explain the physical origin of this strong rectification. The manuscript is pretty well written and the involved physical mechanisms are well described.&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Machine Learning Strategy for Modeling and Optimal Design of Near-Field Radiative Heat Transfer</title>
+      <link>https://example.com/project/ml-nanoscale-heat-transfer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/ml-nanoscale-heat-transfer/</guid>
+      <description>&lt;p&gt;When the vacuum gap distance between two objects is comparable to or smaller than the characteristic wavelength of thermal radiation, near-field effects become significant in radiative heat transfer process. A plethora of researches have theoretically and experimentally investigated that the radiative heat exchange in the near field can surpass the limit governed by Stefan-Boltzmann law, as a result of tunneling of evanescent waves between two bodies. This is called “near-field radiative heat transfer (NFRHT) problem”.&lt;/p&gt;
+&lt;p&gt;Currently, NFRHT is facing two fatal obstacles.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Traditional methods for calculating near-field radiative heat transfer mainly include accurate scattering matrix theory based on Rigorous Coupled-Wave Analysis (RWCA) and Dyadic green&amp;rsquo;s function. However, these accurate methods often require huge computational costs when calculating the NFRHT of complex structures. Otherwise, approximate solving algorithms including Effective Medium Theory (EMT) and Dipole Approximation (DA), although having high efficiency, can be accurate only when the characteristic length of the microstructure is related to the characteristic wavelength of radiation. Therefore, finding a better strategy incorporating merits of these two methods is very meaningful.&lt;/li&gt;
+&lt;li&gt;Researchers in NFRHT community is always seeking for new materials/structures to further enhance the energy transfer rate by evoking corresponding evanescent modes. Such process of enhancing NFRHT is denoted by ‘direct design’. Although this method is considered feasible and can be solved via simulation, it very often relies on the intuition and expertise of the researcher, ultimately limiting the development of structure for desired radiative properties. Inverse design of system’s structures, i.e. obtaining geometric and physical parameter for the desired solution, has been a promising research focus for recent years.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this work, by combining two data-driven ML methods, viz. artificial neural networks (ANNs) and genetic algorithms (GAs), we propose a flowchart for the modeling and optimal design of near-field thermal devices as shown in the head figure. The adopted workflow is enabled by the following innovative points: first, a sampling method based on Latin hypercube sampling (LHS) and sensitivity analysis (SA) is used for the design parameters of the problem to be studied. These sampled points are calculated with accurate NFRHT method so as to build our training dataset. Second, a surrogate ANN model was trained to construct a functional model from an input feature vector to a corresponding output feature vector, which can be used to predict the NFRHT and rectification ratio of corresponding structures. Finally, GA was applied to the surrogate ANN model to identify the optimal solution for the problem, based on emulating biological evolutionary theories. Detailed description and settings of ANN and GA for this research can see the supplementary material.&lt;/p&gt;
+&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;The errors of different testing structures predicted by ANN and effective medium theory (EMT) are shown in the following figure.&lt;/p&gt;
+&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;Currently, this paper was published by &lt;em&gt;Applied Physics Letters&lt;/em&gt;. Additionally, this work is highly acknowledged by my advisor and helped me win the award of best undergraduate thesis (Top 1%).&lt;/p&gt;
+&lt;p&gt;This work was started when I was still an undergraduate student at NUAA in 2020 Spring, under the advisement of Prof. Xianglei Liu. He is now the vice dean of College of Energy and Power Engineering. He won the Sigma Xi Best Ph.D. Thesis Award in Georgia Institute of Technology (TOP 2%),  Raymond Viskanta Young Scientist Award (1-2 people in the field of thermal radiation every year) and so on.&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;7&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

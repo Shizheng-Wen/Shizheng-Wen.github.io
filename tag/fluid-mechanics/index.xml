@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fluid Mechanics | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/tag/fluid-mechanics/</link>
+      <atom:link href="https://example.com/tag/fluid-mechanics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Fluid Mechanics</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 28 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>Fluid Mechanics</title>
+      <link>https://example.com/tag/fluid-mechanics/</link>
+    </image>
+    
+    <item>
+      <title>Feature identification in complex fluid flows by convolutional neural networks.</title>
+      <link>https://example.com/publication/duke_2019_mlfluid/</link>
+      <pubDate>Sun, 28 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/duke_2019_mlfluid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning for Aeroelastic Applications</title>
+      <link>https://example.com/project/ml-aeroelasticity/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/project/ml-aeroelasticity/</guid>
+      <description>&lt;mark&gt;The testimonial video is at the bottom of this page.&lt;/mark&gt;
+&lt;p&gt;In recent years, due to the development of high-performance computations and experimental measurement capabilities. Researchers are able to obtain high precision and high-resolution spatiotemporal data from large-scale fluid simulations and experiments.&lt;/p&gt;
+&lt;p&gt;At the same time, the advancement of sophisticated algorithms and open source software enables researchers to apply ML to address many challenges. Among them, neural networks is a powerful tool to simulate nonlinear mapping relationship. Therefore, in fluid mechanics community, turbulence modeling and more generally, nonlinear fluid dynamics has been one proving ground for neural networks. Recent advancements on ML-assisted fluids can see these reviews in Annual Review of Fluid Mechanics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.annualreviews.org/doi/10.1146/annurev-fluid-010518-040547&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Turbulence modeling in the age of data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.annualreviews.org/doi/abs/10.1146/annurev-fluid-010719-060214&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Machine learning for fluid mechanics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Unsteady flows are high-dimensional, nonlinear and multiscale in nature. Understanding the complex flow physics relies on the extraction of main features known as coherent structures or modes. Coherent structures are characteristic and recurrent flow patterns that not only reveal the essential flow physics, but also provide subspaces to construct low-dimensional flow modes. Currently, flow modes can be extracted based on either energy or frequency, resulting in two main mode decomposition methods: Proper Orthogonal Decompostion (POD) and Dynamic Mode Decomposition (DMD). Details about mode decompostion can see this paper:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arc.aiaa.org/doi/10.2514/1.J056060&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Modal Analysis of Fluid Flows: An overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In our work, we applied machine learning for pattern recognition to a subsonic airfoil experiencing buffet at a high incidence angle and a range of Reynolds numbers. While previous research has applied machine learning to nonlinear fluid flows, little attention has been paid to the coherent structures constructed as part of the neural network. In the context of subsonic buffet flows, this new focus is of particular value.&lt;/p&gt;
+&lt;p&gt;The significance of our work lies in the alignment of the learned flow patterns with existing theories on the dynamics of subsonic buffet flows. By extracting the convolutional kernels and corresponding feature maps, it was verified that the convolutional neural network employed in this research had identified large-scale coherent structures believed to drive the buffet phenomenon. The model was able to accomplish this feat without any provided kinematic, or even temporal, information.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Here, I did an animation to better help the reader understand the power of these kernels.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/3.gif&#34; alt=&#34;3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Next, we consider to introduce temporal information into the neural model so that it can compute characteristic time scales associated with these coherent structures. Here, we employed the CNN-LSTM neural network. And further insight is gained into the dynamics of the airfoil buffet. The LSTM architecture is good at processing the sequence input, like video. Here is the architecture of the neural network.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/4.jpg&#34; alt=&#34;4&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The resulting classification accuracy was also near-perfect. These figure shows kernels and their corresponding feature maps in the convolution layer for the trained model. Compared with figure before, it is clearly that the number of dynamically significant kernels increased when temporal information was considered. The edge and useless kernels, which had low ratios of weight in the CNN, disappeared entirely in the CNN-LSTM model. Therefore, with the inclusion of temporal information, the CNN-LSTM model employed only kernels which captured dynamically significant characteristics; no “edge” or “useless” kernels were constructed. But it should be noted that the CNN-LSTM involves solving within a much larger parameter space and therefore requires significantly more computational resources to train.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;5&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In summary, a convolutional neural network was trained for a simple identification task and the learned coherent structures used by the model for pattern recognition were then studied for dynamical significance. The coherent structures were found to align with current theories on the nature of high-incidence subsonic buffet flows. In our paper, we have more details to discuss, you can view this paper in my &lt;a href=&#34;publication/duke_2019_mlfluid&#34;&gt;Publications page&lt;/a&gt;. Currently, this paper is under revision for publication.&lt;/p&gt;
+&lt;p&gt;This work was finished when I was a visiting student at Duke University in 2019 Fall, under the advisement of Prof.Earl Dowll and Michale W. Lee.&lt;/p&gt;
+&lt;img src=&#34;./photo/7.jpg&#34; alt=&#34;7&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;img src=&#34;./photo/6.jpg&#34; alt=&#34;6&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;p&gt;Here, Prof. Dowell recorded a testimonial video for me. He is the elected member of National Academy of Engineering and honorary fellow of AIAA. He was the former dean of the school of engineering at duke university and former professor at MIT and Princeton. In 2016, he received the highest individual honor for achievement in aeronautics.&lt;/p&gt;
+&lt;p&gt;&lt;video src=&#34;./photo/dowellforshizheng.mp4&#34; controls = &#34;yes&#34;&gt;&lt;/video&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

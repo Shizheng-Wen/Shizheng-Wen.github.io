@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paper | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/category/paper/</link>
+      <atom:link href="https://example.com/category/paper/index.xml" rel="self" type="application/rss+xml" />
+    <description>paper</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>paper</title>
+      <link>https://example.com/category/paper/</link>
+    </image>
+    
+    <item>
+      <title>My first-author paper has been posted on the Arxiv!</title>
+      <link>https://example.com/post/20220907_mlfluid/</link>
+      <pubDate>Thu, 01 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/20220907_mlfluid/</guid>
+      <description>&lt;p&gt;My first-author paper &amp;ldquo;Feature Identification in Complex Fluid Flows by Convolutional Neural Networks&amp;rdquo; has been posted on &lt;a href=&#34;https://arxiv.org/abs/2208.09663&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Arxiv&lt;/a&gt;. Thanks for all my collaborators!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My first-author paper has been published by Applied Physics Letters!</title>
+      <link>https://example.com/post/20220807_aplpaper/</link>
+      <pubDate>Tue, 16 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/20220807_aplpaper/</guid>
+      <description>&lt;p&gt;My first-author paper &amp;ldquo;A Machine Learning Strategy for Modeling and Optimal Design of Near-field Radiative Heat Transfer&amp;rdquo; has been accepted by &lt;em&gt;&lt;a href=&#34;https://aip.scitation.org/doi/10.1063/5.0103363&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Applied Physics Letters&lt;/a&gt;&lt;/em&gt;. Thanks for my collaborators!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Appl. Phys. Lett.&lt;/em&gt; &lt;strong&gt;121&lt;/strong&gt;, 071101 (2022)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

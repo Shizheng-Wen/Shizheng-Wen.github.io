@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>research | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/category/research/</link>
+      <atom:link href="https://example.com/category/research/index.xml" rel="self" type="application/rss+xml" />
+    <description>research</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>research</title>
+      <link>https://example.com/category/research/</link>
+    </image>
+    
+    <item>
+      <title>I join Prof. Hao Sun&#39;s Group and work as a research assistant!</title>
+      <link>https://example.com/post/20220401_join_sun_group/</link>
+      <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/20220401_join_sun_group/</guid>
+      <description>&lt;p&gt;I serve as a research assistant advised by &lt;a href=&#34;https://gsai.ruc.edu.cn/addons/teacher/index/info.html?user_id=25&amp;amp;ruccode=20210163&amp;amp;ln=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Prof. Hao Sun&lt;/a&gt; in Gaoling school of artificial intelligence at Renmin University of China, working on graph neural network (GNN) and partial differential equations (PDEs).&lt;/p&gt;
+&lt;p&gt;Thanks prof. Sun for giving me this valuable opportunity~ :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

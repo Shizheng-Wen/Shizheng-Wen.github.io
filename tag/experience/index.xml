@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>experience | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/tag/experience/</link>
+      <atom:link href="https://example.com/tag/experience/index.xml" rel="self" type="application/rss+xml" />
+    <description>experience</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 28 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>experience</title>
+      <link>https://example.com/tag/experience/</link>
+    </image>
+    
+    <item>
+      <title>I decide to leave the Institute of Nano Science (INS).</title>
+      <link>https://example.com/post/20220625_leave_ins/</link>
+      <pubDate>Tue, 28 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/post/20220625_leave_ins/</guid>
+      <description>&lt;p&gt;After nearly two years working in the Institute of Nano Science, I decide to leave and head for my next step. I really appreciate the help from my advisor, Prof. Wanlin Guo. He is one of the best teachers I have ever met. Also, I want to thanks the help and appreciations from &lt;a href=&#34;https://scholar.google.com/citations?user=fhdZx6sAAAAJ&amp;amp;hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Prof. Min Yi&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?hl=en&amp;amp;user=NlVmmpgAAAAJ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Prof. Hu Qiu&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?hl=en&amp;amp;user=RA5pOAgAAAAJ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Prof. Zhuhua Zhang&lt;/a&gt; and lecturer Qing Wang. Importantly, I want to thanks the  accompany of my buddies. Hope you all will have a very bright future!&lt;/p&gt;
+&lt;img src=&#34;./photo/1.jpg&#34; alt=&#34;1&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;img src=&#34;./photo/2.jpg&#34; alt=&#34;2&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;img src=&#34;./photo/3.jpg&#34; alt=&#34;3&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;img src=&#34;./photo/5.jpg&#34; alt=&#34;4&#34; style=&#34;zoom:100%;&#34; /&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

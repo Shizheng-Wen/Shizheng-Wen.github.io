@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications | Shizheng Wen (闻仕政)</title>
+    <link>https://example.com/publication/</link>
+      <atom:link href="https://example.com/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 28 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://example.com/media/icon_hud68c913909f6e4ee62656f90aef9b962_129223_512x512_fill_lanczos_center_3.png</url>
+      <title>Publications</title>
+      <link>https://example.com/publication/</link>
+    </image>
+    
+    <item>
+      <title>Feature identification in complex fluid flows by convolutional neural networks.</title>
+      <link>https://example.com/publication/duke_2019_mlfluid/</link>
+      <pubDate>Sun, 28 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/duke_2019_mlfluid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</title>
+      <link>https://example.com/publication/apl_2022_ml4nf/</link>
+      <pubDate>Tue, 16 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/apl_2022_ml4nf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>High-performance three-body near-field thermophotovoltaic energy conversion</title>
+      <link>https://example.com/publication/jqsrt_2020_ntpv/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/jqsrt_2020_ntpv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles</title>
+      <link>https://example.com/publication/jqsrt_2019_thermal_rectifer/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://example.com/publication/jqsrt_2019_thermal_rectifer/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
