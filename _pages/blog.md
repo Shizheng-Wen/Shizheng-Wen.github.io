@@ -2,6 +2,7 @@
 layout: default
 permalink: /blog/
 title: blog
+description: Record what I think, learn and experience
 nav: true
 nav_order: 1
 pagination:
@@ -23,7 +24,7 @@ pagination:
 
 {% if blog_name_size > 0 or blog_description_size > 0 %}
 
-  <div class="header-bar">
+  <!-- <div class="header-bar">
     <h1>{{ site.blog_name }}</h1>
     <h2>{{ site.blog_description }}</h2>
   </div>
@@ -99,7 +100,7 @@ pagination:
     </div>
     <hr>
 
-{% endif %}
+{% endif %} -->
 
   <ul class="post-list">
 
