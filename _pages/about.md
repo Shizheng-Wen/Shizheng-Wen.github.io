@@ -19,7 +19,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hi! I'm Shizheng, a Master student at ETH Zurich, advised by Prof. [Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra). [Get my CV here](/assets/pdf/Shizheng_resume.pdf). My research focuses on applied and computational mathematics, with a particular interest in developing solvers for partial differential equations (PDEs). I am passionate about advancing numerical methods and machine learning techniques for PDEs, including:
+Hi! I'm Shizheng, a Master student at ETH Zurich, advised by Prof. [Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra). My research focuses on applied and computational mathematics, with a particular interest in developing solvers for partial differential equations (PDEs). I am passionate about advancing numerical methods and machine learning techniques for PDEs, including:
 
 * Differentiable Programming for numerical methods in PDEs.
 * Physics-Informed Neural Networks (PINNs) and neural operators for PDE solutions.
