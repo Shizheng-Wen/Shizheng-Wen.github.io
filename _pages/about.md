@@ -12,7 +12,7 @@ profile:
     <p>Shizheng Wen (闻仕政)</p>
     <p>AI & Scientific Computing</p>
     <p>PhD student @ ETH</p>
-    <p>Email: shizheng.wen@sam.math.ethz.ch</p>
+    <p>shizheng.wen@sam.math.ethz.ch</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
