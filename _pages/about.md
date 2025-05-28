@@ -11,7 +11,7 @@ profile:
   more_info: >
     <p>Shizheng Wen (闻仕政)</p>
     <p>AI & Scientific Computing</p>
-    <p>PhD student @ ETH</p>
+    <p>PhD student @ ETH Zurich</p>
     <p>shizheng.wen@sam.math.ethz.ch</p>
 
 news: true # includes a list of news items
@@ -21,9 +21,9 @@ social: true # includes social icons at the bottom of the page
 
 Hi! I'm Shizheng, a doctoral student in the research group of [Prof. Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra) at the [Seminar for Applied Mathematics (SAM)](https://math.ethz.ch/sam) at [ETH Zurich](https://ethz.ch/en.html). My research focuses on applied and computational mathematics, with a particular interest in developing solvers for partial differential equations (PDEs). I am passionate about advancing numerical methods and machine learning techniques for PDEs, including:
 
-* Neural operators and Physics-Informed Neural Networks (PINNs) for PDE solutions.
-* Differentiable Programming for numerical methods in PDEs.
-* Large PDE foundation models and their applications.
+* Neural Surrogates (NO and PINN) for PDE Solutions.
+* Differentiable Programming for Numerical Methods in PDEs.
+* PDE Foundation Models and their Applications.
 
 In the past, I’ve had the honor of working with [Prof. Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, [Prof. Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and [Prof. Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA.
 
