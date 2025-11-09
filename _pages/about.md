@@ -12,7 +12,7 @@ profile:
     <p>Shizheng Wen (闻仕政)</p>
     <p>AI & Scientific Computing</p>
     <p>PhD student @ ETH Zurich</p>
-    <p>shizheng.wen@sam.math.ethz.ch</p>
+    <p>shizheng.wen@math.ethz.ch</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
@@ -27,4 +27,4 @@ Hi! I'm Shizheng, a doctoral student in the research group of [Prof. Siddhartha 
 
 In the past, I’ve had the honor of working with [Prof. Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, [Prof. Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and [Prof. Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA.
 
-PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you’d like to connect or collaborate, feel free to reach out!
+PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you'd like to connect or collaborate, feel free to reach out! You can also check out my 📄 [resume](https://drive.google.com/file/d/1ZpCIHhonCtmjH3feGFz3ju5E6cdwDmv8/view?usp=sharing) for more details about my background and experience.
