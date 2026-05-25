@@ -1,0 +1,207 @@
+%=====================================================================
+%  Curriculum Vitae — Shizheng Wen
+%  Compiles out of the box on Overleaf with pdfLaTeX (default compiler).
+%  The Chinese name is rendered via CJKutf8 (gbsn). If you prefer to
+%  drop it, delete the \cn{...} call in the header.
+%=====================================================================
+\documentclass[10.5pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{lato}          % clean sans face (echoes the website's DM Sans); remove for Computer Modern
+\usepackage[margin=0.9in]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{CJKutf8}                 % Chinese name under pdfLaTeX
+\usepackage[hidelinks]{hyperref}
+
+% --- palette (matches the site accent) ---
+\definecolor{accent}{HTML}{0076A3}
+\definecolor{ink}{HTML}{3D3630}
+\definecolor{muted}{HTML}{5A544A}
+\definecolor{rule}{HTML}{D8CFC0}
+\color{ink}
+
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+% --- convenience macros ---
+\newcommand{\cn}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+\newcommand{\me}[1]{\textbf{#1}}                       % highlight my name in author lists
+\newcommand{\link}[2]{[\href{#1}{#2}]}                  % small inline link
+\newcommand{\eq}{\textsuperscript{$\ast$}}              % equal-contribution marker
+
+% --- section styling: colored small-caps heading + thin rule ---
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{accent}}
+  {}{0em}{}[{\vspace{2pt}\color{rule}\titlerule[0.9pt]}]
+\titlespacing*{\section}{0pt}{1.25em}{0.7em}
+
+% tighter list defaults
+\setlist[itemize]{leftmargin=1.1em, itemsep=0.35em, topsep=0.3em, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.6em, itemsep=0.6em, topsep=0.3em, parsep=0pt}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+%=====================================================================
+\begin{document}
+
+% ---------------------------- Header ----------------------------
+{\Huge\bfseries Shizheng Wen}\quad{\Large\color{muted}\cn{闻仕政}}\\[0.35em]
+{\color{muted}\large PhD Student in AI \& Applied Mathematics, ETH Zürich}\\[0.7em]
+{\small
+\faEnvelope[regular]\,\href{mailto:shizheng.wen@sam.math.ethz.ch}{shizheng.wen@sam.math.ethz.ch}
+\quad\textcolor{rule}{|}\quad
+\faGraduationCap\,\href{https://scholar.google.com/citations?user=PV4NVPgAAAAJ}{Google Scholar}
+\quad\textcolor{rule}{|}\quad
+\faGithub\,\href{https://github.com/Shizheng-Wen}{Shizheng-Wen}
+\quad\textcolor{rule}{|}\quad
+\faLinkedin\,\href{https://www.linkedin.com/in/shizheng-wen-1599b0184/}{shizheng-wen}
+}
+
+% ------------------------- Research Interests -------------------------
+\section{Research Interests}
+Scientific computing and machine learning, with a focus on fast, scalable, and differentiable
+solvers for partial differential equations (PDEs): differentiable numerical methods, neural
+operator architectures for complex geometries, and large-scale PDE foundation models.
+
+% ------------------------------ Education ------------------------------
+\section{Education}
+\textbf{ETH Zürich} \hfill {\color{muted}\textit{2025 -- Present}}\\
+\textit{Ph.D. in Computational Mathematics and AI}\\
+{\color{muted}Seminar for Applied Mathematics (SAM), Department of Mathematics; affiliated PhD, ETH AI Center.\\
+\textbf{Advisor:} Prof.\ Siddhartha Mishra.}\\[0.6em]
+
+\textbf{ETH Zürich} \hfill {\color{muted}\textit{2022 -- 2025}}\\
+\textit{M.Sc. in Computational Science and Engineering} \;\href{https://github.com/Shizheng-Wen/Note-Everyday}{\faGithub\ course categories \& personal notes}\\
+{\color{muted}Department of Mathematics. \textbf{Advisor:} Prof.\ Siddhartha Mishra.\\
+Awarded the {\color{ink}\textbf{ETH Medal}} for an outstanding master's thesis.}\\[0.6em]
+
+\textbf{Duke University} \hfill {\color{muted}\textit{2019}}\\
+\textit{Visiting Undergraduate}\\
+{\color{muted}Aeroelasticity Group, Department of Mechanical Engineering and Materials Science.\\
+\textbf{Advisor:} Prof.\ Earl Dowell.}\\[0.6em]
+
+\textbf{Nanjing University of Aeronautics and Astronautics (NUAA)} \hfill {\color{muted}\textit{2016 -- 2020}}\\
+\textit{B.Eng. in Energy and Power Engineering}~\textbf{(with distinction)}\\
+{\color{muted}School of Energy and Power Engineering. \textbf{Advisor:} Prof.\ Xianglei Liu.}
+
+% ------------------------- Open-Source Project -------------------------
+\section{Open-Source Project}
+\begin{itemize}
+\item \textbf{\href{https://www.tensor-mesh.com/}{TensorMesh}} --- creator. A fast, differentiable,
+JIT-free, debugging-friendly, GPU-native finite-element library for PyTorch.
+\item \textbf{\href{https://www.torchsla.com/}{torch-sla}} --- creator. A memory-efficient,
+differentiable sparse linear-algebra / linear-solver library for PyTorch with multiple backends.
+\end{itemize}
+
+% ----------------------------- Publications -----------------------------
+\section{Publications}
+\begin{enumerate}[label=\arabic*.]
+
+\item \textbf{Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient
+High-Performance Galerkin Assembly Algorithm.}\\
+\me{Shizheng Wen}\eq, Mingyuan Chi\eq, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra.\\
+\textit{ICML}, 2026.\;
+\link{https://arxiv.org/abs/2602.05052}{arXiv}\,
+\link{https://github.com/camlab-ethz/TensorMesh}{code}\,
+\link{https://www.tensor-mesh.com/}{project}
+
+\item \textbf{torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse
+Tensor Parallelism for PyTorch.}\\
+Mingyuan Chi\eq, \me{Shizheng Wen}\eq.\\
+Preprint, 2026.\;
+\link{https://arxiv.org/abs/2601.13994}{arXiv}\,
+\link{https://github.com/sparsexlab/torch-sla}{code}\,
+\link{https://www.torchsla.com/}{project}
+
+\item \textbf{MOSIV: Multi-Object System Identification from Videos.}\\
+Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, \me{Shizheng Wen}, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A.\ Jeni, Min Xu, Yizhou Zhao.\\
+\textit{ICLR}, 2026.\;
+\link{https://arxiv.org/abs/2603.06022}{arXiv}\,
+\link{https://huggingface.co/datasets/Hanibel/MOSIV}{code}
+
+\item \textbf{Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate
+for PDEs on Arbitrary Domains.}\\
+\me{Shizheng Wen}, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, Siddhartha Mishra.\\
+\textit{NeurIPS}, 2025.\;
+\link{https://arxiv.org/abs/2505.18781}{arXiv}\,
+\link{https://github.com/shizheng-wen/GAOT}{code}\,
+\link{https://camlab-ethz.github.io/GAOT/}{project}
+
+\item \textbf{RIGNO: A Graph-based Framework for Robust and Accurate Operator Learning for PDEs
+on Arbitrary Domains.}\\
+Sepehr Mousavi, \me{Shizheng Wen}, Levi Lingsch, Maximilian Herde, Bogdan Raoni\'{c}, Siddhartha Mishra.\\
+\textit{NeurIPS}, 2025.\;
+\link{https://arxiv.org/abs/2501.19205}{arXiv}\,
+\link{https://github.com/camlab-ethz/rigno}{code}
+
+\item \textbf{Phase-field Simulation and Machine Learning of Low-field Magneto-elastocaloric
+Effect in a Multiferroic Composite.}\\
+Wei Tang, \me{Shizheng Wen}, Huilong Hou, Qihua Gong, Min Yi, Wanlin Guo.\\
+\textit{International Journal of Mechanical Sciences}, 2024.\;
+\link{https://doi.org/10.1016/j.ijmecsci.2024.109316}{doi}
+
+\item \textbf{Feature Identification in Complex Fluid Flows by Convolutional Neural Networks.}\\
+\me{Shizheng Wen}, Michael W.\ Lee, Kai M.\ Kruger Bastos, Ian Eldridge-Allegra, Earl H.\ Dowell.\\
+\textit{Theoretical and Applied Mechanics Letters}, 2023.\;
+\link{https://doi.org/10.1016/j.taml.2023.100482}{doi}
+
+\item \textbf{A Machine Learning Strategy for Modeling and Optimal Design of Near-field Radiative
+Heat Transfer.}\\
+\me{Shizheng Wen}, Chunzhuo Dang, Xianglei Liu.\\
+\textit{Applied Physics Letters}, 2022.\;
+\link{https://doi.org/10.1063/5.0103363}{doi}
+
+\item \textbf{High-performance Three-body Near-field Thermophotovoltaic Energy Conversion.}\\
+Chunzhuo Dang, Xianglei Liu, Haifeng Xia, \me{Shizheng Wen}, Qiao Xu.\\
+\textit{Journal of Quantitative Spectroscopy and Radiative Transfer}, 2021.\;
+\link{https://doi.org/10.1016/j.jqsrt.2020.107411}{doi}
+
+\item \textbf{Ultrahigh Thermal Rectification Based on Near-field Thermal Radiation between
+Dissimilar Nanoparticles.}\\
+\me{Shizheng Wen}, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, Chunzhuo Dang.\\
+\textit{Journal of Quantitative Spectroscopy and Radiative Transfer}, 2019.\;
+\link{https://doi.org/10.1016/j.jqsrt.2019.05.026}{doi}
+
+\end{enumerate}
+\vspace{0.2em}
+{\footnotesize\itshape \eq\,Equal contribution.}
+
+% ---------------------------- Honors & Awards ----------------------------
+\section{Honors \& Awards}
+\begin{itemize}
+\item ICML Gold Reviewer \hfill 2026
+\item ETH Medal (top 2.5\%) \hfill 2026
+\item National Scholarship (top 1\%) \hfill 2019
+\item NUAA Presidential Fellowship (top 0.1\%) \hfill 2019
+\end{itemize}
+
+% ----------------------------- Invited Talks -----------------------------
+\section{Invited Talks}
+\begin{itemize}
+\item \textit{Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient
+High-Performance Galerkin Assembly Algorithm.}\\
+Simon Fraser University (host: Wuyang Chen). \hfill Mar 2026
+\item \textit{Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate
+for PDEs on Arbitrary Domains.}\\
+Tsinghua University (host: Angelica Aviles-Rivero). \hfill Mar 2026
+\item \textit{Accelerating Computational Science: From Differentiable Solvers to Geometry Aware
+Operator Transformers.}\\
+Stanford University (host: Charbel Farhat). \hfill Dec 2025
+\end{itemize}
+
+% ------------------------------- Teaching -------------------------------
+\section{Teaching}
+\begin{itemize}
+\item \textbf{Numerical Methods for Partial Differential Equations} (10 ECTS), 401-0674-00L.\\
+ETH Zürich, Spring 2026.\;
+\link{https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&ansicht=LERNMATERIALIEN&lerneinheitId=198602&lang=en}{course page}
+\item \textbf{AI in the Sciences and Engineering} (6 ECTS), 401-4656-21L.\\
+ETH Zürich, Fall 2025.\;
+\link{https://camlab-ethz.github.io/ai4s-course/}{course page}
+\end{itemize}
+
+\end{document}
