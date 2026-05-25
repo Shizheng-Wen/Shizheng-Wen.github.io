@@ -34,6 +34,8 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 + May 2026: I received ETH Medal at my master's graduation ceremony, the highest honor for students with  outstanding master's and doctoral theses.
 
++ May 2026: One paper "[torch-sla](https://arxiv.org/abs/2601.13994)" accepted at ICML 2026 Workshop [AI4Physics](https://ai4physics-workshop.github.io/).
+
 + Apr 2026: One paper "[TensorGalerkin](https://arxiv.org/abs/2602.05052)" accepted at **ICML 2026**.
 
 + Feb 2026: We open-sourced [torch-sla](https://www.torchsla.com/)! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends. Corresonding paper on [arxiv](https://arxiv.org/abs/2601.13994). 
@@ -55,7 +57,7 @@ PDEs are the language of natural science, governing everything from fluid dynami
 + Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm, Shizheng Wen^*, Mingyuan Chi^*, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra, ICML 2026. [arXiv](https://arxiv.org/abs/2602.05052)· [code](https://github.com/camlab-ethz/TensorMesh) · [project](https://www.tensor-mesh.com/)
 
 
-+ torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch, Mingyuan Chi^*, Shizheng Wen^*, [arXiv](https://arxiv.org/pdf/2601.13994)· [code](https://github.com/sparsexlab/torch-sla) · [project](https://www.torchsla.com/)
++ torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch, Mingyuan Chi^*, Shizheng Wen^*, ICML 2026 Workshop (AI4Physics). [arXiv](https://arxiv.org/abs/2601.13994) · [code](https://github.com/sparsexlab/torch-sla) · [project](https://www.torchsla.com/)
 
 + MOSIV: Multi-Object System Identification from Videos, Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, Shizheng Wen, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao, ICLR 2026. [arXiv](https://arxiv.org/abs/2603.06022)· [code](https://huggingface.co/datasets/Hanibel/MOSIV)
 
