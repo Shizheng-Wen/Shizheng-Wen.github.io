@@ -34,11 +34,11 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 + May 2026: I received ETH Medal at my master's graduation ceremony, the highest honor for students with  outstanding master's and doctoral theses.
 
-+ May 2026: One paper "[torch-sla](https://arxiv.org/abs/2601.13994)" accepted at ICML 2026 Workshop [AI4Physics](https://ai4physics-workshop.github.io/).
++ May 2026: One paper "[torch-sla](https://arxiv.org/abs/2601.13994)" accepted at **ICML 2026 Workshop AI4Physics**.
 
 + Apr 2026: One paper "[TensorGalerkin](https://arxiv.org/abs/2602.05052)" accepted at **ICML 2026**.
 
-+ Feb 2026: We open-sourced [torch-sla](https://www.torchsla.com/)! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends. Corresonding paper on [arxiv](https://arxiv.org/abs/2601.13994). 
++ Feb 2026: We open-sourced [torch-sla](https://www.torchsla.com/)! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends.
 
 + Jan 2026: One paper "[MOSIV](https://arxiv.org/abs/2603.06022)" accepted at **ICLR 2026**.
 
