@@ -15,7 +15,7 @@ My current work spans four directions:
 - **Physics-informed operator learning.** I train neural operators from the governing equations alone; [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets this label-free training match supervised accuracy.
 - **PDE foundation models.** Large-scale pretraining across diverse physical systems (coming soon).
 
-In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA.
+<!-- In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA. -->
 
 PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you'd like to connect or collaborate, feel free to reach out!
 
@@ -27,7 +27,6 @@ PDEs are the language of natural science, governing everything from fluid dynami
 [GitHub](https://github.com/Shizheng-Wen)
 [LinkedIn](https://www.linkedin.com/in/shizheng-wen-1599b0184/)
 [Twitter / X](https://x.com/WenShizheng)
-[Resume](shizheng-wen-cv.pdf)
 
 
 ## News

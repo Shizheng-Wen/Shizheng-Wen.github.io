@@ -21,7 +21,7 @@ The previous al-folio Jekyll site is preserved on the **`al-folio-backup`** bran
 | `page-story.md` | The **source/brief** the page was generated from. Not served as the page; keep it in sync with `index.html` as the human-readable record. |
 | `avatar.jpeg` | Profile photo, referenced by `index.html` as `avatar.jpeg` (must stay at root). |
 | `shizheng-wen-cv.tex` | LaTeX source of the CV. |
-| `shizheng-wen-cv.pdf` | Compiled CV — this is the file the website's "CV/Resume" link points to (must stay at root). |
+| `shizheng-wen-cv.pdf` | Compiled CV, kept in the repo (no longer linked from the website). |
 | `Makefile` | `make` compiles the `.tex` → `.pdf`; `make clean` removes LaTeX aux files. |
 | `docs/plans/` | pageclaw design + implementation notes (reference only). |
 
