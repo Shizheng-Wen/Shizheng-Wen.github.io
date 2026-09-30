@@ -35,7 +35,7 @@ The previous al-folio Jekyll site is preserved on the **`al-folio-backup`** bran
 When the user describes a change in natural language:
 
 1. **Edit the relevant file(s):**
-   - Website content (About, News, Publications, Awards, Talks, Teaching) → edit
+   - Website content (About, News, Publications, Awards, Talks, Teaching, Service) → edit
      **`index.html`**, then mirror the same change into **`page-story.md`** so the
      two stay consistent.
    - CV / resume content → edit **`shizheng-wen-cv.tex`**.
@@ -65,7 +65,7 @@ When the user describes a change in natural language:
 ## index.html structure reference
 
 Sections are `<section id="...">` with an `<h2 class="section-heading">`:
-`about`, `news`, `publications`, `awards`, `talks`, `teaching`.
+`about`, `news`, `publications`, `awards`, `talks`, `teaching`, `service`.
 
 **News** — a `<ul>` of `<li class="timeline-item">`, reverse-chronological. Each item:
 ```html

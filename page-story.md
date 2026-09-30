@@ -36,7 +36,7 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 + May 2026: We open-sourced [TensorMesh](https://www.tensor-mesh.com/)! A fast, differentiable, JIT-free, debugging-friendly finite element library for PyTorch.
 
-+ May 2026: I received ETH Medal at my master's graduation ceremony, the highest honor for students with  outstanding master's and doctoral theses.
++ May 2026: I received the [ETH Medal](https://math.ethz.ch/news-and-events/news/d-math-news/2026/06/2026-graduation-ceremony.html) at my master's graduation ceremony, the highest honor for students with  outstanding master's and doctoral theses.
 
 + May 2026: One paper "[torch-sla](https://arxiv.org/abs/2601.13994)" accepted at **ICML 2026 Workshop AI4Physics**.
 
@@ -110,13 +110,10 @@ Filter buttons: Featured (default) · All · Neural Operators · Differentiable 
 
 ## Teaching
 
++ 2025 and 2026 Fall, 401-4656-21L AI in the Sciences and Engineering (6 ECTS), [Link](https://camlab-ethz.github.io/ai4s-course/)
+
 + 2026 Spring, 401-0674-00L Numerical Methods for Partial Differential Equations (10 ECTS), [Link](https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&ansicht=LERNMATERIALIEN&lerneinheitId=198602&lang=en)
 
-+ 2025 Fall, 401-4656-21L AI in the Sciences and Engineering (6 ECTS), [Link](https://camlab-ethz.github.io/ai4s-course/)
+## Service
 
-+ 2026 Fall, 401-4656-21L AI in the Sciences and Engineering (6 ECTS), [Link](https://camlab-ethz.github.io/ai4s-course/)
-
-
-
-
-
++ Reviewer: ICLR, NeurIPS, ICML, AAAI, TMLR, Nature Machine Intelligence, Computer Methods in Applied Mechanics and Engineering
