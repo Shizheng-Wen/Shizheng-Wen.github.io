@@ -607,11 +607,11 @@
       <h2 id="heading-about" class="section-heading">About</h2>
       <div class="prose">
         <p>
-          I am Shizheng Wen <span lang="zh">(闻仕政)</span>, a first-year PhD student in AI and applied math at
+          I am Shizheng Wen <span lang="zh">(闻仕政)</span>, a second-year PhD student in AI and applied math at
           <a class="clink" href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>.
           My research sits at the intersection of scientific computing and machine learning, with a focus on building fast, scalable, and differentiable solvers for partial differential equations (PDEs).
         </p>
-        <p>My current work spans three directions:</p>
+        <p>My current work spans four directions:</p>
       </div>
       <ul class="directions" role="list">
         <li>
@@ -625,6 +625,16 @@
           <strong>Scalable neural solver backbones.</strong> I develop neural operator architectures that handle complex geometries and scale to large problems, including
           <a class="clink" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a> and
           <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>.
+          I also study what really makes such architectures work: for example, we show that
+          <a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Transolver does not need a Transformer</a>
+          — its global slicing/deslicing, not attention, is what matters — and provide
+          <a class="clink" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a>,
+          a FlashAttention-style GPU kernel that makes this module far cheaper in memory and compute.
+        </li>
+        <li>
+          <strong>Physics-informed operator learning.</strong> I work on training neural operators purely from the governing equations, with no need for costly simulation data. By
+          <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">preconditioning the physics-informed loss with multigrid</a>,
+          we tame its ill-conditioning, so that label-free training matches the accuracy of supervised training.
         </li>
         <li>
           <strong>PDE foundation models.</strong> I am working on large-scale pretraining of foundation models for PDEs across diverse physical systems (more details coming soon).
