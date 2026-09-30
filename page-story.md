@@ -10,10 +10,10 @@ I am Shizheng Wen (闻仕政), a second-year PhD student in AI and applied math 
 
 My current work spans four directions:
 
-- **Differentiable solvers.** I am the creator of [TensorMesh](https://www.tensor-mesh.com/) — a GPU-native differentiable finite-element library built on PyTorch — and [torch-sla](https://www.torchsla.com/), a differentiable sparse linear algebra library with full autograd support across multiple solver backends. Together they aim to make classical numerical methods first-class citizens in modern ML pipelines.
-- **Scalable neural solver backbones.** I develop neural operator architectures that handle complex geometries and scale to large problems, including [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205). I also study what really makes such architectures work: for example, we show that [Transolver does not need a Transformer](https://arxiv.org/abs/2609.32525) — its global slicing/deslicing, not attention, is what matters — and provide [flashslice](https://github.com/Shizheng-Wen/flashslice), a FlashAttention-style GPU kernel that makes this module far cheaper in memory and compute.
-- **Physics-informed operator learning.** I work on training neural operators purely from the governing equations, with no need for costly simulation data. By [preconditioning the physics-informed loss with multigrid](https://arxiv.org/abs/2609.36216), we tame its ill-conditioning, so that label-free training matches the accuracy of supervised training.
-- **PDE foundation models.** I am working on large-scale pretraining of foundation models for PDEs across diverse physical systems (more details coming soon).
+- **Differentiable solvers.** I created [TensorMesh](https://www.tensor-mesh.com/) (finite elements) and [torch-sla](https://www.torchsla.com/) (sparse linear algebra), bringing classical numerical methods into PyTorch.
+- **Scalable neural solver backbones.** I build neural operators for complex geometries, such as [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205), and study what makes them work, e.g., showing that [Transolver does not need a Transformer](https://arxiv.org/abs/2609.32525).
+- **Physics-informed operator learning.** I train neural operators from the governing equations alone; [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets this label-free training match supervised accuracy.
+- **PDE foundation models.** Large-scale pretraining across diverse physical systems (coming soon).
 
 In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA.
 

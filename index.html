@@ -615,29 +615,22 @@
       </div>
       <ul class="directions" role="list">
         <li>
-          <strong>Differentiable solvers.</strong> I am the creator of
-          <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>
-          — a GPU-native differentiable finite-element library built on PyTorch — and
-          <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a>,
-          a differentiable sparse linear algebra library with full autograd support across multiple solver backends. Together they aim to make classical numerical methods first-class citizens in modern ML pipelines.
+          <strong>Differentiable solvers.</strong> I created
+          <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a> (finite elements) and
+          <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a> (sparse linear algebra), bringing classical numerical methods into PyTorch.
         </li>
         <li>
-          <strong>Scalable neural solver backbones.</strong> I develop neural operator architectures that handle complex geometries and scale to large problems, including
+          <strong>Scalable neural solver backbones.</strong> I build neural operators for complex geometries, such as
           <a class="clink" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a> and
-          <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>.
-          I also study what really makes such architectures work: for example, we show that
-          <a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Transolver does not need a Transformer</a>
-          — its global slicing/deslicing, not attention, is what matters — and provide
-          <a class="clink" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a>,
-          a FlashAttention-style GPU kernel that makes this module far cheaper in memory and compute.
+          <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>, and study what makes them work, e.g., showing that
+          <a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Transolver does not need a Transformer</a>.
         </li>
         <li>
-          <strong>Physics-informed operator learning.</strong> I work on training neural operators purely from the governing equations, with no need for costly simulation data. By
-          <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">preconditioning the physics-informed loss with multigrid</a>,
-          we tame its ill-conditioning, so that label-free training matches the accuracy of supervised training.
+          <strong>Physics-informed operator learning.</strong> I train neural operators from the governing equations alone;
+          <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">multigrid preconditioning</a> lets this label-free training match supervised accuracy.
         </li>
         <li>
-          <strong>PDE foundation models.</strong> I am working on large-scale pretraining of foundation models for PDEs across diverse physical systems (more details coming soon).
+          <strong>PDE foundation models.</strong> Large-scale pretraining across diverse physical systems (coming soon).
         </li>
       </ul>
       <div class="prose" style="margin-top:1rem;">
