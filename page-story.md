@@ -30,6 +30,10 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 
 ## News
++ Sep 2026: One paper "[Preconditioned Physics-Informed Neural Operator Training](https://arxiv.org/abs/2609.36216)" is now available on arXiv.
+
++ Sep 2026: One paper "[Does Transolver really need a Transformer?](https://arxiv.org/abs/2609.32525)" is now available on arXiv.
+
 + May 2026: We open-sourced [TensorMesh](https://www.tensor-mesh.com/)! A fast, differentiable, JIT-free, debugging-friendly finite element library for PyTorch.
 
 + May 2026: I received ETH Medal at my master's graduation ceremony, the highest honor for students with  outstanding master's and doctoral theses.
@@ -54,6 +58,10 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 
 ## Publications
++ Preconditioned Physics-Informed Neural Operator Training, Shizheng Wen^*, Siddhartha Mishra, Marius Zeinhofer^*, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.36216) · [code](https://github.com/camlab-ethz/TensorPILS)
+
++ Does Transolver really need a Transformer?, Shizheng Wen, Siddhartha Mishra, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.32525) · [code](https://github.com/Shizheng-Wen/flashslice)
+
 + Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm, Shizheng Wen^*, Mingyuan Chi^*, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra, ICML 2026. [arXiv](https://arxiv.org/abs/2602.05052)· [code](https://github.com/camlab-ethz/TensorMesh) · [project](https://www.tensor-mesh.com/)
 
 
@@ -87,6 +95,10 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 ## Invited Talks
 
++ Sep 2026: Differentiable Physics Simulation Engine: The infrastructure for physics foundation model, Hong Kong University of Science and Technology, hosted by Tianju Xue.
+
++ Jun 2026: Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing, Beihang University, hosted by Kun Wang.
+
 + Mar 2026: Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient High-Performance Galerkin Assembly Algorithm, Simon Fraser University, hosted by Wuyang Chen.
 
 + Mar 2026: Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains, Tsinghua University, hosted by Angelica Aviles-Rivero.
@@ -98,6 +110,8 @@ PDEs are the language of natural science, governing everything from fluid dynami
 + 2026 Spring, 401-0674-00L Numerical Methods for Partial Differential Equations (10 ECTS), [Link](https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&ansicht=LERNMATERIALIEN&lerneinheitId=198602&lang=en)
 
 + 2025 Fall, 401-4656-21L AI in the Sciences and Engineering (6 ECTS), [Link](https://camlab-ethz.github.io/ai4s-course/)
+
++ 2026 Fall, 401-4656-21L AI in the Sciences and Engineering (6 ECTS), [Link](https://camlab-ethz.github.io/ai4s-course/)
 
 
 
