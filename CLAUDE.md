@@ -86,6 +86,10 @@ Badge color by item type: `tl-green` = Publication, `tl-amber` = Milestone,
 marked with `<sup>*</sup>`), and a `pub-meta` row holding an optional
 `<span class="pub-venue">…</span>`, then `<a class="pub-link">` links separated by
 `<span class="pub-sep">·</span>`.
+Each `pub-item` carries `data-tags` (space-separated: `featured`, `neural-operator`,
+`solver`, `application`) used by the filter buttons above the list; the page shows
+**Featured** by default. Give every new paper at least one category tag (and `featured`
+if it should appear by default), and record the tags in `page-story.md`.
 
 ## Conventions
 

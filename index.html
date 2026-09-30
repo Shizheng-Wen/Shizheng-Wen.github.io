@@ -382,12 +382,38 @@
 
     /* ── Publications ── */
     .pub-list { list-style: none; }
-    .pub-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
+    .pub-item[hidden] { display: none; }
+    /* Divider between consecutive *visible* items, so filtering never leaves stray borders */
+    .pub-item:not([hidden]) ~ .pub-item:not([hidden]) {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
     }
-    .pub-item:first-child { padding-top: 0; }
-    .pub-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .pub-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .pub-filters[hidden] { display: none; }
+    .pub-filter {
+      font: inherit;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 150ms ease-out, background 150ms ease-out, border-color 150ms ease-out;
+    }
+    .pub-filter:hover { color: var(--accent); border-color: var(--accent); }
+    .pub-filter[aria-pressed="true"] {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+    .pub-filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .pub-title {
       font-size: 0.92rem;
       font-weight: 500;
@@ -746,8 +772,15 @@
     <!-- Selected Publications -->
     <section id="publications" class="page-section" aria-labelledby="heading-pubs">
       <h2 id="heading-pubs" class="section-heading">Publications</h2>
+      <div class="pub-filters" role="group" aria-label="Filter publications" hidden>
+        <button type="button" class="pub-filter" data-filter="featured" aria-pressed="true">Featured</button>
+        <button type="button" class="pub-filter" data-filter="all" aria-pressed="false">All</button>
+        <button type="button" class="pub-filter" data-filter="neural-operator" aria-pressed="false">Neural Operators</button>
+        <button type="button" class="pub-filter" data-filter="solver" aria-pressed="false">Differentiable Solvers</button>
+        <button type="button" class="pub-filter" data-filter="application" aria-pressed="false">Applications</button>
+      </div>
       <ol class="pub-list" role="list">
-        <li class="pub-item">
+        <li class="pub-item" data-tags="featured neural-operator">
           <div class="pub-title">Preconditioned Physics-Informed Neural Operator Training</div>
           <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Siddhartha Mishra, Marius Zeinhofer<sup>*</sup></div>
           <div class="pub-meta">
@@ -758,7 +791,7 @@
             <a class="pub-link" href="https://github.com/camlab-ethz/TensorPILS" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="featured neural-operator">
           <div class="pub-title">Does Transolver really need a Transformer?</div>
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Siddhartha Mishra</div>
           <div class="pub-meta">
@@ -769,7 +802,7 @@
             <a class="pub-link" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="featured solver">
           <div class="pub-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm</div>
           <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Mingyuan Chi<sup>*</sup>, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra</div>
           <div class="pub-meta">
@@ -782,7 +815,7 @@
             <a class="pub-link" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="featured solver">
           <div class="pub-title">torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch</div>
           <div class="pub-authors">Mingyuan Chi<sup>*</sup>, <span class="me">Shizheng Wen<sup>*</sup></span></div>
           <div class="pub-meta">
@@ -795,7 +828,7 @@
             <a class="pub-link" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">MOSIV: Multi-Object System Identification from Videos</div>
           <div class="pub-authors">Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, <span class="me">Shizheng Wen</span>, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao</div>
           <div class="pub-meta">
@@ -806,7 +839,7 @@
             <a class="pub-link" href="https://huggingface.co/datasets/Hanibel/MOSIV" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="featured neural-operator">
           <div class="pub-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</div>
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra</div>
           <div class="pub-meta">
@@ -819,7 +852,7 @@
             <a class="pub-link" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="neural-operator">
           <div class="pub-title">RIGNO: A Graph-based framework for robust and accurate operator learning for PDEs on arbitrary domains</div>
           <div class="pub-authors">Sepehr Mousavi, <span class="me">Shizheng Wen</span>, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra</div>
           <div class="pub-meta">
@@ -830,7 +863,7 @@
             <a class="pub-link" href="https://github.com/camlab-ethz/rigno" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</div>
           <div class="pub-authors">Wei Tang, <span class="me">Shizheng Wen</span>, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo</div>
           <div class="pub-meta">
@@ -839,7 +872,7 @@
             <a class="pub-link" href="https://doi.org/10.1016/j.ijmecsci.2024.109316" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">Feature Identification in Complex Fluid Flows by Convolutional Neural Networks</div>
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell</div>
           <div class="pub-meta">
@@ -848,7 +881,7 @@
             <a class="pub-link" href="https://doi.org/10.1016/j.taml.2023.100482" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</div>
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Chunzhuo Dang, and Xianglei Liu</div>
           <div class="pub-meta">
@@ -857,7 +890,7 @@
             <a class="pub-link" href="https://doi.org/10.1063/5.0103363" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">High-performance three-body near-field thermophotovoltaic energy conversion</div>
           <div class="pub-authors">Chunzhuo Dang, Xianglei Liu, Haifeng Xia, <span class="me">Shizheng Wen</span>, and Qiao Xu</div>
           <div class="pub-meta">
@@ -866,7 +899,7 @@
             <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2020.107411" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
-        <li class="pub-item">
+        <li class="pub-item" data-tags="application">
           <div class="pub-title">Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles</div>
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang</div>
           <div class="pub-meta">
@@ -1006,6 +1039,20 @@
       try { localStorage.setItem('theme', next); } catch (e) {}
       syncToggle();
     });
+
+    // ── Publication filters (default: Featured) ──
+    const pubFilterBar = document.querySelector('.pub-filters');
+    const pubFilters = document.querySelectorAll('.pub-filter');
+    const pubItems = document.querySelectorAll('.pub-item');
+    function applyPubFilter(filter) {
+      pubFilters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+      pubItems.forEach(li => {
+        li.hidden = filter !== 'all' && !li.dataset.tags.split(' ').includes(filter);
+      });
+    }
+    pubFilters.forEach(b => b.addEventListener('click', () => applyPubFilter(b.dataset.filter)));
+    pubFilterBar.hidden = false;
+    applyPubFilter('featured');
   </script>
 
 </body>

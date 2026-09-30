@@ -58,30 +58,33 @@ PDEs are the language of natural science, governing everything from fluid dynami
 
 
 ## Publications
-+ Preconditioned Physics-Informed Neural Operator Training, Shizheng Wen^*, Siddhartha Mishra, Marius Zeinhofer^*, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.36216) · [code](https://github.com/camlab-ethz/TensorPILS)
 
-+ Does Transolver really need a Transformer?, Shizheng Wen, Siddhartha Mishra, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.32525) · [code](https://github.com/Shizheng-Wen/flashslice)
+Filter buttons: Featured (default) · All · Neural Operators · Differentiable Solvers · Applications.
 
-+ Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm, Shizheng Wen^*, Mingyuan Chi^*, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra, ICML 2026. [arXiv](https://arxiv.org/abs/2602.05052)· [code](https://github.com/camlab-ethz/TensorMesh) · [project](https://www.tensor-mesh.com/)
++ Preconditioned Physics-Informed Neural Operator Training, Shizheng Wen^*, Siddhartha Mishra, Marius Zeinhofer^*, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.36216) · [code](https://github.com/camlab-ethz/TensorPILS) — *Tags: Featured, Neural Operators*
+
++ Does Transolver really need a Transformer?, Shizheng Wen, Siddhartha Mishra, arXiv preprint, 2026. [arXiv](https://arxiv.org/abs/2609.32525) · [code](https://github.com/Shizheng-Wen/flashslice) — *Tags: Featured, Neural Operators*
+
++ Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm, Shizheng Wen^*, Mingyuan Chi^*, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra, ICML 2026. [arXiv](https://arxiv.org/abs/2602.05052)· [code](https://github.com/camlab-ethz/TensorMesh) · [project](https://www.tensor-mesh.com/) — *Tags: Featured, Differentiable Solvers*
 
 
-+ torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch, Mingyuan Chi^*, Shizheng Wen^*, ICML 2026 Workshop (AI4Physics). [arXiv](https://arxiv.org/abs/2601.13994) · [code](https://github.com/sparsexlab/torch-sla) · [project](https://www.torchsla.com/)
++ torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch, Mingyuan Chi^*, Shizheng Wen^*, ICML 2026 Workshop (AI4Physics). [arXiv](https://arxiv.org/abs/2601.13994) · [code](https://github.com/sparsexlab/torch-sla) · [project](https://www.torchsla.com/) — *Tags: Featured, Differentiable Solvers*
 
-+ MOSIV: Multi-Object System Identification from Videos, Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, Shizheng Wen, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao, ICLR 2026. [arXiv](https://arxiv.org/abs/2603.06022)· [code](https://huggingface.co/datasets/Hanibel/MOSIV)
++ MOSIV: Multi-Object System Identification from Videos, Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, Shizheng Wen, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao, ICLR 2026. [arXiv](https://arxiv.org/abs/2603.06022)· [code](https://huggingface.co/datasets/Hanibel/MOSIV) — *Tags: Applications*
 
-+ Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains, Shizheng Wen, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra, NeurIPS 2025. [arXiv](https://arxiv.org/abs/2505.18781) · [code](https://github.com/shizheng-wen/GAOT) · [project](https://camlab-ethz.github.io/GAOT/)
++ Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains, Shizheng Wen, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra, NeurIPS 2025. [arXiv](https://arxiv.org/abs/2505.18781) · [code](https://github.com/shizheng-wen/GAOT) · [project](https://camlab-ethz.github.io/GAOT/) — *Tags: Featured, Neural Operators*
 
-+ RIGNO: A Graph-based framework for robust and accurate operator learning for PDEs on arbitrary domains, Sepehr Mousavi, Shizheng Wen, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra, NeurIPS 2025. [arXiv](https://arxiv.org/abs/2501.19205) · [code](https://github.com/camlab-ethz/rigno)
++ RIGNO: A Graph-based framework for robust and accurate operator learning for PDEs on arbitrary domains, Sepehr Mousavi, Shizheng Wen, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra, NeurIPS 2025. [arXiv](https://arxiv.org/abs/2501.19205) · [code](https://github.com/camlab-ethz/rigno) — *Tags: Neural Operators*
 
-+ Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite, Wei Tang, Shizheng Wen, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo, International Journal of Mechanical Sciences, 2024. [doi](https://doi.org/10.1016/j.ijmecsci.2024.109316)
++ Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite, Wei Tang, Shizheng Wen, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo, International Journal of Mechanical Sciences, 2024. [doi](https://doi.org/10.1016/j.ijmecsci.2024.109316) — *Tags: Applications*
 
-+ Feature Identification in Complex Fluid Flows by Convolutional Neural Networks, Shizheng Wen, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell, Theoretical and Applied Mechanics Letters, 2023. [doi](https://doi.org/10.1016/j.taml.2023.100482)
++ Feature Identification in Complex Fluid Flows by Convolutional Neural Networks, Shizheng Wen, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell, Theoretical and Applied Mechanics Letters, 2023. [doi](https://doi.org/10.1016/j.taml.2023.100482) — *Tags: Applications*
 
-+ A machine learning strategy for modeling and optimal design of near-field radiative heat transfer, Shizheng Wen, Chunzhuo Dang, and Xianglei Liu, Applied Physics Letters, 2022. [doi](https://doi.org/10.1063/5.0103363)
++ A machine learning strategy for modeling and optimal design of near-field radiative heat transfer, Shizheng Wen, Chunzhuo Dang, and Xianglei Liu, Applied Physics Letters, 2022. [doi](https://doi.org/10.1063/5.0103363) — *Tags: Applications*
 
-+ High-performance three-body near-field thermophotovoltaic energy conversion, Chunzhuo Dang, Xianglei Liu, Haifeng Xia, Shizheng Wen, and Qiao Xu, Journal of Quantitative Spectroscopy and Radiative Transfer, 2021. [doi](https://doi.org/10.1016/j.jqsrt.2020.107411)
++ High-performance three-body near-field thermophotovoltaic energy conversion, Chunzhuo Dang, Xianglei Liu, Haifeng Xia, Shizheng Wen, and Qiao Xu, Journal of Quantitative Spectroscopy and Radiative Transfer, 2021. [doi](https://doi.org/10.1016/j.jqsrt.2020.107411) — *Tags: Applications*
 
-+ Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles, Shizheng Wen, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang, Journal of Quantitative Spectroscopy and Radiative Transfer, 2019. [doi](https://doi.org/10.1016/j.jqsrt.2019.05.026)
++ Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles, Shizheng Wen, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang, Journal of Quantitative Spectroscopy and Radiative Transfer, 2019. [doi](https://doi.org/10.1016/j.jqsrt.2019.05.026) — *Tags: Applications*
 
 ## Selected Awards
 
