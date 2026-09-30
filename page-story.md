@@ -11,7 +11,7 @@ I am Shizheng Wen (闻仕政), a second-year PhD student in AI and applied math 
 My current work spans four directions:
 
 - **Differentiable solvers.** I created [TensorMesh](https://www.tensor-mesh.com/) (finite elements) and [torch-sla](https://www.torchsla.com/) (sparse linear algebra), bringing classical numerical methods into PyTorch.
-- **Scalable neural solver backbones.** I build neural operators for complex geometries, such as [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205), and study what makes them work, e.g., showing that [Transolver does not need a Transformer](https://arxiv.org/abs/2609.32525).
+- **Scalable neural solver backbones.** I build neural operators for complex geometries, such as [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205), and accelerate them with fused GPU kernels such as [flashslice](https://github.com/Shizheng-Wen/flashslice).
 - **Physics-informed operator learning.** I train neural operators from the governing equations alone; [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets this label-free training match supervised accuracy.
 - **PDE foundation models.** Large-scale pretraining across diverse physical systems (coming soon).
 
