@@ -98,6 +98,8 @@ Filter buttons: Featured (default) · All · Neural Operators · Differentiable 
 
 ## Invited Talks
 
++ Nov 2026: Differentiable Finite Elements in PyTorch: TensorMesh and its role in operator learning, University of Freiburg, hosted by Sören Bartels.
+
 + Sep 2026: Differentiable Physics Simulation Engine: The infrastructure for physics foundation model, Hong Kong University of Science and Technology, hosted by Tianju Xue.
 
 + Jun 2026: Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing, Beihang University, hosted by Kun Wang.
