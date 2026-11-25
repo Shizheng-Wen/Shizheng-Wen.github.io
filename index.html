@@ -3,28 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shizheng Wen — PhD Student, ETH Zurich</title>
-  <meta name="description" content="Shizheng Wen (闻仕政) is a doctoral student at the Seminar for Applied Mathematics, ETH Zurich, building foundation models for physics: differentiable solvers, neural operators, and label-free training for PDEs.">
-  <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1B2D'/%3E%3Cpath d='M7 23 16 8l9 15zM11.5 15.5h9L16 23z' fill='none' stroke='%23F7F8FA' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <title>Shizheng Wen — Foundation models for physics</title>
+  <meta name="description" content="Shizheng Wen (闻仕政) is a PhD researcher at ETH Zurich building foundation models for physics: differentiable solvers, neural operators, and label-free training for PDEs.">
+  <meta name="theme-color" content="#0C0E12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0E12'/%3E%3Cpath d='M7 23 16 8l9 15zM11.5 15.5h9L16 23z' fill='none' stroke='%2393A7FF' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preload" href="fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Anti-FOUC: set theme before first paint -->
+  <!-- Anti-FOUC: set theme before first paint (dark unless the visitor chose light) -->
   <script>
     (function () {
-      try {
-        var stored = localStorage.getItem('theme');
-        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
+      var theme = 'dark';
+      try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 
   <style>
-    /* ── Typeface: Hanken Grotesk (variable, self-hosted in /fonts, SIL OFL) ── */
+    /* ── Typefaces (self-hosted in /fonts, SIL OFL): Hanken Grotesk for text, DM Mono for labels ── */
     @font-face {
       font-family: 'Hanken Grotesk';
       font-style: normal;
@@ -41,95 +36,91 @@
       src: url('fonts/hanken-grotesk-latin-ext.woff2') format('woff2');
       unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
     }
+    @font-face {
+      font-family: 'DM Mono';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/dm-mono-latin-400.woff2') format('woff2');
+    }
 
-    /* ── Tokens ──
-       The page itself is ink on paper. The only colour is the solution field in the
-       hero (ParaView's cool-to-warm map); --cool doubles as the interactive accent. */
+    /* ── Tokens ── dark is the default; one cool accent, with --warm kept for the field and status dots */
     :root {
+      --paper:  #0C0E12;
+      --panel:  #11141A;
+      --ink:    #EEF0F4;
+      --muted:  #979FAF;
+      --faint:  #646C7B;
+      --rule:   #1F242E;
+      --cool:   #93A7FF;
+      --warm:   #FF8E73;
+      --nav-bg: rgba(12, 14, 18, 0.78);
+      --max-w:  70rem;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+      --font: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+    :root[data-theme="light"] {
       --paper:  #F7F8FA;
+      --panel:  #FFFFFF;
       --ink:    #0F1B2D;
       --muted:  #586377;
+      --faint:  #8089A0;
       --rule:   #DCE1E9;
       --cool:   #3B4CC0;
       --warm:   #B40426;
       --nav-bg: rgba(247, 248, 250, 0.82);
-      --max-w:  72rem;
-      --gutter: clamp(1.25rem, 4vw, 3rem);
-      --side:   14rem;
-      --font: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-    }
-    :root[data-theme="dark"] {
-      --paper:  #0B1220;
-      --ink:    #E8EBF1;
-      --muted:  #95A1B5;
-      --rule:   #202B3D;
-      --cool:   #9DB0FF;
-      --warm:   #FF8E73;
-      --nav-bg: rgba(11, 18, 32, 0.8);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 5rem;
-      -webkit-text-size-adjust: 100%;
-    }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 4rem; -webkit-text-size-adjust: 100%; }
     body {
       font-family: var(--font);
       background: var(--paper);
       color: var(--ink);
-      font-size: 1.0625rem;
+      font-size: 1rem;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-
     ul, ol { list-style: none; }
     img { display: block; max-width: 100%; }
 
-    /* Links: ink with a quiet underline; the accent only appears on interaction */
     a {
       color: inherit;
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 0.2em;
-      text-decoration-color: color-mix(in srgb, currentColor 32%, transparent);
+      text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
       transition: color 120ms ease-out, text-decoration-color 120ms ease-out;
     }
     a:hover { color: var(--cool); text-decoration-color: currentColor; }
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--cool);
-      outline-offset: 3px;
-      border-radius: 2px;
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--cool); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Small mono label, used for metadata everywhere */
+    .label {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      line-height: 1.5;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--faint);
     }
 
-    /* ── Skip link ── */
     .skip-link {
-      position: fixed;
-      top: 0.5rem;
-      left: 1rem;
-      z-index: 999;
-      padding: 0.45rem 0.9rem;
-      background: var(--ink);
-      color: var(--paper);
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 2px;
-      transform: translateY(calc(-100% - 0.75rem));
-      transition: transform 150ms ease-out;
+      position: fixed; top: 0.5rem; left: 1rem; z-index: 999;
+      padding: 0.45rem 0.9rem; background: var(--ink); color: var(--paper);
+      font-size: 0.875rem; font-weight: 600; text-decoration: none; border-radius: 3px;
+      transform: translateY(calc(-100% - 0.75rem)); transition: transform 150ms ease-out;
     }
     .skip-link:hover { color: var(--paper); }
     .skip-link:focus { transform: translateY(0); }
 
     /* ── Nav ── */
     #site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: var(--nav-bg);
       -webkit-backdrop-filter: saturate(1.4) blur(14px);
       backdrop-filter: saturate(1.4) blur(14px);
@@ -137,435 +128,234 @@
       transition: border-color 200ms ease-out;
     }
     #site-nav.is-scrolled { border-bottom-color: var(--rule); }
-    .nav-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-      height: 3.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-    }
-    .nav-name {
-      margin-right: auto;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-    }
+    .nav-inner { height: 3rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      height: 3.5rem;
-      font-size: 0.9375rem;
-      color: var(--muted);
-      white-space: nowrap;
-      text-decoration: none;
+      display: inline-flex; align-items: center; height: 3rem;
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--faint); text-decoration: none; white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a.active { color: var(--ink); font-weight: 600; }
-
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
     .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-      width: 2.5rem;
-      height: 2.5rem;
-      margin-right: -0.6rem;
-      border: 0;
-      border-radius: 50%;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+      width: 2.25rem; height: 2.25rem; margin-right: -0.55rem;
+      border: 0; border-radius: 50%; background: transparent; color: var(--faint); cursor: pointer;
       transition: color 120ms ease-out;
     }
     .theme-toggle:hover { color: var(--ink); }
-    .theme-toggle svg { width: 1.125rem; height: 1.125rem; }
-    :root[data-theme="dark"] .icon-moon { display: none; }
-    :root:not([data-theme="dark"]) .icon-sun { display: none; }
+    .theme-toggle svg { width: 1rem; height: 1rem; }
+    :root[data-theme="light"] .icon-sun { display: none; }
+    :root:not([data-theme="light"]) .icon-moon { display: none; }
 
-    /* ── Hero: a live finite-element solution, with the name set beneath it ── */
-    .hero {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: min(calc(100svh - 3.5rem), 54rem);
-      overflow: hidden;
-    }
-    #field {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 7%, #000 34%, #000 48%, transparent 74%);
-      mask-image: linear-gradient(to bottom, transparent 7%, #000 34%, #000 48%, transparent 74%);
-    }
-    .hero-copy {
-      position: relative;
-      width: 100%;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 12rem var(--gutter) 4rem;
+    /* ── Hero: pitch on the left, live field on the right ── */
+    .hero { padding: 1.75rem 0 3.75rem; }
+    .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      column-gap: 2rem;
-    }
-    .profile-name {
-      grid-column: 1 / -1;
-      font-size: clamp(3rem, 9.2vw, 7.5rem);
-      font-weight: 500;
-      line-height: 0.94;
-      letter-spacing: -0.045em;
-      margin-left: -0.045em; /* optical alignment of the S with the text below */
-    }
-    .name-zh {
-      display: inline-block;
-      margin-left: 0.35em;
-      font-size: 0.36em;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .hero-lead {
-      grid-column: 1;
-      margin-top: 1.75rem;
-      max-width: 40rem;
-      text-wrap: pretty;
-      font-size: clamp(1.25rem, 2vw, 1.625rem);
-      line-height: 1.35;
-      letter-spacing: -0.015em;
-    }
-    .hero-affil {
-      grid-column: 1;
-      margin-top: 0.9rem;
-      max-width: 40rem;
-      text-wrap: pretty;
-      font-size: 1rem;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-    .hero-affil a { color: var(--ink); }
-    .hero-affil a:hover { color: var(--cool); }
-    .contact-links {
-      grid-column: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1.5rem;
-      margin-top: 1.5rem;
-      font-size: 1rem;
-    }
-    .field-note {
-      grid-column: 2;
-      grid-row: 2 / span 3;
-      max-width: 17rem;
-      font-size: 0.8125rem;
-      line-height: 1.45;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    /* ── Sections: heading in the left gutter, content on the right ── */
-    .page-section {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
-    .section-grid {
-      display: grid;
-      grid-template-columns: var(--side) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
       column-gap: clamp(2rem, 5vw, 4.5rem);
-      padding: 4.5rem 0;
-      border-top: 1px solid var(--rule);
-    }
-    .section-side {
-      position: sticky;
-      top: 5.5rem;
-      align-self: start;
-    }
-    .section-heading {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.6;
-      letter-spacing: -0.005em;
-    }
-    .section-body { min-width: 0; max-width: 46rem; }
-
-    .avatar {
-      width: 100%;
-      max-width: 11.5rem;
-      height: auto;
-      aspect-ratio: 1;
-      object-fit: cover;
-      margin-top: 1.25rem;
-      border-radius: 3px;
-    }
-
-    .prose { max-width: 40rem; }
-    .prose p + p { margin-top: 1rem; }
-    .prose .prose-lead + p { margin-top: 2.5rem; }
-    .prose-lead {
-      font-size: clamp(1.25rem, 2vw, 1.5rem);
-      line-height: 1.4;
-      letter-spacing: -0.015em;
-    }
-
-    /* ── Research stack: labelled rows (three layers, then the model they build towards) ── */
-    .directions { margin: 1.75rem 0 2.5rem; }
-    .directions li {
-      display: grid;
-      grid-template-columns: 11rem minmax(0, 1fr);
-      column-gap: 1.5rem;
-      padding: 1rem 0 1.15rem;
-      border-top: 1px solid var(--rule);
-      font-size: 0.9375rem;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-    .directions strong {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      letter-spacing: -0.008em;
-      color: var(--ink);
-    }
-    .directions a { color: var(--ink); }
-    .directions a:hover { color: var(--cool); }
-    .directions .directions-goal { border-top-color: var(--ink); color: var(--ink); }
-
-    /* ── Timeline rows (News + Talks): date column, then content ── */
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 6.5rem minmax(0, 1fr);
-      column-gap: 1.25rem;
       align-items: start;
-      padding: 0.95rem 0;
-      border-top: 1px solid var(--rule);
     }
-    .timeline-item:first-child { border-top: 0; padding-top: 0; }
-    .timeline-item[hidden] { display: none; }
-    .tl-date {
-      grid-column: 1;
-      grid-row: 1;
-      font-size: 0.9375rem;
-      line-height: 1.7;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
+    .id { display: flex; align-items: center; gap: 0.9rem; }
+    .avatar {
+      width: 3.25rem; height: 3.25rem; flex: 0 0 auto;
+      border-radius: 50%; object-fit: cover; border: 1px solid var(--rule);
     }
-    .tl-badge {
-      grid-column: 1;
-      grid-row: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.8125rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-    .tl-badge::before {
-      content: '';
-      width: 0.4375rem;
-      height: 0.4375rem;
-      border-radius: 50%;
-      background: var(--badge);
-    }
-    .tl-green { --badge: var(--cool); }                 /* Publication */
-    .tl-amber { --badge: var(--warm); }                 /* Milestone */
-    .tl-blue  { --badge: transparent; }                 /* Release / Talk: open ring */
-    .tl-blue::before { box-shadow: inset 0 0 0 1.5px var(--muted); }
-    .tl-content { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
-    .tl-content strong { font-weight: 600; }
-    .tl-talk-title {
-      display: block;
+    .profile-name { font-size: 1.375rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; }
+    .name-zh { margin-left: 0.4rem; font-size: 0.9375rem; font-weight: 400; letter-spacing: 0.02em; color: var(--muted); }
+    .status { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem; }
+    .status::before { content: ''; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--warm); }
+    .tagline {
+      margin-top: 2.25rem;
+      font-size: clamp(2rem, 3.7vw, 2.875rem);
       font-weight: 600;
-      line-height: 1.4;
-      letter-spacing: -0.008em;
-    }
-    .tl-venue {
-      display: block;
-      margin-top: 0.2rem;
-      font-size: 0.9375rem;
-      color: var(--muted);
-    }
-
-    .more-button {
-      margin-top: 1.25rem;
-      margin-left: 7.75rem;
-      padding: 0;
-      border: 0;
-      background: none;
-      font: inherit;
-      font-size: 0.9375rem;
-      color: var(--ink);
-      cursor: pointer;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.2em;
-      text-decoration-color: color-mix(in srgb, currentColor 32%, transparent);
-    }
-    .more-button:hover { color: var(--cool); text-decoration-color: currentColor; }
-
-    /* ── Publications ── */
-    .pub-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .pub-filters[hidden] { display: none; }
-    .pub-filter {
-      padding: 0.2rem 0;
-      border: 0;
-      border-bottom: 1.5px solid transparent;
-      background: none;
-      font: inherit;
-      font-size: 0.9375rem;
-      color: var(--muted);
-      cursor: pointer;
-      transition: color 120ms ease-out, border-color 120ms ease-out;
-    }
-    .pub-filter:hover { color: var(--ink); }
-    .pub-filter[aria-pressed="true"] {
-      color: var(--ink);
-      font-weight: 600;
-      border-bottom-color: var(--ink);
-    }
-    .pub-item[hidden] { display: none; }
-    /* Rule between consecutive *visible* items, so filtering never leaves a stray border */
-    .pub-item:not([hidden]) ~ .pub-item:not([hidden]) {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--rule);
-    }
-    .pub-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      line-height: 1.35;
-      letter-spacing: -0.012em;
+      line-height: 1.08;
+      letter-spacing: -0.032em;
       text-wrap: balance;
     }
-    .pub-authors {
-      margin-top: 0.4rem;
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      color: var(--muted);
+    .tagline .tone { color: var(--cool); }
+    .lede { margin-top: 1.5rem; max-width: 35rem; color: var(--muted); text-wrap: pretty; }
+    .lede b { font-weight: 600; color: var(--ink); }
+    .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.75rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.65rem 1rem; border-radius: 4px;
+      background: var(--ink); color: var(--paper);
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background 120ms ease-out;
     }
+    .btn:hover { background: var(--cool); color: var(--paper); }
+    .social { display: flex; flex-wrap: wrap; gap: 0.4rem 1.15rem; }
+    .social a {
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+    }
+    .social a:hover { color: var(--ink); }
+    .facts {
+      display: grid; grid-template-columns: 6.75rem minmax(0, 1fr); row-gap: 0.55rem;
+      margin-top: 2.25rem; padding-top: 1.35rem; border-top: 1px solid var(--rule);
+      font-size: 0.875rem; line-height: 1.5;
+    }
+    .facts dt { padding-top: 0.2rem; }
+    .facts dd { color: var(--muted); }
+    .facts dd b, .facts dd a { font-weight: 600; color: var(--ink); }
+    .facts dd a { text-decoration: none; }
+    .facts dd a:hover { color: var(--cool); }
+
+    .field-panel { margin-top: 0.5rem; }
+    .field-frame {
+      position: relative; aspect-ratio: 1 / 1;
+      border: 1px solid var(--rule); border-radius: 14px;
+      background: var(--panel); overflow: hidden;
+    }
+    #field {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 2%, #000 26%, #000 78%, transparent 99%);
+      mask-image: linear-gradient(to bottom, transparent 2%, #000 26%, #000 78%, transparent 99%);
+    }
+    .field-panel figcaption { margin-top: 1rem; text-align: center; }
+    .field-panel .label { color: var(--cool); }
+    #field-note { margin-top: 0.3rem; font-size: 0.875rem; color: var(--muted); }
+
+    /* ── Blocks ── */
+    .block { padding: 3.25rem 0; border-top: 1px solid var(--rule); }
+    .block-head {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+      gap: 0.5rem 2rem; margin-bottom: 1.5rem;
+    }
+    .section-heading { font-size: 1.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.022em; }
+    .block > .section-heading, .col > .section-heading { margin-bottom: 1.1rem; }
+    .stats { color: var(--muted); }
+    .stats b { font-weight: 400; color: var(--cool); }
+    .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.5rem; row-gap: 3rem; }
+    .triple { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 3.5rem; row-gap: 3rem; }
+
+    /* ── Selected work: one card per layer of the stack ── */
+    .work-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1.25rem; }
+    .work-media {
+      display: block; aspect-ratio: 16 / 10; overflow: hidden;
+      border: 1px solid var(--rule); border-radius: 8px; background: var(--panel);
+    }
+    .work-media img { width: 100%; height: 100%; object-fit: cover; }
+    .work-media.is-upcoming {
+      display: flex; align-items: center; justify-content: center;
+      border-style: dashed; border-color: color-mix(in srgb, var(--cool) 45%, var(--rule));
+      background:
+        repeating-linear-gradient(135deg, transparent 0 9px, color-mix(in srgb, var(--cool) 7%, transparent) 9px 10px),
+        var(--panel);
+    }
+    .work-media.is-upcoming .label { color: var(--cool); }
+    .work-card > .label { display: block; margin-top: 0.85rem; color: var(--cool); }
+    .work-title { margin-top: 0.2rem; font-size: 1.1875rem; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; }
+    .work-desc { margin-top: 0.35rem; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
+    .work-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.95rem; margin-top: 0.65rem; }
+    .work-links a, .pub-link {
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em;
+      color: var(--cool); text-decoration: none;
+    }
+    .work-links a:hover, .pub-link:hover { color: var(--ink); }
+
+    /* ── Timeline rows (News + Talks) ── */
+    .timeline-item {
+      display: grid; grid-template-columns: 5rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 1rem; align-items: start;
+      padding: 0.75rem 0; border-top: 1px solid var(--rule);
+      font-size: 0.875rem; line-height: 1.5;
+    }
+    .timeline-item[hidden] { display: none; }
+    .tl-date {
+      grid-column: 1; grid-row: 1;
+      font-family: var(--mono); font-size: 0.6875rem; line-height: 1.9; letter-spacing: 0.04em;
+      color: var(--faint); white-space: nowrap;
+    }
+    .tl-badge {
+      grid-column: 1; grid-row: 2;
+      font-family: var(--mono); font-size: 0.5938rem; line-height: 1.6; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .tl-green { color: var(--cool); }     /* Publication */
+    .tl-amber { color: var(--warm); }     /* Milestone */
+    .tl-blue  { color: var(--muted); }    /* Release */
+    .tl-content { grid-column: 2; grid-row: 1 / span 2; min-width: 0; color: var(--muted); }
+    .tl-content a, .tl-content strong { color: var(--ink); }
+    .tl-content strong { font-weight: 600; }
+    .tl-talk-title { display: block; font-weight: 600; line-height: 1.4; color: var(--ink); }
+    .tl-venue { display: block; margin-top: 0.15rem; font-size: 0.8125rem; }
+    .more-button {
+      margin-top: 0.9rem; margin-left: 6rem; padding: 0; border: 0; background: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--cool);
+    }
+    .more-button:hover { color: var(--ink); }
+
+    /* ── Publications ── */
+    .pub-filters { display: flex; flex-wrap: wrap; gap: 0.25rem 1.35rem; }
+    .pub-filters[hidden] { display: none; }
+    .pub-filter {
+      padding: 0.2rem 0; border: 0; border-bottom: 1px solid transparent; background: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--faint); transition: color 120ms ease-out, border-color 120ms ease-out;
+    }
+    .pub-filter:hover { color: var(--ink); }
+    .pub-filter[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--cool); }
+    .pub-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.5rem; }
+    .pub-item { padding: 1rem 0 1.1rem; border-top: 1px solid var(--rule); }
+    .pub-item[hidden] { display: none; }
+    .pub-title { font-size: 0.9688rem; font-weight: 600; line-height: 1.38; letter-spacing: -0.008em; text-wrap: pretty; }
+    .pub-authors { margin-top: 0.3rem; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); }
     .pub-authors .me { font-weight: 600; color: var(--ink); }
     .pub-authors sup { font-size: 0.7em; line-height: 0; }
-    .pub-meta,
-    .teaching-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 0.15rem 1.1rem;
-      margin-top: 0.55rem;
-      font-size: 0.9375rem;
+    .pub-meta, .teaching-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.95rem; margin-top: 0.5rem; }
+    .pub-venue, .teaching-term, .teaching-code {
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--muted);
     }
-    .pub-venue { font-weight: 500; }
-    .pub-footnote {
-      margin-top: 2rem;
-      font-size: 0.8125rem;
-      color: var(--muted);
-    }
+    .pub-venue { color: var(--ink); }
+    .pub-footnote { margin-top: 1rem; font-size: 0.75rem; color: var(--faint); }
 
-    /* ── Awards / Service ── */
-    .award-list { max-width: 34rem; }
+    /* ── Awards / Teaching / Service ── */
     .award-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1.5rem;
-      padding: 0.8rem 0;
-      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: baseline; gap: 1.25rem;
+      padding: 0.7rem 0; border-top: 1px solid var(--rule); font-size: 0.875rem; color: var(--muted);
     }
-    .award-list li:first-child { border-top: 0; padding-top: 0; }
-    .award-year { color: var(--muted); font-variant-numeric: tabular-nums; }
-
-    /* ── Teaching ── */
-    .teaching-item { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
-    .teaching-item:first-child { border-top: 0; padding-top: 0; }
-    .teaching-title {
-      font-size: 1.0625rem;
-      font-weight: 600;
-      line-height: 1.4;
-      letter-spacing: -0.008em;
-    }
+    .col-awards .award-list li { color: var(--ink); }
+    .award-year { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--faint); }
+    .teaching-item { padding: 0.7rem 0 0.8rem; border-top: 1px solid var(--rule); }
+    .teaching-title { font-size: 0.875rem; font-weight: 600; line-height: 1.4; }
     .teaching-ects { font-weight: 400; color: var(--muted); }
-    .teaching-meta { margin-top: 0.3rem; color: var(--muted); }
-    .teaching-code { font-variant-numeric: tabular-nums; }
-    .teaching-meta a { color: var(--ink); }
-    .teaching-meta a:hover { color: var(--cool); }
+    .teaching-meta { margin-top: 0.3rem; }
 
     /* ── Footer ── */
-    .site-footer {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
     .footer-inner {
-      padding: 1.75rem 0 3rem;
-      border-top: 1px solid var(--rule);
-      font-size: 0.8125rem;
-      color: var(--muted);
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem;
+      padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--rule);
+      font-size: 0.8125rem; color: var(--faint);
     }
+    .footer-inner a { color: var(--muted); text-decoration: none; }
+    .footer-inner a:hover { color: var(--cool); }
 
     /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .nav-links { gap: 1.25rem; }
-      .section-grid { grid-template-columns: 1fr; padding: 3rem 0; }
-      .section-side { position: static; margin-bottom: 1.5rem; }
-      .section-heading { font-size: 1.25rem; letter-spacing: -0.015em; }
-      .avatar { max-width: 8.5rem; margin-top: 1rem; }
-      .hero-copy { grid-template-columns: minmax(0, 1fr); }
-      .field-note { grid-column: 1; grid-row: auto; margin-top: 1.75rem; text-align: left; max-width: none; }
-    }
-    @media (max-width: 760px) {
-      .nav-name { display: none; }
-      .nav-inner { gap: 0.5rem; }
-      .nav-links {
-        flex: 1 1 auto;
-        min-width: 0;
-        gap: 1.15rem;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-      .nav-links::-webkit-scrollbar { display: none; }
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: minmax(0, 1fr); row-gap: 2.75rem; }
+      .field-frame { aspect-ratio: 16 / 11; }
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .split, .triple, .pub-list { grid-template-columns: minmax(0, 1fr); }
     }
     @media (max-width: 600px) {
-      body { font-size: 1rem; }
-      .hero { min-height: 0; }
-      #field { height: 21rem; }
-      .hero-copy { padding-top: 12.5rem; padding-bottom: 2.75rem; }
-      .name-zh { display: block; margin: 0.9rem 0 0; font-size: 1.25rem; }
-      .directions li { grid-template-columns: 1fr; row-gap: 0.3rem; }
-      .timeline-item { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.9rem; }
-      .tl-content { flex: 0 0 100%; margin-top: 0.2rem; }
+      .nav-inner { justify-content: space-between; }
+      .nav-links { flex: 1 1 auto; min-width: 0; gap: 1.15rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .hero { padding-top: 1rem; }
+      .tagline { margin-top: 1.75rem; }
+      .facts { grid-template-columns: minmax(0, 1fr); row-gap: 0.1rem; }
+      .facts dd { margin-bottom: 0.6rem; }
+      .work-grid { grid-template-columns: minmax(0, 1fr); }
+      .block { padding: 2.5rem 0; }
       .more-button { margin-left: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
-      }
+      *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
     }
-
     @media print {
-      #site-nav, #field, .field-note, .pub-filters, .more-button { display: none !important; }
-      .hero { min-height: 0; }
-      .hero-copy { padding-top: 0; }
+      #site-nav, .field-panel, .pub-filters, .more-button, .cta .btn { display: none !important; }
       .pub-item[hidden], .timeline-item[hidden] { display: block !important; }
     }
   </style>
@@ -574,25 +364,19 @@
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Navigation -->
   <nav id="site-nav" aria-label="Site navigation">
-    <div class="nav-inner">
-      <a class="nav-name" href="#top">Shizheng Wen</a>
+    <div class="wrap nav-inner">
       <ul class="nav-links" role="list">
-        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#news">News</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#awards">Awards</a></li>
         <li><a href="#talks">Talks</a></li>
+        <li><a href="#publications">Publications</a></li>
         <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#service">Service</a></li>
       </ul>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">
-        <!-- Moon (shown in light mode → switch to dark) -->
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light mode" aria-pressed="false" title="Toggle light / dark">
         <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
         </svg>
-        <!-- Sun (shown in dark mode → switch to light) -->
         <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
@@ -603,445 +387,411 @@
 
   <main id="main-content" tabindex="-1">
 
-    <!-- Hero: live finite-element field + name -->
+    <!-- Hero -->
     <header class="hero" id="top">
-      <canvas id="field" aria-hidden="true"></canvas>
-      <div class="hero-copy">
-        <h1 class="profile-name">Shizheng Wen <span class="name-zh" lang="zh">闻仕政</span></h1>
-        <p class="hero-lead">I build foundation models for physics: AI that simulates the physical world from its governing equations.</p>
-        <p class="hero-affil">
-          PhD student at the <a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH&nbsp;Zurich</a>. Affiliated with the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a> and advised by Prof.&nbsp;<a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.
-        </p>
-        <ul class="contact-links" role="list" aria-label="Contact and profiles">
-          <li><a href="mailto:shizheng.wen@sam.math.ethz.ch">Email</a></li>
-          <li><a href="https://scholar.google.com/citations?user=PV4NVPgAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
-          <li><a href="https://github.com/Shizheng-Wen" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/shizheng-wen-1599b0184/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="https://x.com/WenShizheng" target="_blank" rel="noopener noreferrer">X</a></li>
-        </ul>
-        <p class="field-note" id="field-note">Solved live in your browser: a wave equation on a mesh of linear finite elements. Move across it to make waves.</p>
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <div class="id">
+            <img src="avatar.jpeg" alt="Photo of Shizheng Wen" class="avatar" width="52" height="52">
+            <div>
+              <h1 class="profile-name">Shizheng Wen<span class="name-zh" lang="zh">闻仕政</span></h1>
+              <p class="status label">PhD researcher, ETH Zurich</p>
+            </div>
+          </div>
+          <p class="tagline">Foundation models for physics, <span class="tone">learned from the equations themselves.</span></p>
+          <p class="lede">
+            Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it <b>behaves</b>, from the equations that govern it and with the accuracy that <b>engineering</b> and <b>science</b> require. Physics has no internet-scale corpus to learn from, so I build the full stack: <b>infrastructure</b>, <b>architecture</b> and <b>training</b>.
+          </p>
+          <div class="cta">
+            <a class="btn" href="mailto:shizheng.wen@sam.math.ethz.ch">Get in touch</a>
+            <ul class="social" role="list" aria-label="Profiles">
+              <li><a href="https://scholar.google.com/citations?user=PV4NVPgAAAAJ" target="_blank" rel="noopener noreferrer">Scholar</a></li>
+              <li><a href="https://github.com/Shizheng-Wen" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/shizheng-wen-1599b0184/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://x.com/WenShizheng" target="_blank" rel="noopener noreferrer">X</a></li>
+            </ul>
+          </div>
+          <dl class="facts">
+            <dt class="label">Based at</dt>
+            <dd><a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>, and the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a>. Advised by Prof. <a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.</dd>
+            <dt class="label">Known for</dt>
+            <dd><a href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>, <a href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a>, <a href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a></dd>
+            <dt class="label">Recognition</dt>
+            <dd><b>ETH Medal</b>, with papers at ICML, NeurIPS and ICLR</dd>
+          </dl>
+        </div>
+
+        <figure class="field-panel" id="field-panel">
+          <div class="field-frame"><canvas id="field" aria-hidden="true"></canvas></div>
+          <figcaption>
+            <p class="label">Solved live in your browser</p>
+            <p id="field-note">A wave equation on a mesh of linear finite elements. Move across it to make waves.</p>
+          </figcaption>
+        </figure>
       </div>
     </header>
 
-    <!-- About -->
-    <section id="about" class="page-section" aria-labelledby="heading-about">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-about" class="section-heading">About</h2>
-        <img src="avatar.jpeg" alt="Photo of Shizheng Wen" class="avatar" width="184" height="184">
-      </div>
-      <div class="section-body">
-      <div class="prose">
-        <p class="prose-lead">
-          Today's world models learn what the physical world looks like. I work on models that compute how it behaves, from the equations that govern it and with the accuracy that engineering and science require.
-        </p>
-        <p>
-          I am Shizheng Wen <span lang="zh">(闻仕政)</span>, a second-year PhD student in AI and applied math at
-          <a class="clink" href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>.
-          Language models had the internet to learn from. Physics has no such corpus, so the data, the architecture, and the training method all have to be built. My work covers that full stack:
-        </p>
-      </div>
-      <ul class="directions" role="list">
-        <li>
-          <strong>Data and training infrastructure</strong>
-          <p>
-            <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a> (finite elements) and
-            <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a> (sparse linear algebra) are differentiable, GPU-native solvers. They generate training data at scale and evaluate physics losses directly inside the training loop, so the solver itself becomes the supervisor.
-          </p>
-        </li>
-        <li>
-          <strong>Architecture</strong>
-          <p>
-            <a class="clink" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a> and
-            <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a> are neural operators for PDEs on arbitrary geometries; fused GPU kernels such as
-            <a class="clink" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a> make them simpler and faster.
-          </p>
-        </li>
-        <li>
-          <strong>Training method</strong>
-          <p>
-            Physics-informed, label-free training: neural operators learn from the governing equations alone, and
-            <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">multigrid preconditioning</a> lets them match supervised accuracy, so scale is no longer capped by labelled data.
-          </p>
-        </li>
-        <li class="directions-goal">
-          <strong>Foundation model</strong>
-          <p>
-            These come together in a PDE foundation model pretrained across diverse physical systems, to be released in January 2027.
-          </p>
-        </li>
-      </ul>
-      <div class="prose">
-        <!--
-        <p>
-          In the past, I have had the honor of working with Prof.
-          <a class="clink" href="https://mems.duke.edu/faculty/earl-dowell" target="_blank" rel="noopener noreferrer">Earl Dowell</a>
-          at Duke University, and Prof.
-          <a class="clink" href="https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm" target="_blank" rel="noopener noreferrer">Wanlin Guo</a>
-          and Prof.
-          <a class="clink" href="https://scholar.google.com/citations?hl=en&amp;user=RxW3otEAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener noreferrer">Xianglei Liu</a>
-          at NUAA.
-        </p>
-        -->
-        <p>
-          PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you'd like to connect or collaborate, feel free to reach out!
-        </p>
-      </div>
-      </div>
+    <!-- Selected work: the stack -->
+    <section id="work" class="wrap" aria-labelledby="heading-work">
+      <div class="block">
+        <div class="block-head">
+          <h2 id="heading-work" class="section-heading">Selected work</h2>
+          <p class="label stats"><b>2</b> NeurIPS, <b>1</b> ICML, <b>1</b> ICLR, <b>ETH Medal</b></p>
+        </div>
+        <ul class="work-grid" role="list">
+          <li class="work-card">
+            <a class="work-media" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="media/tensormesh.jpg" alt="" width="800" height="500" loading="lazy"></a>
+            <span class="label">Infrastructure, ICML 2026</span>
+            <h3 class="work-title">TensorMesh</h3>
+            <p class="work-desc">Differentiable, GPU-native finite elements in PyTorch. It generates training data and evaluates physics losses inside the training loop.</p>
+            <p class="work-links"><a href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">Project</a><a href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">Paper</a><a href="https://github.com/camlab-ethz/TensorMesh" target="_blank" rel="noopener noreferrer">Code</a></p>
+          </li>
+          <li class="work-card">
+            <a class="work-media" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="media/gaot.jpg" alt="" width="800" height="500" loading="lazy"></a>
+            <span class="label">Architecture, NeurIPS 2025</span>
+            <h3 class="work-title">GAOT</h3>
+            <p class="work-desc">A geometry-aware operator transformer: an efficient, accurate neural surrogate for PDEs on arbitrary domains.</p>
+            <p class="work-links"><a href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">Project</a><a href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">Paper</a><a href="https://github.com/shizheng-wen/GAOT" target="_blank" rel="noopener noreferrer">Code</a></p>
+          </li>
+          <li class="work-card">
+            <a class="work-media" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="media/pino.jpg" alt="" width="800" height="500" loading="lazy"></a>
+            <span class="label">Training, arXiv 2026</span>
+            <h3 class="work-title">Preconditioned PINO</h3>
+            <p class="work-desc">Label-free training from the governing equations alone. Multigrid preconditioning lets it match supervised accuracy.</p>
+            <p class="work-links"><a href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">Paper</a><a href="https://github.com/camlab-ethz/TensorPILS" target="_blank" rel="noopener noreferrer">Code</a></p>
+          </li>
+          <li class="work-card">
+            <div class="work-media is-upcoming"><span class="label">January 2027</span></div>
+            <span class="label">Foundation model, upcoming</span>
+            <h3 class="work-title">PDE foundation model</h3>
+            <p class="work-desc">Where the stack comes together: one model pretrained across diverse physical systems.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- News -->
-    <section id="news" class="page-section" aria-labelledby="heading-news">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-news" class="section-heading">News</h2>
+    <!-- News + Invited talks -->
+    <div class="wrap">
+      <div class="block split">
+        <section id="news" class="col" aria-labelledby="heading-news">
+          <h2 id="heading-news" class="section-heading">News</h2>
+          <ul class="timeline" id="news-list" role="list">
+            <li class="timeline-item">
+              <span class="tl-date">Sep 2026</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">Preconditioned Physics-Informed Neural Operator Training</a>" is now available on arXiv.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Sep 2026</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Does Transolver really need a Transformer?</a>" is now available on arXiv.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">May 2026</span>
+              <span class="tl-badge tl-blue">Release</span>
+              <div class="tl-content">
+                We open-sourced <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>! A fast, differentiable, JIT-free, debugging-friendly finite element library for PyTorch.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">May 2026</span>
+              <span class="tl-badge tl-amber">Milestone</span>
+              <div class="tl-content">
+                I received the <a class="clink" href="https://math.ethz.ch/news-and-events/news/d-math-news/2026/06/2026-graduation-ceremony.html" target="_blank" rel="noopener noreferrer">ETH Medal</a> at my master's graduation ceremony, the highest honor for students with outstanding master's and doctoral theses.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">May 2026</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">torch-sla</a>" accepted at <strong>ICML 2026 Workshop AI4Physics</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Apr 2026</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">TensorGalerkin</a>" accepted at <strong>ICML 2026</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Feb 2026</span>
+              <span class="tl-badge tl-blue">Release</span>
+              <div class="tl-content">
+                We open-sourced <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a>! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Jan 2026</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">MOSIV</a>" accepted at <strong>ICLR 2026</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Sep 2025</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                Two papers ("<a class="clink" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">GAOT</a>" and "<a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>") accepted at <strong>NeurIPS 2025</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">May 2025</span>
+              <span class="tl-badge tl-amber">Milestone</span>
+              <div class="tl-content">
+                Started my Ph.D. journey at the Seminar for Applied Mathematics, ETH Zurich.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Apr 2024</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/abs/pii/S0020740324003588" target="_blank" rel="noopener noreferrer">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</a>" accepted at <strong>International Journal of Mechanical Sciences (IJMS)</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Nov 2023</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/pii/S2095034923000533" target="_blank" rel="noopener noreferrer">Feature identification in complex fluid flows by convolutional neural networks</a>" accepted at <strong>Theoretical and Applied Mechanics Letters (TAML)</strong>.
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Jul 2022</span>
+              <span class="tl-badge tl-green">Publication</span>
+              <div class="tl-content">
+                One paper "<a class="clink" href="https://pubs.aip.org/aip/apl/article-abstract/121/7/071101/2834033/A-machine-learning-strategy-for-modeling-and?redirectedFrom=fulltext" target="_blank" rel="noopener noreferrer">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</a>" accepted at <strong>Applied Physics Letters (APL)</strong>.
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section id="talks" class="col" aria-labelledby="heading-talks">
+          <h2 id="heading-talks" class="section-heading">Invited talks</h2>
+          <ul class="timeline" role="list">
+            <li class="timeline-item">
+              <span class="tl-date">Nov 2026</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Differentiable Finite Elements in PyTorch: TensorMesh and its role in operator learning</span>
+                <span class="tl-venue">University of Freiburg, hosted by Sören Bartels.</span>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Sep 2026</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Differentiable Physics Simulation Engine: The infrastructure for physics foundation model</span>
+                <span class="tl-venue">Hong Kong University of Science and Technology, hosted by Tianju Xue.</span>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Jun 2026</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing</span>
+                <span class="tl-venue">Beihang University, hosted by Kun Wang.</span>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Mar 2026</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient High-Performance Galerkin Assembly Algorithm</span>
+                <span class="tl-venue">Simon Fraser University, hosted by Wuyang Chen.</span>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Mar 2026</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</span>
+                <span class="tl-venue">Tsinghua University, hosted by Angelica Aviles-Rivero.</span>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="tl-date">Dec 2025</span>
+              <div class="tl-content">
+                <span class="tl-talk-title">Accelerating Computational Science: From Differentiable Solvers to Geometry Aware Operator Transformers</span>
+                <span class="tl-venue">Stanford University, hosted by Charbel Farhat.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
       </div>
-      <div class="section-body">
-      <ul class="timeline" id="news-list" role="list">
-        <li class="timeline-item">
-          <span class="tl-date">Sep 2026</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">Preconditioned Physics-Informed Neural Operator Training</a>" is now available on arXiv.
+    </div>
+
+    <!-- Publications -->
+    <section id="publications" class="wrap" aria-labelledby="heading-pubs">
+      <div class="block">
+        <div class="block-head">
+          <h2 id="heading-pubs" class="section-heading">Publications</h2>
+          <div class="pub-filters" role="group" aria-label="Filter publications" hidden>
+            <button type="button" class="pub-filter" data-filter="featured" aria-pressed="true">Featured</button>
+            <button type="button" class="pub-filter" data-filter="all" aria-pressed="false">All</button>
+            <button type="button" class="pub-filter" data-filter="neural-operator" aria-pressed="false">Neural Operators</button>
+            <button type="button" class="pub-filter" data-filter="solver" aria-pressed="false">Differentiable Solvers</button>
+            <button type="button" class="pub-filter" data-filter="application" aria-pressed="false">Applications</button>
           </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Sep 2026</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Does Transolver really need a Transformer?</a>" is now available on arXiv.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">May 2026</span>
-          <span class="tl-badge tl-blue">Release</span>
-          <div class="tl-content">
-            We open-sourced <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>! A fast, differentiable, JIT-free, debugging-friendly finite element library for PyTorch.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">May 2026</span>
-          <span class="tl-badge tl-amber">Milestone</span>
-          <div class="tl-content">
-            I received the <a class="clink" href="https://math.ethz.ch/news-and-events/news/d-math-news/2026/06/2026-graduation-ceremony.html" target="_blank" rel="noopener noreferrer">ETH Medal</a> at my master's graduation ceremony, the highest honor for students with outstanding master's and doctoral theses.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">May 2026</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">torch-sla</a>" accepted at <strong>ICML 2026 Workshop AI4Physics</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Apr 2026</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">TensorGalerkin</a>" accepted at <strong>ICML 2026</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Feb 2026</span>
-          <span class="tl-badge tl-blue">Release</span>
-          <div class="tl-content">
-            We open-sourced <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a>! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Jan 2026</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">MOSIV</a>" accepted at <strong>ICLR 2026</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Sep 2025</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            Two papers ("<a class="clink" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">GAOT</a>" and "<a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>") accepted at <strong>NeurIPS 2025</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">May 2025</span>
-          <span class="tl-badge tl-amber">Milestone</span>
-          <div class="tl-content">
-            Started my Ph.D. journey at the Seminar for Applied Mathematics, ETH Zurich.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Apr 2024</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/abs/pii/S0020740324003588" target="_blank" rel="noopener noreferrer">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</a>" accepted at <strong>International Journal of Mechanical Sciences (IJMS)</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Nov 2023</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/pii/S2095034923000533" target="_blank" rel="noopener noreferrer">Feature identification in complex fluid flows by convolutional neural networks</a>" accepted at <strong>Theoretical and Applied Mechanics Letters (TAML)</strong>.
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Jul 2022</span>
-          <span class="tl-badge tl-green">Publication</span>
-          <div class="tl-content">
-            One paper "<a class="clink" href="https://pubs.aip.org/aip/apl/article-abstract/121/7/071101/2834033/A-machine-learning-strategy-for-modeling-and?redirectedFrom=fulltext" target="_blank" rel="noopener noreferrer">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</a>" accepted at <strong>Applied Physics Letters (APL)</strong>.
-          </div>
-        </li>
-      </ul>
-      </div>
+        </div>
+        <ol class="pub-list" role="list">
+          <li class="pub-item" data-tags="featured neural-operator">
+            <div class="pub-title">Preconditioned Physics-Informed Neural Operator Training</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Siddhartha Mishra, Marius Zeinhofer<sup>*</sup></div>
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv preprint, 2026</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/camlab-ethz/TensorPILS" target="_blank" rel="noopener noreferrer">code</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="featured neural-operator">
+            <div class="pub-title">Does Transolver really need a Transformer?</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen</span>, Siddhartha Mishra</div>
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv preprint, 2026</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">code</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="featured solver">
+            <div class="pub-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Mingyuan Chi<sup>*</sup>, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra</div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICML 2026</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/camlab-ethz/TensorMesh" target="_blank" rel="noopener noreferrer">code</a>
+              <a class="pub-link" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">project</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="featured solver">
+            <div class="pub-title">torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch</div>
+            <div class="pub-authors">Mingyuan Chi<sup>*</sup>, <span class="me">Shizheng Wen<sup>*</sup></span></div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICML 2026 Workshop (AI4Physics)</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/sparsexlab/torch-sla" target="_blank" rel="noopener noreferrer">code</a>
+              <a class="pub-link" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">project</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">MOSIV: Multi-Object System Identification from Videos</div>
+            <div class="pub-authors">Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, <span class="me">Shizheng Wen</span>, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao</div>
+            <div class="pub-meta">
+              <span class="pub-venue">ICLR 2026</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://huggingface.co/datasets/Hanibel/MOSIV" target="_blank" rel="noopener noreferrer">code</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="featured neural-operator">
+            <div class="pub-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen</span>, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra</div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2025</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/shizheng-wen/GAOT" target="_blank" rel="noopener noreferrer">code</a>
+              <a class="pub-link" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">project</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="neural-operator">
+            <div class="pub-title">RIGNO: A Graph-based framework for robust and accurate operator learning for PDEs on arbitrary domains</div>
+            <div class="pub-authors">Sepehr Mousavi, <span class="me">Shizheng Wen</span>, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra</div>
+            <div class="pub-meta">
+              <span class="pub-venue">NeurIPS 2025</span>
+              <a class="pub-link" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">arXiv</a>
+              <a class="pub-link" href="https://github.com/camlab-ethz/rigno" target="_blank" rel="noopener noreferrer">code</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</div>
+            <div class="pub-authors">Wei Tang, <span class="me">Shizheng Wen</span>, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo</div>
+            <div class="pub-meta">
+              <span class="pub-venue">International Journal of Mechanical Sciences, 2024</span>
+              <a class="pub-link" href="https://doi.org/10.1016/j.ijmecsci.2024.109316" target="_blank" rel="noopener noreferrer">doi</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">Feature Identification in Complex Fluid Flows by Convolutional Neural Networks</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen</span>, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell</div>
+            <div class="pub-meta">
+              <span class="pub-venue">Theoretical and Applied Mechanics Letters, 2023</span>
+              <a class="pub-link" href="https://doi.org/10.1016/j.taml.2023.100482" target="_blank" rel="noopener noreferrer">doi</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen</span>, Chunzhuo Dang, and Xianglei Liu</div>
+            <div class="pub-meta">
+              <span class="pub-venue">Applied Physics Letters, 2022</span>
+              <a class="pub-link" href="https://doi.org/10.1063/5.0103363" target="_blank" rel="noopener noreferrer">doi</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">High-performance three-body near-field thermophotovoltaic energy conversion</div>
+            <div class="pub-authors">Chunzhuo Dang, Xianglei Liu, Haifeng Xia, <span class="me">Shizheng Wen</span>, and Qiao Xu</div>
+            <div class="pub-meta">
+              <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2021</span>
+              <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2020.107411" target="_blank" rel="noopener noreferrer">doi</a>
+            </div>
+          </li>
+          <li class="pub-item" data-tags="application">
+            <div class="pub-title">Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles</div>
+            <div class="pub-authors"><span class="me">Shizheng Wen</span>, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang</div>
+            <div class="pub-meta">
+              <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2019</span>
+              <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2019.05.026" target="_blank" rel="noopener noreferrer">doi</a>
+            </div>
+          </li>
+        </ol>
+        <p class="pub-footnote"><sup>*</sup> Equal contribution.</p>
       </div>
     </section>
 
-    <!-- Selected Publications -->
-    <section id="publications" class="page-section" aria-labelledby="heading-pubs">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-pubs" class="section-heading">Publications</h2>
+    <!-- Awards + Teaching + Service -->
+    <div class="wrap">
+      <div class="block triple">
+        <section id="awards" class="col col-awards" aria-labelledby="heading-awards">
+          <h2 id="heading-awards" class="section-heading">Awards</h2>
+          <ul class="award-list" role="list">
+            <li>ICML Gold Reviewer <span class="award-year">2026</span></li>
+            <li>ETH Medal (top 2.5%) <span class="award-year">2026</span></li>
+            <li>National Scholarship (top 1%) <span class="award-year">2019</span></li>
+            <li>NUAA Presidential Fellowship (top 0.1%) <span class="award-year">2019</span></li>
+          </ul>
+        </section>
+        <section id="teaching" class="col" aria-labelledby="heading-teaching">
+          <h2 id="heading-teaching" class="section-heading">Teaching</h2>
+          <ul class="teaching-list" role="list">
+            <li class="teaching-item">
+              <div class="teaching-title">AI in the Sciences and Engineering <span class="teaching-ects">(6 ECTS)</span></div>
+              <div class="teaching-meta">
+                <span class="teaching-term">2025 and 2026 Fall</span>
+                <span class="teaching-code">401-4656-21L</span>
+                <a class="pub-link" href="https://camlab-ethz.github.io/ai4s-course/" target="_blank" rel="noopener noreferrer">course page</a>
+              </div>
+            </li>
+            <li class="teaching-item">
+              <div class="teaching-title">Numerical Methods for Partial Differential Equations <span class="teaching-ects">(10 ECTS)</span></div>
+              <div class="teaching-meta">
+                <span class="teaching-term">2026 Spring</span>
+                <span class="teaching-code">401-0674-00L</span>
+                <a class="pub-link" href="https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&amp;ansicht=LERNMATERIALIEN&amp;lerneinheitId=198602&amp;lang=en" target="_blank" rel="noopener noreferrer">course page</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section id="service" class="col" aria-labelledby="heading-service">
+          <h2 id="heading-service" class="section-heading">Service</h2>
+          <ul class="award-list" role="list">
+            <li>Reviewer: ICLR, NeurIPS, ICML, AAAI, TMLR, Nature Machine Intelligence, Computer Methods in Applied Mechanics and Engineering</li>
+          </ul>
+        </section>
       </div>
-      <div class="section-body">
-      <div class="pub-filters" role="group" aria-label="Filter publications" hidden>
-        <button type="button" class="pub-filter" data-filter="featured" aria-pressed="true">Featured</button>
-        <button type="button" class="pub-filter" data-filter="all" aria-pressed="false">All</button>
-        <button type="button" class="pub-filter" data-filter="neural-operator" aria-pressed="false">Neural Operators</button>
-        <button type="button" class="pub-filter" data-filter="solver" aria-pressed="false">Differentiable Solvers</button>
-        <button type="button" class="pub-filter" data-filter="application" aria-pressed="false">Applications</button>
-      </div>
-      <ol class="pub-list" role="list">
-        <li class="pub-item" data-tags="featured neural-operator">
-          <div class="pub-title">Preconditioned Physics-Informed Neural Operator Training</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Siddhartha Mishra, Marius Zeinhofer<sup>*</sup></div>
-          <div class="pub-meta">
-            <span class="pub-venue">arXiv preprint, 2026</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/camlab-ethz/TensorPILS" target="_blank" rel="noopener noreferrer">code</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="featured neural-operator">
-          <div class="pub-title">Does Transolver really need a Transformer?</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen</span>, Siddhartha Mishra</div>
-          <div class="pub-meta">
-            <span class="pub-venue">arXiv preprint, 2026</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">code</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="featured solver">
-          <div class="pub-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an efficient high-performance Galerkin assembly algorithm</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Mingyuan Chi<sup>*</sup>, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra</div>
-          <div class="pub-meta">
-            <span class="pub-venue">ICML 2026</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/camlab-ethz/TensorMesh" target="_blank" rel="noopener noreferrer">code</a>
-            <a class="pub-link" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">project</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="featured solver">
-          <div class="pub-title">torch-sla: Differentiable Sparse Linear Algebra with Adjoint Solvers and Sparse Tensor Parallelism for PyTorch</div>
-          <div class="pub-authors">Mingyuan Chi<sup>*</sup>, <span class="me">Shizheng Wen<sup>*</sup></span></div>
-          <div class="pub-meta">
-            <span class="pub-venue">ICML 2026 Workshop (AI4Physics)</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/sparsexlab/torch-sla" target="_blank" rel="noopener noreferrer">code</a>
-            <a class="pub-link" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">project</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">MOSIV: Multi-Object System Identification from Videos</div>
-          <div class="pub-authors">Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, <span class="me">Shizheng Wen</span>, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao</div>
-          <div class="pub-meta">
-            <span class="pub-venue">ICLR 2026</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://huggingface.co/datasets/Hanibel/MOSIV" target="_blank" rel="noopener noreferrer">code</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="featured neural-operator">
-          <div class="pub-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen</span>, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra</div>
-          <div class="pub-meta">
-            <span class="pub-venue">NeurIPS 2025</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/shizheng-wen/GAOT" target="_blank" rel="noopener noreferrer">code</a>
-            <a class="pub-link" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">project</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="neural-operator">
-          <div class="pub-title">RIGNO: A Graph-based framework for robust and accurate operator learning for PDEs on arbitrary domains</div>
-          <div class="pub-authors">Sepehr Mousavi, <span class="me">Shizheng Wen</span>, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra</div>
-          <div class="pub-meta">
-            <span class="pub-venue">NeurIPS 2025</span>
-            <a class="pub-link" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <a class="pub-link" href="https://github.com/camlab-ethz/rigno" target="_blank" rel="noopener noreferrer">code</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</div>
-          <div class="pub-authors">Wei Tang, <span class="me">Shizheng Wen</span>, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo</div>
-          <div class="pub-meta">
-            <span class="pub-venue">International Journal of Mechanical Sciences, 2024</span>
-            <a class="pub-link" href="https://doi.org/10.1016/j.ijmecsci.2024.109316" target="_blank" rel="noopener noreferrer">doi</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">Feature Identification in Complex Fluid Flows by Convolutional Neural Networks</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen</span>, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell</div>
-          <div class="pub-meta">
-            <span class="pub-venue">Theoretical and Applied Mechanics Letters, 2023</span>
-            <a class="pub-link" href="https://doi.org/10.1016/j.taml.2023.100482" target="_blank" rel="noopener noreferrer">doi</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen</span>, Chunzhuo Dang, and Xianglei Liu</div>
-          <div class="pub-meta">
-            <span class="pub-venue">Applied Physics Letters, 2022</span>
-            <a class="pub-link" href="https://doi.org/10.1063/5.0103363" target="_blank" rel="noopener noreferrer">doi</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">High-performance three-body near-field thermophotovoltaic energy conversion</div>
-          <div class="pub-authors">Chunzhuo Dang, Xianglei Liu, Haifeng Xia, <span class="me">Shizheng Wen</span>, and Qiao Xu</div>
-          <div class="pub-meta">
-            <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2021</span>
-            <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2020.107411" target="_blank" rel="noopener noreferrer">doi</a>
-          </div>
-        </li>
-        <li class="pub-item" data-tags="application">
-          <div class="pub-title">Ultrahigh thermal rectification based on near-field thermal radiation between dissimilar nanoparticles</div>
-          <div class="pub-authors"><span class="me">Shizheng Wen</span>, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang</div>
-          <div class="pub-meta">
-            <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2019</span>
-            <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2019.05.026" target="_blank" rel="noopener noreferrer">doi</a>
-          </div>
-        </li>
-      </ol>
-      <p class="pub-footnote"><sup>*</sup> Equal contribution.</p>
-      </div>
-      </div>
-    </section>
-
-    <!-- Selected Awards -->
-    <section id="awards" class="page-section" aria-labelledby="heading-awards">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-awards" class="section-heading">Selected Awards</h2>
-      </div>
-      <div class="section-body">
-      <ul class="award-list" role="list">
-        <li>ICML Gold Reviewer <span class="award-year">2026</span></li>
-        <li>ETH Medal (top 2.5%) <span class="award-year">2026</span></li>
-        <li>National Scholarship (top 1%) <span class="award-year">2019</span></li>
-        <li>NUAA Presidential Fellowship (top 0.1%) <span class="award-year">2019</span></li>
-      </ul>
-      </div>
-      </div>
-    </section>
-
-    <!-- Invited Talks -->
-    <section id="talks" class="page-section" aria-labelledby="heading-talks">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-talks" class="section-heading">Invited Talks</h2>
-      </div>
-      <div class="section-body">
-      <ul class="timeline" role="list">
-        <li class="timeline-item">
-          <span class="tl-date">Nov 2026</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Differentiable Finite Elements in PyTorch: TensorMesh and its role in operator learning</span>
-            <span class="tl-venue">University of Freiburg, hosted by Sören Bartels.</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Sep 2026</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Differentiable Physics Simulation Engine: The infrastructure for physics foundation model</span>
-            <span class="tl-venue">Hong Kong University of Science and Technology, hosted by Tianju Xue.</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Jun 2026</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing</span>
-            <span class="tl-venue">Beihang University, hosted by Kun Wang.</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Mar 2026</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient High-Performance Galerkin Assembly Algorithm</span>
-            <span class="tl-venue">Simon Fraser University, hosted by Wuyang Chen.</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Mar 2026</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</span>
-            <span class="tl-venue">Tsinghua University, hosted by Angelica Aviles-Rivero.</span>
-          </div>
-        </li>
-        <li class="timeline-item">
-          <span class="tl-date">Dec 2025</span>
-          <div class="tl-content">
-            <span class="tl-talk-title">Accelerating Computational Science: From Differentiable Solvers to Geometry Aware Operator Transformers</span>
-            <span class="tl-venue">Stanford University, hosted by Charbel Farhat.</span>
-          </div>
-        </li>
-      </ul>
-      </div>
-      </div>
-    </section>
-
-    <!-- Teaching -->
-    <section id="teaching" class="page-section" aria-labelledby="heading-teaching">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-teaching" class="section-heading">Teaching</h2>
-      </div>
-      <div class="section-body">
-      <ul class="teaching-list" role="list">
-        <li class="teaching-item">
-          <div class="teaching-title">AI in the Sciences and Engineering <span class="teaching-ects">(6 ECTS)</span></div>
-          <div class="teaching-meta">
-            <span class="teaching-term">2025 and 2026 Fall</span>
-            <span class="teaching-code">401-4656-21L</span>
-            <a class="pub-link" href="https://camlab-ethz.github.io/ai4s-course/" target="_blank" rel="noopener noreferrer">course page</a>
-          </div>
-        </li>
-        <li class="teaching-item">
-          <div class="teaching-title">Numerical Methods for Partial Differential Equations <span class="teaching-ects">(10 ECTS)</span></div>
-          <div class="teaching-meta">
-            <span class="teaching-term">2026 Spring</span>
-            <span class="teaching-code">401-0674-00L</span>
-            <a class="pub-link" href="https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&amp;ansicht=LERNMATERIALIEN&amp;lerneinheitId=198602&amp;lang=en" target="_blank" rel="noopener noreferrer">course page</a>
-          </div>
-        </li>
-      </ul>
-      </div>
-      </div>
-    </section>
-
-    <!-- Service -->
-    <section id="service" class="page-section" aria-labelledby="heading-service">
-      <div class="section-grid">
-      <div class="section-side">
-        <h2 id="heading-service" class="section-heading">Service</h2>
-      </div>
-      <div class="section-body">
-      <ul class="award-list" role="list">
-        <li>Reviewer: ICLR, NeurIPS, ICML, AAAI, TMLR, Nature Machine Intelligence, Computer Methods in Applied Mechanics and Engineering</li>
-      </ul>
-      </div>
-      </div>
-    </section>
+    </div>
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="wrap site-footer">
     <div class="footer-inner">
       <p>© 2026 Shizheng Wen</p>
+      <p><a href="mailto:shizheng.wen@sam.math.ethz.ch">shizheng.wen@sam.math.ethz.ch</a></p>
     </div>
   </footer>
 
@@ -1072,7 +822,7 @@
     const root = document.documentElement;
     function syncToggle() {
       const isDark = root.getAttribute('data-theme') === 'dark';
-      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-pressed', String(!isDark));
       toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     }
     syncToggle();
@@ -1127,7 +877,7 @@
     // by displacement with ParaView's cool-to-warm map.
     (function () {
       const canvas = document.getElementById('field');
-      const hero = document.getElementById('top');
+      const hero = document.getElementById('field-panel');
       if (!canvas || !canvas.getContext || !hero) return;
       const ctx = canvas.getContext('2d');
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1153,7 +903,7 @@
         const base = dark ? [232, 235, 241] : [15, 27, 45];
         const cool = dark ? [130, 152, 255] : [59, 76, 192];
         const warm = dark ? [255, 128, 100] : [180, 4, 38];
-        const baseAlpha = dark ? 0.13 : 0.12;
+        const baseAlpha = dark ? 0.2 : 0.16;
         palette = [];
         for (let b = -BINS; b <= BINS; b++) {
           const t = Math.abs(b) / BINS;
@@ -1174,8 +924,8 @@
         canvas.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        NX = W < 700 ? 48 : W < 1200 ? 76 : 96;
-        NY = W < 700 ? 28 : 34;
+        NX = W < 700 ? 44 : 64;
+        NY = W < 700 ? 30 : 34;
         u = new Float32Array(NX * NY);
         uPrev = new Float32Array(NX * NY);
         uNext = new Float32Array(NX * NY);
@@ -1183,13 +933,13 @@
         sy = new Float32Array(NX * NY);
         amp = new Float32Array(NY);
 
-        spanX = W * 2.45;       // width of the near edge; the far edge still overshoots the viewport
-        top0 = H * 0.1;
-        spanY = H * 0.66;
+        spanX = W * 2.3;       // width of the near edge; the far edge still overshoots the viewport
+        top0 = H * 0.06;
+        spanY = H * 0.84;
         for (let j = 0; j < NY; j++) {
           const z = j / (NY - 1);
           const d = depthOf(z);
-          amp[j] = H * 0.13 * d;
+          amp[j] = H * 0.11 * d;
           for (let i = 0; i < NX; i++) {
             sx[j * NX + i] = W / 2 + (i / (NX - 1) - 0.5) * spanX * d;
             sy[j * NX + i] = top0 + spanY * rowOf(z);
@@ -1252,7 +1002,7 @@
             if (i < NX - 1 && j < NY - 1) seg(k, k + NX + 1);    // diagonal: two triangles per cell
           }
         }
-        ctx.lineWidth = 0.75;
+        ctx.lineWidth = 0.8;
         for (let b = 0; b <= 2 * BINS; b++) {
           ctx.strokeStyle = palette[b];
           ctx.stroke(paths[b]);

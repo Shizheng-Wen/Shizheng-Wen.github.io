@@ -6,21 +6,24 @@
 
 ![Avatar](avatar.jpeg)
 
-I build foundation models for physics: AI that simulates the physical world from its governing equations. *(hero line)*
+**Tagline:** Foundation models for physics, learned from the equations themselves.
 
-Today's world models learn what the physical world looks like. I work on models that compute how it behaves, from the equations that govern it and with the accuracy that engineering and science require.
+Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it **behaves**, from the equations that govern it and with the accuracy that **engineering** and **science** require. Physics has no internet-scale corpus to learn from, so I build the full stack: **infrastructure**, **architecture** and **training**.
 
-I am Shizheng Wen (闻仕政), a second-year PhD student in AI and applied math at [ETH Zurich](https://ethz.ch/en.html). Language models had the internet to learn from. Physics has no such corpus, so the data, the architecture, and the training method all have to be built. My work covers that full stack:
+- **Based at:** [Seminar for Applied Mathematics](https://math.ethz.ch/sam), [ETH Zurich](https://ethz.ch/en.html), and the [ETH AI Center](https://ai.ethz.ch/). Advised by Prof. [Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra).
+- **Known for:** [TensorMesh](https://www.tensor-mesh.com/), [GAOT](https://camlab-ethz.github.io/GAOT/), [torch-sla](https://www.torchsla.com/)
+- **Recognition:** ETH Medal, with papers at ICML, NeurIPS and ICLR
 
-- **Data and training infrastructure.** [TensorMesh](https://www.tensor-mesh.com/) (finite elements) and [torch-sla](https://www.torchsla.com/) (sparse linear algebra) are differentiable, GPU-native solvers. They generate training data at scale and evaluate physics losses directly inside the training loop, so the solver itself becomes the supervisor.
-- **Architecture.** [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205) are neural operators for PDEs on arbitrary geometries; fused GPU kernels such as [flashslice](https://github.com/Shizheng-Wen/flashslice) make them simpler and faster.
-- **Training method.** Physics-informed, label-free training: neural operators learn from the governing equations alone, and [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets them match supervised accuracy, so scale is no longer capped by labelled data.
-- **Foundation model.** These come together in a PDE foundation model pretrained across diverse physical systems, to be released in January 2027.
+## Selected work
+
+Stat line: 2 NeurIPS, 1 ICML, 1 ICLR, ETH Medal.
+
+- **TensorMesh** (Infrastructure, ICML 2026). Differentiable, GPU-native finite elements in PyTorch. It generates training data and evaluates physics losses inside the training loop. [Project](https://www.tensor-mesh.com/) · [Paper](https://arxiv.org/abs/2602.05052) · [Code](https://github.com/camlab-ethz/TensorMesh)
+- **GAOT** (Architecture, NeurIPS 2025). A geometry-aware operator transformer: an efficient, accurate neural surrogate for PDEs on arbitrary domains. [Project](https://camlab-ethz.github.io/GAOT/) · [Paper](https://arxiv.org/abs/2505.18781) · [Code](https://github.com/shizheng-wen/GAOT)
+- **Preconditioned PINO** (Training, arXiv 2026). Label-free training from the governing equations alone. Multigrid preconditioning lets it match supervised accuracy. [Paper](https://arxiv.org/abs/2609.36216) · [Code](https://github.com/camlab-ethz/TensorPILS)
+- **PDE foundation model** (upcoming, January 2027). Where the stack comes together: one model pretrained across diverse physical systems.
 
 <!-- In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA. -->
-
-PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you'd like to connect or collaborate, feel free to reach out!
-
 
 ## Links
 

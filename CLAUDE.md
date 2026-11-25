@@ -8,7 +8,7 @@ The personal academic homepage of **Shizheng Wen**, served by **GitHub Pages** a
 <https://shizheng-wen.github.io> from the **`main`** branch, **`/ (root)`** folder.
 
 It is a **single-page static site**: one hand-maintained `index.html` (inline CSS/JS) plus the
-self-hosted font files in `fonts/`. There is **no build step** for the website — GitHub Pages
+self-hosted font files in `fonts/` and the project thumbnails in `media/`. There is **no build step** for the website — GitHub Pages
 serves the files as-is (a `.nojekyll` file disables Jekyll processing).
 
 The page was first generated with [pageclaw](https://github.com/XY-Showing/pageclaw) and then
@@ -24,7 +24,8 @@ The previous al-folio Jekyll site is preserved on the **`al-folio-backup`** bran
 | `index.html` | **The live web page.** Self-contained (inline CSS/JS). This is what visitors see. |
 | `page-story.md` | The **source/brief** the page was generated from. Not served as the page; keep it in sync with `index.html` as the human-readable record. |
 | `avatar.jpeg` | Profile photo, referenced by `index.html` as `avatar.jpeg` (must stay at root). |
-| `fonts/` | Hanken Grotesk variable font (latin + latin-ext `.woff2`, SIL OFL), loaded by `@font-face` in `index.html`. Self-hosted on purpose: the page makes no third-party requests. |
+| `fonts/` | Hanken Grotesk (variable, latin + latin-ext) and DM Mono 400 (`.woff2`, SIL OFL), loaded by `@font-face` in `index.html`. Self-hosted on purpose: the page makes no third-party requests. |
+| `media/` | 800×500 JPEG thumbnails for the "Selected work" cards (`tensormesh.jpg`, `gaot.jpg`, `pino.jpg`), cropped from figures in the projects' own repos. |
 | `shizheng-wen-cv.tex` | LaTeX source of the CV. |
 | `shizheng-wen-cv.pdf` | Compiled CV, kept in the repo (no longer linked from the website). |
 | `Makefile` | `make` compiles the `.tex` → `.pdf`; `make clean` removes LaTeX aux files. |
@@ -69,14 +70,33 @@ When the user describes a change in natural language:
 
 ## index.html structure reference
 
-Each section is `<section id="..." class="page-section">` wrapping a `.section-grid` with two
-children: `.section-side` (the `<h2 class="section-heading">`, shown in the left gutter on wide
-screens) and `.section-body` (the content). Section ids: `about`, `news`, `publications`,
-`awards`, `talks`, `teaching`, `service`. The hero above them (`<header class="hero" id="top">`)
-holds the name, a one-line research thesis (`.hero-lead`), the affiliation sentence
-(`.hero-affil`), and the contact links. In About, the research stack is `<ul class="directions">`:
-one `<li><strong>Label</strong><p>…</p></li>` per layer, with `class="directions-goal"` on the
-foundation-model row.
+The page is a compact, pitch-style single page. Top to bottom:
+
+- **Hero** (`<header class="hero" id="top">`), two columns. Left: `.id` (avatar, name as the
+  `<h1>`, status label), the `.tagline` (the accent-coloured half is `<span class="tone">`),
+  the `.lede` paragraph (key terms in `<b>`), `.cta` (email button + `.social` links), and the
+  `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Known for, Recognition).
+  Right: `#field-panel`, the live simulation with its caption `#field-note`.
+- **Selected work** (`#work`): `.work-grid` of four `.work-card`s, one per layer of the stack
+  (infrastructure, architecture, training) plus the foundation model. The line in
+  `.block-head .stats` summarises venues; keep its counts true to the publication list.
+- **News** (`#news`) and **Invited talks** (`#talks`), side by side.
+- **Publications** (`#publications`), a two-column list with filter buttons in the heading row.
+- **Awards** (`#awards`), **Teaching** (`#teaching`), **Service** (`#service`), three columns.
+
+**Work card**
+```html
+<li class="work-card">
+  <a class="work-media" href="..." target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="media/name.jpg" alt="" width="800" height="500" loading="lazy"></a>
+  <span class="label">Layer, Venue Year</span>
+  <h3 class="work-title">Name</h3>
+  <p class="work-desc">One or two short sentences.</p>
+  <p class="work-links"><a href="...">Project</a><a href="...">Paper</a><a href="...">Code</a></p>
+</li>
+```
+The foundation-model card uses `<div class="work-media is-upcoming"><span class="label">January 2027</span></div>`
+instead of an image and has no links yet. When it is released: give it a thumbnail and links,
+move it first, and update the tagline/lede if needed.
 
 **News** — `<ul class="timeline" id="news-list">` of `<li class="timeline-item">`,
 reverse-chronological. The newest 6 are shown; a script adds a "Show N earlier items" button
@@ -94,7 +114,7 @@ Badge class and label by item type: `tl-green` + `Publication`, `tl-amber` + `Mi
 `tl-blue` + `Release`. Venue names are bolded with `<strong>…</strong>` (no link),
 e.g. `<strong>NeurIPS 2025</strong>`.
 
-**Invited Talks** — same `timeline-item` rows, without a badge, newest first:
+**Invited talks** — same `timeline-item` rows, without a badge, newest first:
 ```html
 <li class="timeline-item">
   <span class="tl-date">Nov 2026</span>
@@ -111,9 +131,9 @@ marked with `<sup>*</sup>`), and a `pub-meta` row holding an optional
 `<span class="pub-venue">…</span>` followed by `<a class="pub-link">` links (no separator
 elements; spacing comes from CSS).
 Each `pub-item` carries `data-tags` (space-separated: `featured`, `neural-operator`,
-`solver`, `application`) used by the filter buttons above the list; the page shows
-**Featured** by default. Give every new paper at least one category tag (and `featured`
-if it should appear by default), and record the tags in `page-story.md`.
+`solver`, `application`) used by the filter buttons; the page shows **Featured** by default.
+Give every new paper at least one category tag (and `featured` if it should appear by
+default), and record the tags in `page-story.md`.
 
 **Awards** — `<li>Award name <span class="award-year">2026</span></li>` in `.award-list`.
 
@@ -121,19 +141,21 @@ if it should appear by default), and record the tags in `page-story.md`.
 
 Keep these when editing, so the page stays one system:
 
-- **Palette** lives in the `:root` / `:root[data-theme="dark"]` custom properties at the top
-  of the `<style>` block: `--paper`, `--ink`, `--muted`, `--rule`, plus `--cool` / `--warm`.
-  The page is ink on paper; colour is reserved for the hero field and tiny status dots.
-  Links are ink with a quiet underline and turn `--cool` on hover.
-- **Type** is one family, Hanken Grotesk, at a few weights (400 / 500 / 600). No second typeface.
-- **Layout** is a two-column grid per section (heading gutter + content) that collapses to
-  one column below 900px. Rows are separated by 1px `--rule` lines, not cards or boxes.
+- **Dense and short.** The whole page is about three screens. Small type (14–16px body), tight
+  rows, a 70rem container. Prefer trimming copy to adding sections.
+- **Palette** lives in the `:root` (dark, the default) and `:root[data-theme="light"]` custom
+  properties: `--paper`, `--panel`, `--ink`, `--muted`, `--faint`, `--rule`, and one accent,
+  `--cool`. `--warm` is only for the field and the status / milestone markers.
+- **Type**: Hanken Grotesk for text and headings (400 / 600); DM Mono, small, uppercase and
+  letter-spaced (class `label`), for metadata: dates, venues, link rows, nav.
+- **Rules, not boxes**: rows are separated by 1px `--rule` lines. The only framed elements are
+  the field panel and the work thumbnails.
 - **Hero field** — the `<canvas id="field">` is a live simulation, not decoration: a damped
   wave equation on a structured triangular mesh (P1 finite elements, lumped mass, explicit
-  time stepping), coloured with ParaView's cool-to-warm map. The script is the last block in
+  time stepping), coloured with a cool-to-warm map. The script is the last block in
   `index.html`; it pauses off-screen, and shows a single still frame under
   `prefers-reduced-motion`. The caption `#field-note` says what it is; keep the two in sync.
-- Light/dark theme follows the system setting, with a toggle stored in `localStorage`.
+- Dark is the default theme; the toggle stores the visitor's choice in `localStorage`.
 
 ## Conventions
 
