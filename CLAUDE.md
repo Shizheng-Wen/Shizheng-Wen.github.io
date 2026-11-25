@@ -75,7 +75,7 @@ The page is a compact, pitch-style single page. Top to bottom:
 - **Hero** (`<header class="hero" id="top">`), two columns. Left: `.id` (avatar, name as the
   `<h1>`, status label), the `.tagline` (the accent-coloured half is `<span class="tone">`),
   the `.lede` paragraph (key terms in `<b>`), `.cta` (email button + `.social` links), and the
-  `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Known for, Recognition).
+  `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
   Right: `#field-panel`, the live simulation with its caption `#field-note`.
 - **Selected work** (`#work`): `.work-grid` of four `.work-card`s, one per layer of the stack
   (infrastructure, architecture, training) plus the foundation model. The line in
@@ -152,7 +152,9 @@ Keep these when editing, so the page stays one system:
   the field panel and the work thumbnails.
 - **Hero field** — the `<canvas id="field">` is a live simulation, not decoration: a damped
   wave equation on a structured triangular mesh (P1 finite elements, lumped mass, explicit
-  time stepping), coloured with a cool-to-warm map. The script is the last block in
+  time stepping), coloured with a cool-to-warm map. The nodes under the initials "SW"
+  (`INITIALS` in the script) are clamped and drawn in the accent colour, so the waves scatter
+  off them. The script is the last block in
   `index.html`; it pauses off-screen, and shows a single still frame under
   `prefers-reduced-motion`. The caption `#field-note` says what it is; keep the two in sync.
 - Dark is the default theme; the toggle stores the visitor's choice in `localStorage`.

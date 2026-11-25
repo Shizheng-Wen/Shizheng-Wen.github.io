@@ -11,7 +11,7 @@
 Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it **behaves**, from the equations that govern it and with the accuracy that **engineering** and **science** require. Physics has no internet-scale corpus to learn from, so I build the full stack: **infrastructure**, **architecture** and **training**.
 
 - **Based at:** [Seminar for Applied Mathematics](https://math.ethz.ch/sam), [ETH Zurich](https://ethz.ch/en.html), and the [ETH AI Center](https://ai.ethz.ch/). Advised by Prof. [Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra).
-- **Known for:** [TensorMesh](https://www.tensor-mesh.com/), [GAOT](https://camlab-ethz.github.io/GAOT/), [torch-sla](https://www.torchsla.com/)
+- **Open source:** [TensorMesh](https://www.tensor-mesh.com/), [GAOT](https://camlab-ethz.github.io/GAOT/), [torch-sla](https://www.torchsla.com/)
 - **Recognition:** ETH Medal, with papers at ICML, NeurIPS and ICLR
 
 ## Selected work

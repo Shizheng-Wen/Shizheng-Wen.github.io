@@ -414,7 +414,7 @@
           <dl class="facts">
             <dt class="label">Based at</dt>
             <dd><a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>, and the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a>. Advised by Prof. <a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.</dd>
-            <dt class="label">Known for</dt>
+            <dt class="label">Open source</dt>
             <dd><a href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>, <a href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a>, <a href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a></dd>
             <dt class="label">Recognition</dt>
             <dd><b>ETH Medal</b>, with papers at ICML, NeurIPS and ICLR</dd>
@@ -425,7 +425,7 @@
           <div class="field-frame"><canvas id="field" aria-hidden="true"></canvas></div>
           <figcaption>
             <p class="label">Solved live in your browser</p>
-            <p id="field-note">A wave equation on a mesh of linear finite elements. Move across it to make waves.</p>
+            <p id="field-note">A wave equation on a finite-element mesh, scattering off my initials. Move across it to make waves.</p>
           </figcaption>
         </figure>
       </div>
@@ -873,8 +873,9 @@
     // A damped wave equation  u_tt = c² Δu − γ u_t  on a structured triangular mesh,
     // discretised with linear (P1) finite elements and a lumped mass matrix, stepped
     // explicitly (leapfrog). On this mesh the P1 stiffness matrix reduces to the
-    // 5-point stencil used below. The boundary is clamped (u = 0). Lines are coloured
-    // by displacement with ParaView's cool-to-warm map.
+    // 5-point stencil used below. The boundary is clamped (u = 0), and so are the nodes
+    // under the initials "SW": they act as rigid obstacles that the waves scatter off.
+    // Lines are coloured by displacement with ParaView's cool-to-warm map.
     (function () {
       const canvas = document.getElementById('field');
       const hero = document.getElementById('field-panel');
@@ -884,16 +885,19 @@
 
       const C2 = 0.24;        // (c·dt/h)², below the CFL limit of 0.5
       const DAMPING = 0.014;  // γ·dt
-      const BINS = 8;         // colour bins on each side of zero
-      const U_MAX = 0.3;      // displacement mapped to full colour
+      const BINS = 12;        // colour bins on each side of zero
+      const U_MAX = 0.24;     // displacement mapped to full colour
 
-      let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp;
-      let palette = null;
+      const INITIALS = 'SW';
+
+      let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp, solid;
+      let palette = null, inkColor = '';
       let running = false, visible = true, raf = 0, last = 0, acc = 0, nextDrop = 0;
       let pointerI = -1, pointerJ = -1;
+      let drawCost = 0, skipNext = false;   // on slow devices, draw every other frame
 
       // Projection: the mesh lies flat and is seen from a low angle.
-      const NEAR = 1.0, FAR = 0.45;           // scale at the near and far edge
+      const NEAR = 1.0, FAR = 0.7;            // scale at the near and far edge
       const depthOf = z => FAR + (NEAR - FAR) * z;
       const rowOf = z => (FAR * z + 0.5 * (NEAR - FAR) * z * z) / (0.5 * (NEAR + FAR));
       let spanX, top0, spanY;
@@ -903,14 +907,14 @@
         const base = dark ? [232, 235, 241] : [15, 27, 45];
         const cool = dark ? [130, 152, 255] : [59, 76, 192];
         const warm = dark ? [255, 128, 100] : [180, 4, 38];
-        const baseAlpha = dark ? 0.2 : 0.16;
+        const baseAlpha = dark ? 0.15 : 0.13;
+        inkColor = dark ? 'rgba(160,178,255,0.95)' : 'rgba(59,76,192,0.92)';
         palette = [];
         for (let b = -BINS; b <= BINS; b++) {
           const t = Math.abs(b) / BINS;
           const end = b < 0 ? cool : warm;
-          const k = Math.pow(t, 0.7);
-          const rgb = base.map((v, i) => Math.round(v + (end[i] - v) * k));
-          const alpha = baseAlpha + (0.95 - baseAlpha) * k;
+          const rgb = base.map((v, i) => Math.round(v + (end[i] - v) * Math.pow(t, 0.8)));
+          const alpha = baseAlpha + (0.95 - baseAlpha) * Math.pow(t, 1.15);  // faint ripples stay quiet
           palette.push(`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha.toFixed(3)})`);
         }
       }
@@ -924,28 +928,49 @@
         canvas.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        NX = W < 700 ? 44 : 64;
-        NY = W < 700 ? 30 : 34;
+        NX = W < 400 ? 72 : W < 600 ? 92 : 104;
+        NY = W < 400 ? 46 : 52;
         u = new Float32Array(NX * NY);
         uPrev = new Float32Array(NX * NY);
         uNext = new Float32Array(NX * NY);
         sx = new Float32Array(NX * NY);
         sy = new Float32Array(NX * NY);
         amp = new Float32Array(NY);
+        solid = new Uint8Array(NX * NY);
 
-        spanX = W * 2.3;       // width of the near edge; the far edge still overshoots the viewport
-        top0 = H * 0.06;
-        spanY = H * 0.84;
+        spanX = W * 1.52;      // width of the near edge; the far edge still overshoots the panel
+        top0 = H * 0.04;
+        spanY = H * 0.95;
         for (let j = 0; j < NY; j++) {
           const z = j / (NY - 1);
           const d = depthOf(z);
-          amp[j] = H * 0.11 * d;
+          amp[j] = H * 0.085 * d;
           for (let i = 0; i < NX; i++) {
             sx[j * NX + i] = W / 2 + (i / (NX - 1) - 0.5) * spanX * d;
             sy[j * NX + i] = top0 + spanY * rowOf(z);
           }
         }
+        markInitials();
         buildPalette();
+      }
+
+      // Rasterise the initials in screen space and clamp every mesh node that falls under
+      // them, so the letters read upright whatever the perspective.
+      function markInitials() {
+        const mask = document.createElement('canvas');
+        mask.width = Math.ceil(W);
+        mask.height = Math.ceil(H);
+        const m = mask.getContext('2d', { willReadFrequently: true });
+        const size = Math.min(W * 0.47, H * 0.52);
+        m.font = `700 ${size}px "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif`;
+        m.textAlign = 'center';
+        m.textBaseline = 'alphabetic';
+        m.fillText(INITIALS, W / 2, top0 + spanY * 0.5 + size * 0.36);
+        const data = m.getImageData(0, 0, mask.width, mask.height).data;
+        for (let k = 0; k < NX * NY; k++) {
+          const x = Math.round(sx[k]), y = Math.round(sy[k]);
+          solid[k] = x >= 0 && y >= 0 && x < mask.width && y < mask.height && data[(y * mask.width + x) * 4 + 3] > 127 ? 1 : 0;
+        }
       }
 
       // Screen → mesh coordinates (inverse of the projection above, ignoring displacement)
@@ -962,6 +987,7 @@
         const r = Math.ceil(radius * 3);
         for (let j = Math.max(1, Math.floor(cj - r)); j <= Math.min(NY - 2, Math.ceil(cj + r)); j++) {
           for (let i = Math.max(1, Math.floor(ci - r)); i <= Math.min(NX - 2, Math.ceil(ci + r)); i++) {
+            if (solid[j * NX + i]) continue;
             const g = strength * Math.exp(-((i - ci) ** 2 + (j - cj) ** 2) / (2 * radius * radius));
             u[j * NX + i] += g;
             uPrev[j * NX + i] += g;
@@ -973,6 +999,7 @@
         for (let j = 1; j < NY - 1; j++) {
           for (let i = 1; i < NX - 1; i++) {
             const k = j * NX + i;
+            if (solid[k]) { uNext[k] = 0; continue; }
             const lap = u[k - 1] + u[k + 1] + u[k - NX] + u[k + NX] - 4 * u[k];
             uNext[k] = 2 * u[k] - uPrev[k] + C2 * lap - DAMPING * (u[k] - uPrev[k]);
           }
@@ -984,7 +1011,9 @@
         ctx.clearRect(0, 0, W, H);
         const paths = [];
         for (let b = 0; b <= 2 * BINS; b++) paths.push(new Path2D());
+        const ink = new Path2D();   // edges inside the initials
         const seg = (a, b) => {
+          if (solid[a] && solid[b]) { ink.moveTo(sx[a], sy[a]); ink.lineTo(sx[b], sy[b]); return; }
           const ja = (a / NX) | 0, jb = (b / NX) | 0;
           const ya = sy[a] - u[a] * amp[ja], yb = sy[b] - u[b] * amp[jb];
           if ((ya < -20 && yb < -20) || (sx[a] < -20 && sx[b] < -20) || (sx[a] > W + 20 && sx[b] > W + 20)) return;
@@ -1002,20 +1031,23 @@
             if (i < NX - 1 && j < NY - 1) seg(k, k + NX + 1);    // diagonal: two triangles per cell
           }
         }
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth = 0.7;
         for (let b = 0; b <= 2 * BINS; b++) {
           ctx.strokeStyle = palette[b];
           ctx.stroke(paths[b]);
         }
+        ctx.lineWidth = 0.9;
+        ctx.strokeStyle = inkColor;
+        ctx.stroke(ink);
       }
 
       function randomDrop(strength) {
-        const i = 4 + Math.random() * (NX - 8);
-        const j = 3 + Math.random() * (NY - 6);
+        const i = 6 + Math.random() * (NX - 12);
+        const j = 5 + Math.random() * (NY - 10);
         // keep ambient drops inside the visible part of the mesh
         const k = Math.round(j) * NX + Math.round(i);
-        if (sx[k] < 0 || sx[k] > W) return randomDrop(strength);
-        drop(i, j, strength, 2.2 + Math.random() * 1.2);
+        if (sx[k] < 0 || sx[k] > W || solid[k]) return randomDrop(strength);
+        drop(i, j, strength, 3.6 + Math.random() * 1.8);
       }
 
       function frame(now) {
@@ -1030,7 +1062,14 @@
           randomDrop((Math.random() < 0.5 ? -1 : 1) * (0.55 + Math.random() * 0.35));
           nextDrop = now + 2600 + Math.random() * 2600;
         }
-        draw();
+        if (skipNext) {
+          skipNext = false;
+        } else {
+          const t0 = performance.now();
+          draw();
+          drawCost += (performance.now() - t0 - drawCost) * 0.1;
+          skipNext = drawCost > 9;
+        }
         raf = requestAnimationFrame(frame);
       }
 
@@ -1049,11 +1088,11 @@
       }
 
       function initialState() {
-        // Opening disturbance: one crest right of centre, one shallower trough further back
-        drop(NX * 0.63, NY * 0.56, 1.0, 3.0);
-        drop(NX * 0.38, NY * 0.3, -0.7, 2.6);
+        // Opening disturbance: a crest in front of the initials, a shallower trough behind them
+        drop(NX * 0.5, NY * 0.86, 1.0, 4.6);
+        drop(NX * 0.3, NY * 0.13, -0.7, 4.0);
         if (reduceMotion) {
-          for (let n = 0; n < 46; n++) step();   // a single still frame, mid-propagation
+          for (let n = 0; n < 60; n++) step();   // a single still frame, mid-propagation
         }
       }
 
@@ -1065,6 +1104,10 @@
 
       reset();
       start();
+      // The initials are drawn with the page typeface; redo the mask once it has loaded
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load('700 64px "Hanken Grotesk"').then(() => { markInitials(); if (!running) draw(); });
+      }
 
       // Disturb the membrane under the pointer (works for mouse, pen and touch)
       if (!reduceMotion) {
@@ -1074,15 +1117,15 @@
           if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) { pointerI = -1; return; }
           if (pointerI >= 0) {
             const dist = Math.hypot(i - pointerI, j - pointerJ);
-            if (dist < 0.6) return;
-            drop(i, j, -Math.min(0.5, 0.1 + dist * 0.07), 1.7);
+            if (dist < 1) return;
+            drop(i, j, -Math.min(0.5, 0.1 + dist * 0.045), 2.7);
           }
           pointerI = i; pointerJ = j;
         }, { passive: true });
         hero.addEventListener('pointerleave', () => { pointerI = -1; });
       } else {
         document.getElementById('field-note').textContent =
-          'A wave equation solved on a mesh of linear finite elements.';
+          'A wave equation on a finite-element mesh, scattering off my initials.';
       }
 
       // Run only while the hero is on screen and the tab is visible
