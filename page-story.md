@@ -123,4 +123,4 @@ Filter buttons: Featured (default) · All · Neural Operators · Differentiable 
 
 ## Service
 
-+ Reviewer: ICLR, NeurIPS, ICML, AAAI, TMLR, Nature Machine Intelligence, Computer Methods in Applied Mechanics and Engineering
++ Reviewer: ICLR, NeurIPS, ICML, AAAI, IJCAI, TMLR, Nature Machine Intelligence, ACM Transactions on Graphics, Computer Methods in Applied Mechanics and Engineering
