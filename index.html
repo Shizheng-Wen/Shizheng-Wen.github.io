@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shizheng Wen — PhD Student, ETH Zurich</title>
   <meta name="description" content="Shizheng Wen (闻仕政) is a doctoral student at the Seminar for Applied Mathematics, ETH Zurich, working on fast, scalable, and differentiable solvers for PDEs at the intersection of scientific computing and machine learning.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1B2D'/%3E%3Cpath d='M7 23 16 8l9 15zM11.5 15.5h9L16 23z' fill='none' stroke='%23F7F8FA' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Anti-FOUC: set theme before first paint -->
   <script>
@@ -23,54 +24,106 @@
   </script>
 
   <style>
-    :root {
-      --bg:             #f8f4ec;
-      --surface:        #faf8f3;
-      --text:           #3d3630;
-      --text-muted:     #5a544a;
-      --accent:         #0076a3;
-      --accent-hover:   #00597a;
-      --border:         #e5ded3;
-      --nav-bg:         #ffffff;
-      --badge-green:    #56ae5d;
-      --badge-blue:     #1988b8;
-      --badge-amber:    #d99a2b;
-      --radius:         4px;
-      --max-w:          780px;
-      --font: 'DM Sans', system-ui, -apple-system, sans-serif;
+    /* ── Typeface: Hanken Grotesk (variable, self-hosted in /fonts, SIL OFL) ── */
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/hanken-grotesk-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/hanken-grotesk-latin-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
     }
 
+    /* ── Tokens ──
+       The page itself is ink on paper. The only colour is the solution field in the
+       hero (ParaView's cool-to-warm map); --cool doubles as the interactive accent. */
+    :root {
+      --paper:  #F7F8FA;
+      --ink:    #0F1B2D;
+      --muted:  #586377;
+      --rule:   #DCE1E9;
+      --cool:   #3B4CC0;
+      --warm:   #B40426;
+      --nav-bg: rgba(247, 248, 250, 0.82);
+      --max-w:  72rem;
+      --gutter: clamp(1.25rem, 4vw, 3rem);
+      --side:   14rem;
+      --font: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    }
     :root[data-theme="dark"] {
-      --bg:             #1c1a17;
-      --surface:        #23201c;
-      --text:           #ece6da;
-      --text-muted:     #a89f90;
-      --accent:         #4db8e0;
-      --accent-hover:   #7cccea;
-      --border:         #352f28;
-      --nav-bg:         #23201c;
-      --badge-green:    #6cc473;
-      --badge-blue:     #4db8e0;
-      --badge-amber:    #e0aa44;
+      --paper:  #0B1220;
+      --ink:    #E8EBF1;
+      --muted:  #95A1B5;
+      --rule:   #202B3D;
+      --cool:   #9DB0FF;
+      --warm:   #FF8E73;
+      --nav-bg: rgba(11, 18, 32, 0.8);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 60px; /* sticky nav height + buffer */
+      scroll-padding-top: 5rem;
+      -webkit-text-size-adjust: 100%;
     }
-
-    a { cursor: pointer; }
 
     body {
       font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 0.95rem;
-      line-height: 1.65;
-      transition: background 200ms ease-out, color 200ms ease-out;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
+
+    ul, ol { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Links: ink with a quiet underline; the accent only appears on interaction */
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      text-decoration-color: color-mix(in srgb, currentColor 32%, transparent);
+      transition: color 120ms ease-out, text-decoration-color 120ms ease-out;
+    }
+    a:hover { color: var(--cool); text-decoration-color: currentColor; }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--cool);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: fixed;
+      top: 0.5rem;
+      left: 1rem;
+      z-index: 999;
+      padding: 0.45rem 0.9rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 2px;
+      transform: translateY(calc(-100% - 0.75rem));
+      transition: transform 150ms ease-out;
+    }
+    .skip-link:hover { color: var(--paper); }
+    .skip-link:focus { transform: translateY(0); }
 
     /* ── Nav ── */
     #site-nav {
@@ -78,471 +131,416 @@
       top: 0;
       z-index: 100;
       background: var(--nav-bg);
-      border-bottom: 1px solid var(--border);
-      transition: background 200ms ease-out, border-color 200ms ease-out;
+      -webkit-backdrop-filter: saturate(1.4) blur(14px);
+      backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 200ms ease-out;
     }
+    #site-nav.is-scrolled { border-bottom-color: var(--rule); }
     .nav-inner {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 var(--gutter);
+      height: 3.5rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      height: 49px;
+      gap: 1.25rem;
     }
     .nav-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text);
-      white-space: nowrap;
       margin-right: auto;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      text-decoration: none;
     }
     .nav-links {
-      list-style: none;
       display: flex;
       align-items: center;
-      gap: 1.6rem;
+      gap: 1.75rem;
     }
     .nav-links a {
       display: inline-flex;
       align-items: center;
-      padding: 0.85rem 0;          /* enlarge keyboard/touch hit area within the 49px bar */
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
+      height: 3.5rem;
+      font-size: 0.9375rem;
+      color: var(--muted);
       white-space: nowrap;
-      color: var(--text-muted);
-      transition: color 150ms ease-out;
+      text-decoration: none;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent);
-    }
-    .nav-links a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-      border-radius: var(--radius);
-    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 600; }
 
-    /* ── Theme toggle ── */
     .theme-toggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      margin-right: -10px; /* optical edge alignment */
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
+      flex: 0 0 auto;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: -0.6rem;
+      border: 0;
       border-radius: 50%;
+      background: transparent;
+      color: var(--muted);
       cursor: pointer;
-      transition: color 150ms ease-out, background 150ms ease-out, transform 100ms ease-out;
+      transition: color 120ms ease-out;
     }
-    .theme-toggle:hover {
-      color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 10%, transparent);
-    }
-    .theme-toggle:active { transform: scale(0.9); }
-    .theme-toggle:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-    .theme-toggle svg { width: 20px; height: 20px; }
+    .theme-toggle:hover { color: var(--ink); }
+    .theme-toggle svg { width: 1.125rem; height: 1.125rem; }
     :root[data-theme="dark"] .icon-moon { display: none; }
     :root:not([data-theme="dark"]) .icon-sun { display: none; }
 
-    /* ── Profile Header ── */
-    .profile-header {
+    /* ── Hero: a live finite-element solution, with the name set beneath it ── */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: min(calc(100svh - 3.5rem), 54rem);
+      overflow: hidden;
+    }
+    #field {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 7%, #000 34%, #000 48%, transparent 74%);
+      mask-image: linear-gradient(to bottom, transparent 7%, #000 34%, #000 48%, transparent 74%);
+    }
+    .hero-copy {
+      position: relative;
+      width: 100%;
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 2.75rem 1.5rem 1.75rem;
-      text-align: center;
-    }
-    .avatar {
-      width: 124px;
-      height: 124px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--border);
-      margin: 0 auto 1.1rem;
-      display: block;
+      padding: 12rem var(--gutter) 4rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      column-gap: 2rem;
     }
     .profile-name {
-      font-size: 1.75rem;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      margin-bottom: 0.45rem;
-      color: var(--text);
+      grid-column: 1 / -1;
+      font-size: clamp(3rem, 9.2vw, 7.5rem);
+      font-weight: 500;
+      line-height: 0.94;
+      letter-spacing: -0.045em;
+      margin-left: -0.045em; /* optical alignment of the S with the text below */
     }
-    .profile-title,
-    .profile-affil {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.15rem;
-    }
-    .profile-title a,
-    .profile-affil a {
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-color: var(--border);
-      text-underline-offset: 2px;
-      transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
-    }
-    .profile-title a:hover,
-    .profile-affil a:hover {
-      color: var(--accent);
-      text-decoration-color: var(--accent);
-    }
-    .profile-title a:focus-visible,
-    .profile-affil a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
-
-    /* ── Social Links ── */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.1rem;
-    }
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      color: var(--text-muted);
-      border-radius: 50%;
-      transition: color 150ms ease-out, background 150ms ease-out, transform 100ms ease-out;
-      text-decoration: none;
-    }
-    .social-link:hover {
-      color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 10%, transparent);
-    }
-    .social-link:active { transform: scale(0.9); }
-    .social-link:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-    .social-link svg { width: 20px; height: 20px; }
-    /* Simple Icons (monochrome) recolored via mask → inherits currentColor in both themes */
-    .si-icon {
+    .name-zh {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-color: currentColor;
-      -webkit-mask: var(--mask) center / contain no-repeat;
-      mask: var(--mask) center / contain no-repeat;
+      margin-left: 0.35em;
+      font-size: 0.36em;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .hero-lead {
+      margin-top: 1.75rem;
+      max-width: 38rem;
+      text-wrap: pretty;
+      font-size: clamp(1.125rem, 1.55vw, 1.3125rem);
+      line-height: 1.45;
+      letter-spacing: -0.005em;
+    }
+    .contact-links {
+      grid-column: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+    .field-note {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+      max-width: 17rem;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--muted);
+      text-align: right;
     }
 
-    /* ── Skip Link ── */
-    .skip-link {
-      position: fixed;
-      top: 0.5rem;
-      left: 1rem;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.4rem 0.9rem;
-      border-radius: var(--radius);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      z-index: 999;
-      transform: translateY(calc(-100% - 0.75rem));
-      transition: transform 150ms ease-out;
-    }
-    .skip-link:focus { transform: translateY(0); }
-
-    /* ── Sections ── */
+    /* ── Sections: heading in the left gutter, content on the right ── */
     .page-section {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 2rem 1.5rem;
-      border-top: 1px solid var(--border);
+      padding: 0 var(--gutter);
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, 1fr);
+      column-gap: clamp(2rem, 5vw, 4.5rem);
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .section-side {
+      position: sticky;
+      top: 5.5rem;
+      align-self: start;
     }
     .section-heading {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 1.1rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
+      line-height: 1.6;
+      letter-spacing: -0.005em;
     }
-    .prose { max-width: 72ch; }
-    .prose p { color: var(--text); }
-    .prose p + p { margin-top: 0.9rem; }
+    .section-body { min-width: 0; max-width: 46rem; }
 
-    /* inline content links */
-    .clink {
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      text-underline-offset: 2px;
-      transition: text-decoration-color 150ms ease-out, color 150ms ease-out;
-    }
-    .clink:hover {
-      color: var(--accent-hover);
-      text-decoration-color: currentColor;
-    }
-    .clink:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-      border-radius: 2px;
+    .avatar {
+      width: 100%;
+      max-width: 11.5rem;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+      margin-top: 1.25rem;
+      border-radius: 3px;
     }
 
-    /* ── Research directions list ── */
+    .prose { max-width: 40rem; }
+    .prose p + p { margin-top: 1rem; }
+    .prose .prose-lead + p { margin-top: 2.5rem; }
+    .prose-lead {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+    }
+
+    /* ── Research directions: four titled paragraphs on a 2 × 2 grid ── */
     .directions {
-      list-style: none;
-      max-width: 72ch;
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+      margin: 1rem 0 2.5rem;
     }
     .directions li {
-      padding-left: 1.1rem;
-      position: relative;
+      padding: 1.1rem 0 1.4rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--muted);
     }
-    .directions li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.62em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
+    .directions strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
     }
-    .directions strong { font-weight: 600; color: var(--text); }
+    .directions a { color: var(--ink); }
+    .directions a:hover { color: var(--cool); }
 
-    /* ── Timeline (News + Talks) ── */
-    .timeline {
-      list-style: none;
-      position: relative;
-      padding-left: 1.75rem;
+    /* ── Timeline rows (News + Talks): date column, then content ── */
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 6.5rem minmax(0, 1fr);
+      column-gap: 1.25rem;
+      align-items: start;
+      padding: 0.95rem 0;
+      border-top: 1px solid var(--rule);
     }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 10px;
-      bottom: 10px;
-      width: 2px;
-      background: var(--border);
-    }
-    .timeline-item { position: relative; margin-bottom: 1.25rem; }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .tl-badge {
-      position: absolute;
-      left: -1.75rem;
-      top: 0.46rem;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      border: 2px solid var(--bg);
-    }
-    .tl-green { background: var(--badge-green); }
-    .tl-blue  { background: var(--badge-blue); }
-    .tl-amber { background: var(--badge-amber); }
-    .tl-content { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+    .timeline-item:first-child { border-top: 0; padding-top: 0; }
+    .timeline-item[hidden] { display: none; }
     .tl-date {
-      display: inline-block;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-right: 0.45rem;
+      grid-column: 1;
+      grid-row: 1;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
-    .tl-talk-title { font-weight: 500; }
-    .tl-venue { color: var(--text-muted); }
+    .tl-badge {
+      grid-column: 1;
+      grid-row: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .tl-badge::before {
+      content: '';
+      width: 0.4375rem;
+      height: 0.4375rem;
+      border-radius: 50%;
+      background: var(--badge);
+    }
+    .tl-green { --badge: var(--cool); }                 /* Publication */
+    .tl-amber { --badge: var(--warm); }                 /* Milestone */
+    .tl-blue  { --badge: transparent; }                 /* Release / Talk: open ring */
+    .tl-blue::before { box-shadow: inset 0 0 0 1.5px var(--muted); }
+    .tl-content { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
+    .tl-content strong { font-weight: 600; }
+    .tl-talk-title {
+      display: block;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.008em;
+    }
+    .tl-venue {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.9375rem;
+      color: var(--muted);
+    }
 
-    /* Scrollable News window — show a few, wheel/keys reveal the rest */
-    .news-scroll {
-      max-height: 19rem;
-      overflow-y: auto;
-      padding-right: 0.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+    .more-button {
+      margin-top: 1.25rem;
+      margin-left: 7.75rem;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      font-size: 0.9375rem;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      text-decoration-color: color-mix(in srgb, currentColor 32%, transparent);
     }
-    .news-scroll:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-      border-radius: var(--radius);
-    }
-    .news-scroll::-webkit-scrollbar { width: 8px; }
-    .news-scroll::-webkit-scrollbar-track { background: transparent; }
-    .news-scroll::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 99px;
-    }
-    .news-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    .more-button:hover { color: var(--cool); text-decoration-color: currentColor; }
 
     /* ── Publications ── */
-    .pub-list { list-style: none; }
-    .pub-item[hidden] { display: none; }
-    /* Divider between consecutive *visible* items, so filtering never leaves stray borders */
-    .pub-item:not([hidden]) ~ .pub-item:not([hidden]) {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
     .pub-filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
+      gap: 0.25rem 1.5rem;
+      margin-bottom: 2rem;
     }
     .pub-filters[hidden] { display: none; }
     .pub-filter {
+      padding: 0.2rem 0;
+      border: 0;
+      border-bottom: 1.5px solid transparent;
+      background: none;
       font: inherit;
-      font-size: 0.8rem;
-      padding: 0.35rem 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--text-muted);
+      font-size: 0.9375rem;
+      color: var(--muted);
       cursor: pointer;
-      transition: color 150ms ease-out, background 150ms ease-out, border-color 150ms ease-out;
+      transition: color 120ms ease-out, border-color 120ms ease-out;
     }
-    .pub-filter:hover { color: var(--accent); border-color: var(--accent); }
+    .pub-filter:hover { color: var(--ink); }
     .pub-filter[aria-pressed="true"] {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      color: var(--ink);
+      font-weight: 600;
+      border-bottom-color: var(--ink);
     }
-    .pub-filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .pub-item[hidden] { display: none; }
+    /* Rule between consecutive *visible* items, so filtering never leaves a stray border */
+    .pub-item:not([hidden]) ~ .pub-item:not([hidden]) {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+    }
     .pub-title {
-      font-size: 0.92rem;
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-      line-height: 1.5;
-      color: var(--text);
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.012em;
+      text-wrap: balance;
     }
     .pub-authors {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-      line-height: 1.55;
-    }
-    .pub-authors .me { font-weight: 600; color: var(--text); }
-    .pub-authors sup { font-size: 0.7em; }
-    .pub-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 0.4rem 0.55rem;
-      font-size: 0.8rem;
-    }
-    .pub-venue {
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.01em;
-    }
-    .pub-sep { color: var(--text-muted); opacity: 0.55; }
-    .pub-link {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 150ms ease-out;
-    }
-    .pub-link:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 2px; }
-    .pub-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-    .pub-footnote {
-      margin-top: 1rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Teaching ── */
-    .teaching-list { list-style: none; }
-    .teaching-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .teaching-item:first-child { padding-top: 0; }
-    .teaching-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .teaching-title {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.25rem;
+      margin-top: 0.4rem;
+      font-size: 0.9375rem;
       line-height: 1.5;
+      color: var(--muted);
     }
-    .teaching-ects { color: var(--text-muted); font-weight: 400; }
+    .pub-authors .me { font-weight: 600; color: var(--ink); }
+    .pub-authors sup { font-size: 0.7em; line-height: 0; }
+    .pub-meta,
     .teaching-meta {
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
-      gap: 0.4rem 0.55rem;
-      font-size: 0.8rem;
+      gap: 0.15rem 1.1rem;
+      margin-top: 0.55rem;
+      font-size: 0.9375rem;
     }
-    .teaching-meta + .teaching-meta { margin-top: 0.28rem; }
-    .teaching-term { font-weight: 600; color: var(--text-muted); letter-spacing: 0.01em; }
-    .teaching-code { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .pub-venue { font-weight: 500; }
+    .pub-footnote {
+      margin-top: 2rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
 
-    /* ── Awards ── */
-    .award-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      max-width: 60ch;
-    }
+    /* ── Awards / Service ── */
+    .award-list { max-width: 34rem; }
     .award-list li {
-      position: relative;
-      padding-left: 1.1rem;
-      font-size: 0.9rem;
-      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid var(--rule);
     }
-    .award-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.62em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--text-muted);
+    .award-list li:first-child { border-top: 0; padding-top: 0; }
+    .award-year { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* ── Teaching ── */
+    .teaching-item { padding: 1.1rem 0; border-top: 1px solid var(--rule); }
+    .teaching-item:first-child { border-top: 0; padding-top: 0; }
+    .teaching-title {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.008em;
     }
-    .award-year { color: var(--text-muted); font-weight: 500; }
+    .teaching-ects { font-weight: 400; color: var(--muted); }
+    .teaching-meta { margin-top: 0.3rem; color: var(--muted); }
+    .teaching-code { font-variant-numeric: tabular-nums; }
+    .teaching-meta a { color: var(--ink); }
+    .teaching-meta a:hover { color: var(--cool); }
 
     /* ── Footer ── */
     .site-footer {
-      border-top: 1px solid var(--border);
-      margin-top: 2rem;
-      padding: 1.5rem 0 2rem;
-    }
-    .footer-inner {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 1.5rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-align: center;
+      padding: 0 var(--gutter);
+    }
+    .footer-inner {
+      padding: 1.75rem 0 3rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.8125rem;
+      color: var(--muted);
     }
 
     /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .nav-inner { padding: 0 0.85rem; gap: 0.4rem; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 1.25rem; }
+      .section-grid { grid-template-columns: 1fr; padding: 3rem 0; }
+      .section-side { position: static; margin-bottom: 1.5rem; }
+      .section-heading { font-size: 1.25rem; letter-spacing: -0.015em; }
+      .avatar { max-width: 8.5rem; margin-top: 1rem; }
+      .field-note { grid-column: 1; grid-row: auto; margin-top: 1.75rem; text-align: left; max-width: none; }
+    }
+    @media (max-width: 760px) {
       .nav-name { display: none; }
+      .nav-inner { gap: 0.5rem; }
       .nav-links {
         flex: 1 1 auto;
         min-width: 0;
-        gap: 1rem;
-        flex-wrap: nowrap;
+        gap: 1.15rem;
         overflow-x: auto;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
       }
       .nav-links::-webkit-scrollbar { display: none; }
-      .nav-links a { font-size: 0.82rem; }
-      .theme-toggle { width: 40px; height: 40px; margin-right: -8px; flex: 0 0 auto; }
-      .profile-header { padding: 2rem 1rem 1.25rem; }
-      .page-section { padding: 1.5rem 1rem; }
-      .footer-inner { padding: 0 1rem; }
-      .profile-name { font-size: 1.45rem; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 1rem; }
+      .hero { min-height: 0; }
+      #field { height: 21rem; }
+      .hero-copy { padding-top: 12.5rem; padding-bottom: 2.75rem; }
+      .name-zh { display: block; margin: 0.9rem 0 0; font-size: 1.25rem; }
+      .directions { grid-template-columns: 1fr; }
+      .timeline-item { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.9rem; }
+      .tl-content { flex: 0 0 100%; margin-top: 0.2rem; }
+      .more-button { margin-left: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -551,6 +549,13 @@
         transition-duration: 0ms !important;
         animation-duration: 0ms !important;
       }
+    }
+
+    @media print {
+      #site-nav, #field, .field-note, .pub-filters, .more-button { display: none !important; }
+      .hero { min-height: 0; }
+      .hero-copy { padding-top: 0; }
+      .pub-item[hidden], .timeline-item[hidden] { display: block !important; }
     }
   </style>
 </head>
@@ -561,7 +566,7 @@
   <!-- Navigation -->
   <nav id="site-nav" aria-label="Site navigation">
     <div class="nav-inner">
-      <span class="nav-name">Shizheng Wen</span>
+      <a class="nav-name" href="#top">Shizheng Wen</a>
       <ul class="nav-links" role="list">
         <li><a href="#about">About</a></li>
         <li><a href="#news">News</a></li>
@@ -587,45 +592,35 @@
 
   <main id="main-content" tabindex="-1">
 
-    <!-- Profile Header -->
-    <header class="profile-header">
-      <img src="avatar.jpeg" alt="Photo of Shizheng Wen" class="avatar" width="124" height="124">
-      <h1 class="profile-name">Shizheng Wen <span lang="zh">(闻仕政)</span></h1>
-      <p class="profile-title">PhD Student · <a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics (SAM)</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a></p>
-      <p class="profile-affil">Affiliated PhD · <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a> · Advised by Prof. <a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a></p>
-
-      <div class="social-links" role="list" aria-label="Social and contact links">
-        <!-- Email -->
-        <a href="mailto:shizheng.wen@sam.math.ethz.ch" aria-label="Email" class="social-link" role="listitem">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect width="20" height="16" x="2" y="4" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-        </a>
-        <!-- Google Scholar -->
-        <a href="https://scholar.google.com/citations?user=PV4NVPgAAAAJ" aria-label="Google Scholar" class="social-link" role="listitem" target="_blank" rel="noopener noreferrer">
-          <span class="si-icon" style="--mask:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlescholar.svg')" aria-hidden="true"></span>
-        </a>
-        <!-- GitHub -->
-        <a href="https://github.com/Shizheng-Wen" aria-label="GitHub" class="social-link" role="listitem" target="_blank" rel="noopener noreferrer">
-          <span class="si-icon" style="--mask:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg')" aria-hidden="true"></span>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/shizheng-wen-1599b0184/" aria-label="LinkedIn" class="social-link" role="listitem" target="_blank" rel="noopener noreferrer">
-          <span class="si-icon" style="--mask:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg')" aria-hidden="true"></span>
-        </a>
-        <!-- Twitter / X -->
-        <a href="https://x.com/WenShizheng" aria-label="Twitter / X" class="social-link" role="listitem" target="_blank" rel="noopener noreferrer">
-          <span class="si-icon" style="--mask:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg')" aria-hidden="true"></span>
-        </a>
+    <!-- Hero: live finite-element field + name -->
+    <header class="hero" id="top">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div class="hero-copy">
+        <h1 class="profile-name">Shizheng Wen <span class="name-zh" lang="zh">闻仕政</span></h1>
+        <p class="hero-lead">
+          PhD student at the <a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH&nbsp;Zurich</a>. Affiliated with the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a> and advised by Prof.&nbsp;<a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.
+        </p>
+        <ul class="contact-links" role="list" aria-label="Contact and profiles">
+          <li><a href="mailto:shizheng.wen@sam.math.ethz.ch">Email</a></li>
+          <li><a href="https://scholar.google.com/citations?user=PV4NVPgAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+          <li><a href="https://github.com/Shizheng-Wen" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/shizheng-wen-1599b0184/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://x.com/WenShizheng" target="_blank" rel="noopener noreferrer">X</a></li>
+        </ul>
+        <p class="field-note" id="field-note">Solved live in your browser: a wave equation on a mesh of linear finite elements. Move across it to make waves.</p>
       </div>
     </header>
 
     <!-- About -->
     <section id="about" class="page-section" aria-labelledby="heading-about">
-      <h2 id="heading-about" class="section-heading">About</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-about" class="section-heading">About</h2>
+        <img src="avatar.jpeg" alt="Photo of Shizheng Wen" class="avatar" width="184" height="184">
+      </div>
+      <div class="section-body">
       <div class="prose">
-        <p>
+        <p class="prose-lead">
           I am Shizheng Wen <span lang="zh">(闻仕政)</span>, a second-year PhD student in AI and applied math at
           <a class="clink" href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>.
           My research sits at the intersection of scientific computing and machine learning, with a focus on building fast, scalable, and differentiable solvers for partial differential equations (PDEs).
@@ -652,7 +647,7 @@
           <strong>PDE foundation models.</strong> Large-scale pretraining across diverse physical systems (coming soon).
         </li>
       </ul>
-      <div class="prose" style="margin-top:1rem;">
+      <div class="prose">
         <!--
         <p>
           In the past, I have had the honor of working with Prof.
@@ -668,111 +663,121 @@
           PDEs are the language of natural science, governing everything from fluid dynamics to quantum mechanics. As an enthusiast of mathematics, physics, and biology, I love integrating multidisciplinary perspectives to tackle complex problems. If you'd like to connect or collaborate, feel free to reach out!
         </p>
       </div>
+      </div>
+      </div>
     </section>
 
     <!-- News -->
     <section id="news" class="page-section" aria-labelledby="heading-news">
-      <h2 id="heading-news" class="section-heading">News</h2>
-      <div class="news-scroll" tabindex="0" role="group" aria-label="News, scroll for more">
-      <ul class="timeline" role="list">
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-news" class="section-heading">News</h2>
+      </div>
+      <div class="section-body">
+      <ul class="timeline" id="news-list" role="list">
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Sep 2026</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Sep 2026</span>
             One paper "<a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">Preconditioned Physics-Informed Neural Operator Training</a>" is now available on arXiv.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Sep 2026</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Sep 2026</span>
             One paper "<a class="clink" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">Does Transolver really need a Transformer?</a>" is now available on arXiv.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Release"></span>
+          <span class="tl-date">May 2026</span>
+          <span class="tl-badge tl-blue">Release</span>
           <div class="tl-content">
-            <span class="tl-date">May 2026</span>
             We open-sourced <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>! A fast, differentiable, JIT-free, debugging-friendly finite element library for PyTorch.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-amber" role="img" aria-label="Milestone"></span>
+          <span class="tl-date">May 2026</span>
+          <span class="tl-badge tl-amber">Milestone</span>
           <div class="tl-content">
-            <span class="tl-date">May 2026</span>
             I received the <a class="clink" href="https://math.ethz.ch/news-and-events/news/d-math-news/2026/06/2026-graduation-ceremony.html" target="_blank" rel="noopener noreferrer">ETH Medal</a> at my master's graduation ceremony, the highest honor for students with outstanding master's and doctoral theses.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">May 2026</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">May 2026</span>
             One paper "<a class="clink" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">torch-sla</a>" accepted at <strong>ICML 2026 Workshop AI4Physics</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Apr 2026</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Apr 2026</span>
             One paper "<a class="clink" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">TensorGalerkin</a>" accepted at <strong>ICML 2026</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Release"></span>
+          <span class="tl-date">Feb 2026</span>
+          <span class="tl-badge tl-blue">Release</span>
           <div class="tl-content">
-            <span class="tl-date">Feb 2026</span>
             We open-sourced <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a>! A memory-efficient, differentiable sparse linear equation solver library for PyTorch with multiple backends.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Jan 2026</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Jan 2026</span>
             One paper "<a class="clink" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">MOSIV</a>" accepted at <strong>ICLR 2026</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Sep 2025</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Sep 2025</span>
             Two papers ("<a class="clink" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">GAOT</a>" and "<a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>") accepted at <strong>NeurIPS 2025</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-amber" role="img" aria-label="Milestone"></span>
+          <span class="tl-date">May 2025</span>
+          <span class="tl-badge tl-amber">Milestone</span>
           <div class="tl-content">
-            <span class="tl-date">May 2025</span>
             Started my Ph.D. journey at the Seminar for Applied Mathematics, ETH Zurich.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Apr 2024</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Apr 2024</span>
             One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/abs/pii/S0020740324003588" target="_blank" rel="noopener noreferrer">Phase-field simulation and machine learning of low-field magneto-elastocaloric effect in a multiferroic composite</a>" accepted at <strong>International Journal of Mechanical Sciences (IJMS)</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Nov 2023</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Nov 2023</span>
             One paper "<a class="clink" href="https://www.sciencedirect.com/science/article/pii/S2095034923000533" target="_blank" rel="noopener noreferrer">Feature identification in complex fluid flows by convolutional neural networks</a>" accepted at <strong>Theoretical and Applied Mechanics Letters (TAML)</strong>.
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-green" role="img" aria-label="Publication"></span>
+          <span class="tl-date">Jul 2022</span>
+          <span class="tl-badge tl-green">Publication</span>
           <div class="tl-content">
-            <span class="tl-date">Jul 2022</span>
             One paper "<a class="clink" href="https://pubs.aip.org/aip/apl/article-abstract/121/7/071101/2834033/A-machine-learning-strategy-for-modeling-and?redirectedFrom=fulltext" target="_blank" rel="noopener noreferrer">A machine learning strategy for modeling and optimal design of near-field radiative heat transfer</a>" accepted at <strong>Applied Physics Letters (APL)</strong>.
           </div>
         </li>
       </ul>
       </div>
+      </div>
     </section>
 
     <!-- Selected Publications -->
     <section id="publications" class="page-section" aria-labelledby="heading-pubs">
-      <h2 id="heading-pubs" class="section-heading">Publications</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-pubs" class="section-heading">Publications</h2>
+      </div>
+      <div class="section-body">
       <div class="pub-filters" role="group" aria-label="Filter publications" hidden>
         <button type="button" class="pub-filter" data-filter="featured" aria-pressed="true">Featured</button>
         <button type="button" class="pub-filter" data-filter="all" aria-pressed="false">All</button>
@@ -786,9 +791,7 @@
           <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Siddhartha Mishra, Marius Zeinhofer<sup>*</sup></div>
           <div class="pub-meta">
             <span class="pub-venue">arXiv preprint, 2026</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/camlab-ethz/TensorPILS" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
@@ -797,9 +800,7 @@
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Siddhartha Mishra</div>
           <div class="pub-meta">
             <span class="pub-venue">arXiv preprint, 2026</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2609.32525" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
@@ -808,11 +809,8 @@
           <div class="pub-authors"><span class="me">Shizheng Wen<sup>*</sup></span>, Mingyuan Chi<sup>*</sup>, Tianwei Yu, Ben Moseley, Mike Yan Michelis, Pu Ren, Hao Sun, Siddhartha Mishra</div>
           <div class="pub-meta">
             <span class="pub-venue">ICML 2026</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2602.05052" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/camlab-ethz/TensorMesh" target="_blank" rel="noopener noreferrer">code</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
@@ -821,11 +819,8 @@
           <div class="pub-authors">Mingyuan Chi<sup>*</sup>, <span class="me">Shizheng Wen<sup>*</sup></span></div>
           <div class="pub-meta">
             <span class="pub-venue">ICML 2026 Workshop (AI4Physics)</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2601.13994" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/sparsexlab/torch-sla" target="_blank" rel="noopener noreferrer">code</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
@@ -834,9 +829,7 @@
           <div class="pub-authors">Chunjiang Liu, Xiaoyuan Wang, Qingran Lin, Albert Xiao, Haoyu Chen, <span class="me">Shizheng Wen</span>, Hao Zhang, Lu Qi, Ming-Hsuan Yang, Laszlo A. Jeni, Min Xu, Yizhou Zhao</div>
           <div class="pub-meta">
             <span class="pub-venue">ICLR 2026</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2603.06022" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://huggingface.co/datasets/Hanibel/MOSIV" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
@@ -845,11 +838,8 @@
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Arsh Kumbhat, Levi Lingsch, Sepehr Mousavi, Yizhou Zhao, Praveen Chandrashekar, and Siddhartha Mishra</div>
           <div class="pub-meta">
             <span class="pub-venue">NeurIPS 2025</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2505.18781" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/shizheng-wen/GAOT" target="_blank" rel="noopener noreferrer">code</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">project</a>
           </div>
         </li>
@@ -858,9 +848,7 @@
           <div class="pub-authors">Sepehr Mousavi, <span class="me">Shizheng Wen</span>, Levi Lingsch, Maximilian Herde, Bogdan Raonić, and Siddhartha Mishra</div>
           <div class="pub-meta">
             <span class="pub-venue">NeurIPS 2025</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">arXiv</a>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://github.com/camlab-ethz/rigno" target="_blank" rel="noopener noreferrer">code</a>
           </div>
         </li>
@@ -869,7 +857,6 @@
           <div class="pub-authors">Wei Tang, <span class="me">Shizheng Wen</span>, Huilong Hou, Qihua Gong, Min Yi, and Wanlin Guo</div>
           <div class="pub-meta">
             <span class="pub-venue">International Journal of Mechanical Sciences, 2024</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://doi.org/10.1016/j.ijmecsci.2024.109316" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
@@ -878,7 +865,6 @@
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Michael W. Lee, Kai M. Kruger Bastos, Ian Eldridge-Allegra, and Earl H. Dowell</div>
           <div class="pub-meta">
             <span class="pub-venue">Theoretical and Applied Mechanics Letters, 2023</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://doi.org/10.1016/j.taml.2023.100482" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
@@ -887,7 +873,6 @@
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Chunzhuo Dang, and Xianglei Liu</div>
           <div class="pub-meta">
             <span class="pub-venue">Applied Physics Letters, 2022</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://doi.org/10.1063/5.0103363" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
@@ -896,7 +881,6 @@
           <div class="pub-authors">Chunzhuo Dang, Xianglei Liu, Haifeng Xia, <span class="me">Shizheng Wen</span>, and Qiao Xu</div>
           <div class="pub-meta">
             <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2021</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2020.107411" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
@@ -905,85 +889,100 @@
           <div class="pub-authors"><span class="me">Shizheng Wen</span>, Xianglei Liu, Sheng Cheng, Zhoubing Wang, Shenghao Zhang, and Chunzhuo Dang</div>
           <div class="pub-meta">
             <span class="pub-venue">Journal of Quantitative Spectroscopy and Radiative Transfer, 2019</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://doi.org/10.1016/j.jqsrt.2019.05.026" target="_blank" rel="noopener noreferrer">doi</a>
           </div>
         </li>
       </ol>
       <p class="pub-footnote"><sup>*</sup> Equal contribution.</p>
+      </div>
+      </div>
     </section>
 
     <!-- Selected Awards -->
     <section id="awards" class="page-section" aria-labelledby="heading-awards">
-      <h2 id="heading-awards" class="section-heading">Selected Awards</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-awards" class="section-heading">Selected Awards</h2>
+      </div>
+      <div class="section-body">
       <ul class="award-list" role="list">
-        <li>ICML Gold Reviewer <span class="award-year">· 2026</span></li>
-        <li>ETH Medal (top 2.5%) <span class="award-year">· 2026</span></li>
-        <li>National Scholarship (top 1%) <span class="award-year">· 2019</span></li>
-        <li>NUAA Presidential Fellowship (top 0.1%) <span class="award-year">· 2019</span></li>
+        <li>ICML Gold Reviewer <span class="award-year">2026</span></li>
+        <li>ETH Medal (top 2.5%) <span class="award-year">2026</span></li>
+        <li>National Scholarship (top 1%) <span class="award-year">2019</span></li>
+        <li>NUAA Presidential Fellowship (top 0.1%) <span class="award-year">2019</span></li>
       </ul>
+      </div>
+      </div>
     </section>
 
     <!-- Invited Talks -->
     <section id="talks" class="page-section" aria-labelledby="heading-talks">
-      <h2 id="heading-talks" class="section-heading">Invited Talks</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-talks" class="section-heading">Invited Talks</h2>
+      </div>
+      <div class="section-body">
       <ul class="timeline" role="list">
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Nov 2026</span>
           <div class="tl-content">
-            <span class="tl-date">Nov 2026</span>
-            <span class="tl-talk-title">Differentiable Finite Elements in PyTorch: TensorMesh and its role in operator learning</span> — <span class="tl-venue">University of Freiburg, hosted by Sören Bartels.</span>
+            <span class="tl-talk-title">Differentiable Finite Elements in PyTorch: TensorMesh and its role in operator learning</span>
+            <span class="tl-venue">University of Freiburg, hosted by Sören Bartels.</span>
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Sep 2026</span>
           <div class="tl-content">
-            <span class="tl-date">Sep 2026</span>
-            <span class="tl-talk-title">Differentiable Physics Simulation Engine: The infrastructure for physics foundation model</span> — <span class="tl-venue">Hong Kong University of Science and Technology, hosted by Tianju Xue.</span>
+            <span class="tl-talk-title">Differentiable Physics Simulation Engine: The infrastructure for physics foundation model</span>
+            <span class="tl-venue">Hong Kong University of Science and Technology, hosted by Tianju Xue.</span>
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Jun 2026</span>
           <div class="tl-content">
-            <span class="tl-date">Jun 2026</span>
-            <span class="tl-talk-title">Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing</span> — <span class="tl-venue">Beihang University, hosted by Kun Wang.</span>
+            <span class="tl-talk-title">Accelerating computational science: a paradigm shift from sparse-iterative solver to dense-parallel computing</span>
+            <span class="tl-venue">Beihang University, hosted by Kun Wang.</span>
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Mar 2026</span>
           <div class="tl-content">
-            <span class="tl-date">Mar 2026</span>
-            <span class="tl-talk-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient High-Performance Galerkin Assembly Algorithm</span> — <span class="tl-venue">Simon Fraser University, hosted by Wuyang Chen.</span>
+            <span class="tl-talk-title">Learning, Solving and Optimizing PDEs with TensorGalerkin: an Efficient High-Performance Galerkin Assembly Algorithm</span>
+            <span class="tl-venue">Simon Fraser University, hosted by Wuyang Chen.</span>
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Mar 2026</span>
           <div class="tl-content">
-            <span class="tl-date">Mar 2026</span>
-            <span class="tl-talk-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</span> — <span class="tl-venue">Tsinghua University, hosted by Angelica Aviles-Rivero.</span>
+            <span class="tl-talk-title">Geometry Aware Operator Transformer as an Efficient and Accurate Neural Surrogate for PDEs on Arbitrary Domains</span>
+            <span class="tl-venue">Tsinghua University, hosted by Angelica Aviles-Rivero.</span>
           </div>
         </li>
         <li class="timeline-item">
-          <span class="tl-badge tl-blue" role="img" aria-label="Talk"></span>
+          <span class="tl-date">Dec 2025</span>
           <div class="tl-content">
-            <span class="tl-date">Dec 2025</span>
-            <span class="tl-talk-title">Accelerating Computational Science: From Differentiable Solvers to Geometry Aware Operator Transformers</span> — <span class="tl-venue">Stanford University, hosted by Charbel Farhat.</span>
+            <span class="tl-talk-title">Accelerating Computational Science: From Differentiable Solvers to Geometry Aware Operator Transformers</span>
+            <span class="tl-venue">Stanford University, hosted by Charbel Farhat.</span>
           </div>
         </li>
       </ul>
+      </div>
+      </div>
     </section>
 
     <!-- Teaching -->
     <section id="teaching" class="page-section" aria-labelledby="heading-teaching">
-      <h2 id="heading-teaching" class="section-heading">Teaching</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-teaching" class="section-heading">Teaching</h2>
+      </div>
+      <div class="section-body">
       <ul class="teaching-list" role="list">
         <li class="teaching-item">
           <div class="teaching-title">AI in the Sciences and Engineering <span class="teaching-ects">(6 ECTS)</span></div>
           <div class="teaching-meta">
             <span class="teaching-term">2025 and 2026 Fall</span>
-            <span class="pub-sep">·</span>
             <span class="teaching-code">401-4656-21L</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://camlab-ethz.github.io/ai4s-course/" target="_blank" rel="noopener noreferrer">course page</a>
           </div>
         </li>
@@ -991,21 +990,27 @@
           <div class="teaching-title">Numerical Methods for Partial Differential Equations <span class="teaching-ects">(10 ECTS)</span></div>
           <div class="teaching-meta">
             <span class="teaching-term">2026 Spring</span>
-            <span class="pub-sep">·</span>
             <span class="teaching-code">401-0674-00L</span>
-            <span class="pub-sep">·</span>
             <a class="pub-link" href="https://www.vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2026S&amp;ansicht=LERNMATERIALIEN&amp;lerneinheitId=198602&amp;lang=en" target="_blank" rel="noopener noreferrer">course page</a>
           </div>
         </li>
       </ul>
+      </div>
+      </div>
     </section>
 
     <!-- Service -->
     <section id="service" class="page-section" aria-labelledby="heading-service">
-      <h2 id="heading-service" class="section-heading">Service</h2>
+      <div class="section-grid">
+      <div class="section-side">
+        <h2 id="heading-service" class="section-heading">Service</h2>
+      </div>
+      <div class="section-body">
       <ul class="award-list" role="list">
         <li>Reviewer: ICLR, NeurIPS, ICML, AAAI, TMLR, Nature Machine Intelligence, Computer Methods in Applied Mechanics and Engineering</li>
       </ul>
+      </div>
+      </div>
     </section>
 
   </main>
@@ -1017,7 +1022,12 @@
   </footer>
 
   <script>
-    // ── Active-nav tracking (no entrance animation, just highlight) ──
+    // ── Nav: hairline once scrolled, active-section highlight ──
+    const nav = document.getElementById('site-nav');
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     if ('IntersectionObserver' in window) {
@@ -1047,7 +1057,29 @@
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch (e) {}
       syncToggle();
+      document.dispatchEvent(new Event('themechange'));
     });
+
+    // ── News: show the latest few, reveal the rest on request ──
+    (function () {
+      const VISIBLE = 6;
+      const list = document.getElementById('news-list');
+      if (!list) return;
+      const rest = Array.from(list.children).slice(VISIBLE);
+      if (!rest.length) return;
+      rest.forEach(li => { li.hidden = true; });
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'more-button';
+      button.textContent = `Show ${rest.length} earlier items`;
+      button.addEventListener('click', () => {
+        rest.forEach(li => { li.hidden = false; });
+        button.remove();
+        rest[0].setAttribute('tabindex', '-1');
+        rest[0].focus({ preventScroll: true });
+      });
+      list.after(button);
+    })();
 
     // ── Publication filters (default: Featured) ──
     const pubFilterBar = document.querySelector('.pub-filters');
@@ -1062,6 +1094,244 @@
     pubFilters.forEach(b => b.addEventListener('click', () => applyPubFilter(b.dataset.filter)));
     pubFilterBar.hidden = false;
     applyPubFilter('featured');
+
+    // ── Hero field ──
+    // A damped wave equation  u_tt = c² Δu − γ u_t  on a structured triangular mesh,
+    // discretised with linear (P1) finite elements and a lumped mass matrix, stepped
+    // explicitly (leapfrog). On this mesh the P1 stiffness matrix reduces to the
+    // 5-point stencil used below. The boundary is clamped (u = 0). Lines are coloured
+    // by displacement with ParaView's cool-to-warm map.
+    (function () {
+      const canvas = document.getElementById('field');
+      const hero = document.getElementById('top');
+      if (!canvas || !canvas.getContext || !hero) return;
+      const ctx = canvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const C2 = 0.24;        // (c·dt/h)², below the CFL limit of 0.5
+      const DAMPING = 0.014;  // γ·dt
+      const BINS = 8;         // colour bins on each side of zero
+      const U_MAX = 0.3;      // displacement mapped to full colour
+
+      let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp;
+      let palette = null;
+      let running = false, visible = true, raf = 0, last = 0, acc = 0, nextDrop = 0;
+      let pointerI = -1, pointerJ = -1;
+
+      // Projection: the mesh lies flat and is seen from a low angle.
+      const NEAR = 1.0, FAR = 0.45;           // scale at the near and far edge
+      const depthOf = z => FAR + (NEAR - FAR) * z;
+      const rowOf = z => (FAR * z + 0.5 * (NEAR - FAR) * z * z) / (0.5 * (NEAR + FAR));
+      let spanX, top0, spanY;
+
+      function buildPalette() {
+        const dark = root.getAttribute('data-theme') === 'dark';
+        const base = dark ? [232, 235, 241] : [15, 27, 45];
+        const cool = dark ? [130, 152, 255] : [59, 76, 192];
+        const warm = dark ? [255, 128, 100] : [180, 4, 38];
+        const baseAlpha = dark ? 0.13 : 0.12;
+        palette = [];
+        for (let b = -BINS; b <= BINS; b++) {
+          const t = Math.abs(b) / BINS;
+          const end = b < 0 ? cool : warm;
+          const k = Math.pow(t, 0.7);
+          const rgb = base.map((v, i) => Math.round(v + (end[i] - v) * k));
+          const alpha = baseAlpha + (0.95 - baseAlpha) * k;
+          palette.push(`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha.toFixed(3)})`);
+        }
+      }
+
+      function setup() {
+        const rect = canvas.getBoundingClientRect();
+        W = Math.max(1, rect.width);
+        H = Math.max(1, rect.height);
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        NX = W < 700 ? 48 : W < 1200 ? 76 : 96;
+        NY = W < 700 ? 28 : 34;
+        u = new Float32Array(NX * NY);
+        uPrev = new Float32Array(NX * NY);
+        uNext = new Float32Array(NX * NY);
+        sx = new Float32Array(NX * NY);
+        sy = new Float32Array(NX * NY);
+        amp = new Float32Array(NY);
+
+        spanX = W * 2.45;       // width of the near edge; the far edge still overshoots the viewport
+        top0 = H * 0.1;
+        spanY = H * 0.66;
+        for (let j = 0; j < NY; j++) {
+          const z = j / (NY - 1);
+          const d = depthOf(z);
+          amp[j] = H * 0.13 * d;
+          for (let i = 0; i < NX; i++) {
+            sx[j * NX + i] = W / 2 + (i / (NX - 1) - 0.5) * spanX * d;
+            sy[j * NX + i] = top0 + spanY * rowOf(z);
+          }
+        }
+        buildPalette();
+      }
+
+      // Screen → mesh coordinates (inverse of the projection above, ignoring displacement)
+      function locate(px, py) {
+        const v = Math.min(1, Math.max(0, (py - top0) / spanY)) * 0.5 * (NEAR + FAR);
+        const a = 0.5 * (NEAR - FAR);
+        const z = (-FAR + Math.sqrt(FAR * FAR + 4 * a * v)) / (2 * a);
+        const d = depthOf(z);
+        return [((px - W / 2) / (spanX * d) + 0.5) * (NX - 1), z * (NY - 1)];
+      }
+
+      // A smooth bump added to both time levels: a displaced membrane, released at rest
+      function drop(ci, cj, strength, radius) {
+        const r = Math.ceil(radius * 3);
+        for (let j = Math.max(1, Math.floor(cj - r)); j <= Math.min(NY - 2, Math.ceil(cj + r)); j++) {
+          for (let i = Math.max(1, Math.floor(ci - r)); i <= Math.min(NX - 2, Math.ceil(ci + r)); i++) {
+            const g = strength * Math.exp(-((i - ci) ** 2 + (j - cj) ** 2) / (2 * radius * radius));
+            u[j * NX + i] += g;
+            uPrev[j * NX + i] += g;
+          }
+        }
+      }
+
+      function step() {
+        for (let j = 1; j < NY - 1; j++) {
+          for (let i = 1; i < NX - 1; i++) {
+            const k = j * NX + i;
+            const lap = u[k - 1] + u[k + 1] + u[k - NX] + u[k + NX] - 4 * u[k];
+            uNext[k] = 2 * u[k] - uPrev[k] + C2 * lap - DAMPING * (u[k] - uPrev[k]);
+          }
+        }
+        const t = uPrev; uPrev = u; u = uNext; uNext = t;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const paths = [];
+        for (let b = 0; b <= 2 * BINS; b++) paths.push(new Path2D());
+        const seg = (a, b) => {
+          const ja = (a / NX) | 0, jb = (b / NX) | 0;
+          const ya = sy[a] - u[a] * amp[ja], yb = sy[b] - u[b] * amp[jb];
+          if ((ya < -20 && yb < -20) || (sx[a] < -20 && sx[b] < -20) || (sx[a] > W + 20 && sx[b] > W + 20)) return;
+          let bin = Math.round(((u[a] + u[b]) * 0.5 / U_MAX) * BINS);
+          bin = bin < -BINS ? -BINS : bin > BINS ? BINS : bin;
+          const p = paths[bin + BINS];
+          p.moveTo(sx[a], ya);
+          p.lineTo(sx[b], yb);
+        };
+        for (let j = 0; j < NY; j++) {
+          for (let i = 0; i < NX; i++) {
+            const k = j * NX + i;
+            if (i < NX - 1) seg(k, k + 1);                       // edge along x
+            if (j < NY - 1) seg(k, k + NX);                      // edge along y
+            if (i < NX - 1 && j < NY - 1) seg(k, k + NX + 1);    // diagonal: two triangles per cell
+          }
+        }
+        ctx.lineWidth = 0.75;
+        for (let b = 0; b <= 2 * BINS; b++) {
+          ctx.strokeStyle = palette[b];
+          ctx.stroke(paths[b]);
+        }
+      }
+
+      function randomDrop(strength) {
+        const i = 4 + Math.random() * (NX - 8);
+        const j = 3 + Math.random() * (NY - 6);
+        // keep ambient drops inside the visible part of the mesh
+        const k = Math.round(j) * NX + Math.round(i);
+        if (sx[k] < 0 || sx[k] > W) return randomDrop(strength);
+        drop(i, j, strength, 2.2 + Math.random() * 1.2);
+      }
+
+      function frame(now) {
+        raf = 0;
+        if (!running) return;
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        acc += dt;
+        let n = 0;
+        while (acc >= 1 / 60 && n < 3) { step(); acc -= 1 / 60; n++; }
+        if (now > nextDrop) {
+          randomDrop((Math.random() < 0.5 ? -1 : 1) * (0.55 + Math.random() * 0.35));
+          nextDrop = now + 2600 + Math.random() * 2600;
+        }
+        draw();
+        raf = requestAnimationFrame(frame);
+      }
+
+      function start() {
+        if (running || reduceMotion || !visible || document.hidden) return;
+        running = true;
+        last = performance.now();
+        acc = 0;
+        if (!nextDrop) nextDrop = last + 2400;
+        raf = requestAnimationFrame(frame);
+      }
+      function stop() {
+        running = false;
+        if (raf) cancelAnimationFrame(raf);
+        raf = 0;
+      }
+
+      function initialState() {
+        // Opening disturbance: one crest right of centre, one shallower trough further back
+        drop(NX * 0.63, NY * 0.56, 1.0, 3.0);
+        drop(NX * 0.38, NY * 0.3, -0.7, 2.6);
+        if (reduceMotion) {
+          for (let n = 0; n < 46; n++) step();   // a single still frame, mid-propagation
+        }
+      }
+
+      function reset() {
+        setup();
+        initialState();
+        draw();
+      }
+
+      reset();
+      start();
+
+      // Disturb the membrane under the pointer (works for mouse, pen and touch)
+      if (!reduceMotion) {
+        hero.addEventListener('pointermove', e => {
+          const rect = canvas.getBoundingClientRect();
+          const [i, j] = locate(e.clientX - rect.left, e.clientY - rect.top);
+          if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) { pointerI = -1; return; }
+          if (pointerI >= 0) {
+            const dist = Math.hypot(i - pointerI, j - pointerJ);
+            if (dist < 0.6) return;
+            drop(i, j, -Math.min(0.5, 0.1 + dist * 0.07), 1.7);
+          }
+          pointerI = i; pointerJ = j;
+        }, { passive: true });
+        hero.addEventListener('pointerleave', () => { pointerI = -1; });
+      } else {
+        document.getElementById('field-note').textContent =
+          'A wave equation solved on a mesh of linear finite elements.';
+      }
+
+      // Run only while the hero is on screen and the tab is visible
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => {
+          visible = entries[0].isIntersecting;
+          visible ? start() : stop();
+        }).observe(hero);
+      }
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+      document.addEventListener('themechange', () => { buildPalette(); if (!running) draw(); });
+
+      let resizeTimer = 0, lastW = W;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const w = canvas.getBoundingClientRect().width;
+          if (Math.abs(w - lastW) < 2) return;   // ignore mobile URL-bar height changes
+          lastW = w;
+          reset();
+        }, 150);
+      });
+    })();
   </script>
 
 </body>
