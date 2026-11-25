@@ -73,7 +73,10 @@ Each section is `<section id="..." class="page-section">` wrapping a `.section-g
 children: `.section-side` (the `<h2 class="section-heading">`, shown in the left gutter on wide
 screens) and `.section-body` (the content). Section ids: `about`, `news`, `publications`,
 `awards`, `talks`, `teaching`, `service`. The hero above them (`<header class="hero" id="top">`)
-holds the name, the affiliation sentence, and the contact links.
+holds the name, a one-line research thesis (`.hero-lead`), the affiliation sentence
+(`.hero-affil`), and the contact links. In About, the research stack is `<ul class="directions">`:
+one `<li><strong>Label</strong><p>…</p></li>` per layer, with `class="directions-goal"` on the
+foundation-model row.
 
 **News** — `<ul class="timeline" id="news-list">` of `<li class="timeline-item">`,
 reverse-chronological. The newest 6 are shown; a script adds a "Show N earlier items" button

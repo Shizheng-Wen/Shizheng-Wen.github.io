@@ -6,14 +6,16 @@
 
 ![Avatar](avatar.jpeg)
 
-I am Shizheng Wen (闻仕政), a second-year PhD student in AI and applied math at [ETH Zurich](https://ethz.ch/en.html). My research sits at the intersection of scientific computing and machine learning, with a focus on building fast, scalable, and differentiable solvers for partial differential equations (PDEs).
+I build foundation models for physics: AI that simulates the physical world from its governing equations. *(hero line)*
 
-My current work spans four directions:
+Today's world models learn what the physical world looks like. I work on models that compute how it behaves, from the equations that govern it and with the accuracy that engineering and science require.
 
-- **Differentiable solvers.** I created [TensorMesh](https://www.tensor-mesh.com/) (finite elements) and [torch-sla](https://www.torchsla.com/) (sparse linear algebra), bringing classical numerical methods into PyTorch.
-- **Scalable neural solver backbones.** I build neural operators for complex geometries, such as [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205), and accelerate them with fused GPU kernels such as [flashslice](https://github.com/Shizheng-Wen/flashslice).
-- **Physics-informed operator learning.** I train neural operators from the governing equations alone; [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets this label-free training match supervised accuracy.
-- **PDE foundation models.** Large-scale pretraining across diverse physical systems (coming soon).
+I am Shizheng Wen (闻仕政), a second-year PhD student in AI and applied math at [ETH Zurich](https://ethz.ch/en.html). Language models had the internet to learn from. Physics has no such corpus, so the data, the architecture, and the training method all have to be built. My work covers that full stack:
+
+- **Data and training infrastructure.** [TensorMesh](https://www.tensor-mesh.com/) (finite elements) and [torch-sla](https://www.torchsla.com/) (sparse linear algebra) are differentiable, GPU-native solvers. They generate training data at scale and evaluate physics losses directly inside the training loop, so the solver itself becomes the supervisor.
+- **Architecture.** [GAOT](https://camlab-ethz.github.io/GAOT/) and [RIGNO](https://arxiv.org/abs/2501.19205) are neural operators for PDEs on arbitrary geometries; fused GPU kernels such as [flashslice](https://github.com/Shizheng-Wen/flashslice) make them simpler and faster.
+- **Training method.** Physics-informed, label-free training: neural operators learn from the governing equations alone, and [multigrid preconditioning](https://arxiv.org/abs/2609.36216) lets them match supervised accuracy, so scale is no longer capped by labelled data.
+- **Foundation model.** These come together in a PDE foundation model pretrained across diverse physical systems, to be released in January 2027.
 
 <!-- In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA. -->
 

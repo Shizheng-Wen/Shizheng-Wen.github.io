@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shizheng Wen — PhD Student, ETH Zurich</title>
-  <meta name="description" content="Shizheng Wen (闻仕政) is a doctoral student at the Seminar for Applied Mathematics, ETH Zurich, working on fast, scalable, and differentiable solvers for PDEs at the intersection of scientific computing and machine learning.">
+  <meta name="description" content="Shizheng Wen (闻仕政) is a doctoral student at the Seminar for Applied Mathematics, ETH Zurich, building foundation models for physics: differentiable solvers, neural operators, and label-free training for PDEs.">
   <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1B2D'/%3E%3Cpath d='M7 23 16 8l9 15zM11.5 15.5h9L16 23z' fill='none' stroke='%23F7F8FA' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -237,13 +237,25 @@
       white-space: nowrap;
     }
     .hero-lead {
+      grid-column: 1;
       margin-top: 1.75rem;
-      max-width: 38rem;
+      max-width: 40rem;
       text-wrap: pretty;
-      font-size: clamp(1.125rem, 1.55vw, 1.3125rem);
-      line-height: 1.45;
-      letter-spacing: -0.005em;
+      font-size: clamp(1.25rem, 2vw, 1.625rem);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
     }
+    .hero-affil {
+      grid-column: 1;
+      margin-top: 0.9rem;
+      max-width: 40rem;
+      text-wrap: pretty;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .hero-affil a { color: var(--ink); }
+    .hero-affil a:hover { color: var(--cool); }
     .contact-links {
       grid-column: 1;
       display: flex;
@@ -254,7 +266,7 @@
     }
     .field-note {
       grid-column: 2;
-      grid-row: 2 / span 2;
+      grid-row: 2 / span 3;
       max-width: 17rem;
       font-size: 0.8125rem;
       line-height: 1.45;
@@ -307,30 +319,28 @@
       letter-spacing: -0.015em;
     }
 
-    /* ── Research directions: four titled paragraphs on a 2 × 2 grid ── */
-    .directions {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 2.5rem;
-      margin: 1rem 0 2.5rem;
-    }
+    /* ── Research stack: labelled rows (three layers, then the model they build towards) ── */
+    .directions { margin: 1.75rem 0 2.5rem; }
     .directions li {
-      padding: 1.1rem 0 1.4rem;
+      display: grid;
+      grid-template-columns: 11rem minmax(0, 1fr);
+      column-gap: 1.5rem;
+      padding: 1rem 0 1.15rem;
       border-top: 1px solid var(--rule);
       font-size: 0.9375rem;
       line-height: 1.55;
       color: var(--muted);
     }
     .directions strong {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-size: 1.0625rem;
+      font-size: 1rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
+      line-height: 1.4;
+      letter-spacing: -0.008em;
       color: var(--ink);
     }
     .directions a { color: var(--ink); }
     .directions a:hover { color: var(--cool); }
+    .directions .directions-goal { border-top-color: var(--ink); color: var(--ink); }
 
     /* ── Timeline rows (News + Talks): date column, then content ── */
     .timeline-item {
@@ -516,6 +526,7 @@
       .section-side { position: static; margin-bottom: 1.5rem; }
       .section-heading { font-size: 1.25rem; letter-spacing: -0.015em; }
       .avatar { max-width: 8.5rem; margin-top: 1rem; }
+      .hero-copy { grid-template-columns: minmax(0, 1fr); }
       .field-note { grid-column: 1; grid-row: auto; margin-top: 1.75rem; text-align: left; max-width: none; }
     }
     @media (max-width: 760px) {
@@ -537,7 +548,7 @@
       #field { height: 21rem; }
       .hero-copy { padding-top: 12.5rem; padding-bottom: 2.75rem; }
       .name-zh { display: block; margin: 0.9rem 0 0; font-size: 1.25rem; }
-      .directions { grid-template-columns: 1fr; }
+      .directions li { grid-template-columns: 1fr; row-gap: 0.3rem; }
       .timeline-item { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.9rem; }
       .tl-content { flex: 0 0 100%; margin-top: 0.2rem; }
       .more-button { margin-left: 0; }
@@ -597,7 +608,8 @@
       <canvas id="field" aria-hidden="true"></canvas>
       <div class="hero-copy">
         <h1 class="profile-name">Shizheng Wen <span class="name-zh" lang="zh">闻仕政</span></h1>
-        <p class="hero-lead">
+        <p class="hero-lead">I build foundation models for physics: AI that simulates the physical world from its governing equations.</p>
+        <p class="hero-affil">
           PhD student at the <a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH&nbsp;Zurich</a>. Affiliated with the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a> and advised by Prof.&nbsp;<a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.
         </p>
         <ul class="contact-links" role="list" aria-label="Contact and profiles">
@@ -621,30 +633,42 @@
       <div class="section-body">
       <div class="prose">
         <p class="prose-lead">
+          Today's world models learn what the physical world looks like. I work on models that compute how it behaves, from the equations that govern it and with the accuracy that engineering and science require.
+        </p>
+        <p>
           I am Shizheng Wen <span lang="zh">(闻仕政)</span>, a second-year PhD student in AI and applied math at
           <a class="clink" href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>.
-          My research sits at the intersection of scientific computing and machine learning, with a focus on building fast, scalable, and differentiable solvers for partial differential equations (PDEs).
+          Language models had the internet to learn from. Physics has no such corpus, so the data, the architecture, and the training method all have to be built. My work covers that full stack:
         </p>
-        <p>My current work spans four directions:</p>
       </div>
       <ul class="directions" role="list">
         <li>
-          <strong>Differentiable solvers.</strong> I created
-          <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a> (finite elements) and
-          <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a> (sparse linear algebra), bringing classical numerical methods into PyTorch.
+          <strong>Data and training infrastructure</strong>
+          <p>
+            <a class="clink" href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a> (finite elements) and
+            <a class="clink" href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a> (sparse linear algebra) are differentiable, GPU-native solvers. They generate training data at scale and evaluate physics losses directly inside the training loop, so the solver itself becomes the supervisor.
+          </p>
         </li>
         <li>
-          <strong>Scalable neural solver backbones.</strong> I build neural operators for complex geometries, such as
-          <a class="clink" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a> and
-          <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a>, and accelerate them with fused GPU kernels such as
-          <a class="clink" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a>.
+          <strong>Architecture</strong>
+          <p>
+            <a class="clink" href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a> and
+            <a class="clink" href="https://arxiv.org/abs/2501.19205" target="_blank" rel="noopener noreferrer">RIGNO</a> are neural operators for PDEs on arbitrary geometries; fused GPU kernels such as
+            <a class="clink" href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a> make them simpler and faster.
+          </p>
         </li>
         <li>
-          <strong>Physics-informed operator learning.</strong> I train neural operators from the governing equations alone;
-          <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">multigrid preconditioning</a> lets this label-free training match supervised accuracy.
+          <strong>Training method</strong>
+          <p>
+            Physics-informed, label-free training: neural operators learn from the governing equations alone, and
+            <a class="clink" href="https://arxiv.org/abs/2609.36216" target="_blank" rel="noopener noreferrer">multigrid preconditioning</a> lets them match supervised accuracy, so scale is no longer capped by labelled data.
+          </p>
         </li>
-        <li>
-          <strong>PDE foundation models.</strong> Large-scale pretraining across diverse physical systems (coming soon).
+        <li class="directions-goal">
+          <strong>Foundation model</strong>
+          <p>
+            These come together in a PDE foundation model pretrained across diverse physical systems, to be released in January 2027.
+          </p>
         </li>
       </ul>
       <div class="prose">
