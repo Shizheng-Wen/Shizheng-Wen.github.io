@@ -225,8 +225,6 @@
     }
     .section-heading { font-size: 1.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.022em; }
     .block > .section-heading, .col > .section-heading { margin-bottom: 1.1rem; }
-    .stats { color: var(--muted); }
-    .stats b { font-weight: 400; color: var(--cool); }
     .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.5rem; row-gap: 3rem; }
     .triple { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 3.5rem; row-gap: 3rem; }
 
@@ -261,7 +259,6 @@
       padding: 0.75rem 0; border-top: 1px solid var(--rule);
       font-size: 0.875rem; line-height: 1.5;
     }
-    .timeline-item[hidden] { display: none; }
     .tl-date {
       grid-column: 1; grid-row: 1;
       font-family: var(--mono); font-size: 0.6875rem; line-height: 1.9; letter-spacing: 0.04em;
@@ -279,11 +276,20 @@
     .tl-content strong { font-weight: 600; }
     .tl-talk-title { display: block; font-weight: 600; line-height: 1.4; color: var(--ink); }
     .tl-venue { display: block; margin-top: 0.15rem; font-size: 0.8125rem; }
-    .more-button {
-      margin-top: 0.9rem; margin-left: 6rem; padding: 0; border: 0; background: none; cursor: pointer;
-      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--cool);
+    /* News and talks share one fixed height and scroll inside it; the bottom fades while more is below */
+    .scroll-list {
+      height: 25rem; overflow-y: auto; padding-right: 0.9rem;
+      border-top: 1px solid var(--rule);
+      scrollbar-width: thin; scrollbar-color: var(--rule) transparent;
     }
-    .more-button:hover { color: var(--ink); }
+    .scroll-list.has-more {
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
+    }
+    .scroll-list > .timeline-item:first-child { border-top: 0; }
+    .scroll-list::-webkit-scrollbar { width: 6px; }
+    .scroll-list::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+    .scroll-list:focus-visible { outline: 2px solid var(--cool); outline-offset: 4px; border-radius: 2px; }
 
     /* ── Publications ── */
     .pub-filters { display: flex; flex-wrap: wrap; gap: 0.25rem 1.35rem; }
@@ -336,6 +342,7 @@
       .field-frame { aspect-ratio: 16 / 11; }
       .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .split, .triple, .pub-list { grid-template-columns: minmax(0, 1fr); }
+      .scroll-list { height: auto; max-height: 24rem; }
     }
     @media (max-width: 600px) {
       .nav-inner { justify-content: space-between; }
@@ -347,7 +354,6 @@
       .facts dd { margin-bottom: 0.6rem; }
       .work-grid { grid-template-columns: minmax(0, 1fr); }
       .block { padding: 2.5rem 0; }
-      .more-button { margin-left: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -355,8 +361,9 @@
       *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
     }
     @media print {
-      #site-nav, .field-panel, .pub-filters, .more-button, .cta .btn { display: none !important; }
-      .pub-item[hidden], .timeline-item[hidden] { display: block !important; }
+      #site-nav, .field-panel, .pub-filters, .cta .btn { display: none !important; }
+      .pub-item[hidden] { display: block !important; }
+      .scroll-list { height: auto; max-height: none; overflow: visible; -webkit-mask-image: none; mask-image: none; }
     }
   </style>
 </head>
@@ -400,7 +407,7 @@
           </div>
           <p class="tagline">Foundation models for physics, <span class="tone">learned from the equations themselves.</span></p>
           <p class="lede">
-            Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it <b>behaves</b>, from the equations that govern it and with the accuracy that <b>engineering</b> and <b>science</b> require. Physics has no internet-scale corpus to learn from, so I build the full stack: <b>infrastructure</b>, <b>architecture</b> and <b>training</b>.
+            Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it <b>behaves</b>, from the equations that govern it and with the accuracy that <b>engineering</b> and <b>science</b> require. Physics has no internet-scale corpus to learn from, so there is no settled training paradigm yet. Personally, I build the full stack: <b>infrastructure</b>, <b>architecture</b> and <b>training</b>.
           </p>
           <div class="cta">
             <a class="btn" href="mailto:shizheng.wen@sam.math.ethz.ch">Get in touch</a>
@@ -415,7 +422,7 @@
             <dt class="label">Based at</dt>
             <dd><a href="https://math.ethz.ch/sam" target="_blank" rel="noopener noreferrer">Seminar for Applied Mathematics</a>, <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer">ETH Zurich</a>, and the <a href="https://ai.ethz.ch/" target="_blank" rel="noopener noreferrer">ETH AI Center</a>. Advised by Prof. <a href="https://de.wikipedia.org/wiki/Siddhartha_Mishra" target="_blank" rel="noopener noreferrer">Siddhartha Mishra</a>.</dd>
             <dt class="label">Open source</dt>
-            <dd><a href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>, <a href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a>, <a href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a></dd>
+            <dd><a href="https://camlab-ethz.github.io/GAOT/" target="_blank" rel="noopener noreferrer">GAOT</a>, <a href="https://github.com/Shizheng-Wen/flashslice" target="_blank" rel="noopener noreferrer">flashslice</a>, <a href="https://www.tensor-mesh.com/" target="_blank" rel="noopener noreferrer">TensorMesh</a>, <a href="https://www.torchsla.com/" target="_blank" rel="noopener noreferrer">torch-sla</a></dd>
             <dt class="label">Recognition</dt>
             <dd><b>ETH Medal</b>, with papers at ICML, NeurIPS and ICLR</dd>
           </dl>
@@ -436,7 +443,6 @@
       <div class="block">
         <div class="block-head">
           <h2 id="heading-work" class="section-heading">Selected work</h2>
-          <p class="label stats"><b>2</b> NeurIPS, <b>1</b> ICML, <b>1</b> ICLR, <b>ETH Medal</b></p>
         </div>
         <ul class="work-grid" role="list">
           <li class="work-card">
@@ -475,7 +481,7 @@
       <div class="block split">
         <section id="news" class="col" aria-labelledby="heading-news">
           <h2 id="heading-news" class="section-heading">News</h2>
-          <ul class="timeline" id="news-list" role="list">
+          <ul class="timeline scroll-list" id="news-list" role="list" tabindex="0" aria-label="News, newest first; scroll for earlier items">
             <li class="timeline-item">
               <span class="tl-date">Sep 2026</span>
               <span class="tl-badge tl-green">Publication</span>
@@ -571,7 +577,7 @@
         </section>
         <section id="talks" class="col" aria-labelledby="heading-talks">
           <h2 id="heading-talks" class="section-heading">Invited talks</h2>
-          <ul class="timeline" role="list">
+          <ul class="timeline scroll-list" id="talks-list" role="list" tabindex="0" aria-label="Invited talks, newest first; scroll for earlier talks">
             <li class="timeline-item">
               <span class="tl-date">Nov 2026</span>
               <div class="tl-content">
@@ -834,26 +840,13 @@
       document.dispatchEvent(new Event('themechange'));
     });
 
-    // ── News: show the latest few, reveal the rest on request ──
-    (function () {
-      const VISIBLE = 6;
-      const list = document.getElementById('news-list');
-      if (!list) return;
-      const rest = Array.from(list.children).slice(VISIBLE);
-      if (!rest.length) return;
-      rest.forEach(li => { li.hidden = true; });
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'more-button';
-      button.textContent = `Show ${rest.length} earlier items`;
-      button.addEventListener('click', () => {
-        rest.forEach(li => { li.hidden = false; });
-        button.remove();
-        rest[0].setAttribute('tabindex', '-1');
-        rest[0].focus({ preventScroll: true });
-      });
-      list.after(button);
-    })();
+    // ── News / talks: fade the bottom edge of each scrolling list while more lies below ──
+    document.querySelectorAll('.scroll-list').forEach(list => {
+      const update = () => list.classList.toggle('has-more', list.scrollTop + list.clientHeight < list.scrollHeight - 4);
+      list.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
 
     // ── Publication filters (default: Featured) ──
     const pubFilterBar = document.querySelector('.pub-filters');

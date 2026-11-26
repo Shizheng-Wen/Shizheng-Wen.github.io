@@ -78,9 +78,9 @@ The page is a compact, pitch-style single page. Top to bottom:
   `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
   Right: `#field-panel`, the live simulation with its caption `#field-note`.
 - **Selected work** (`#work`): `.work-grid` of four `.work-card`s, one per layer of the stack
-  (infrastructure, architecture, training) plus the foundation model. The line in
-  `.block-head .stats` summarises venues; keep its counts true to the publication list.
-- **News** (`#news`) and **Invited talks** (`#talks`), side by side.
+  (infrastructure, architecture, training) plus the foundation model.
+- **News** (`#news`) and **Invited talks** (`#talks`), side by side. Both lists carry the
+  `scroll-list` class: the same fixed height, scrolling inside it to reach older items.
 - **Publications** (`#publications`), a two-column list with filter buttons in the heading row.
 - **Awards** (`#awards`), **Teaching** (`#teaching`), **Service** (`#service`), three columns.
 
@@ -99,8 +99,8 @@ instead of an image and has no links yet. When it is released: give it a thumbna
 move it first, and update the tagline/lede if needed.
 
 **News** — `<ul class="timeline" id="news-list">` of `<li class="timeline-item">`,
-reverse-chronological. The newest 6 are shown; a script adds a "Show N earlier items" button
-for the rest, so just prepend new items. Each item:
+reverse-chronological. The list scrolls inside a fixed height, so just prepend new items.
+Each item:
 ```html
 <li class="timeline-item">
   <span class="tl-date">May 2026</span>

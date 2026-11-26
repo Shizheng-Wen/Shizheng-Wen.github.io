@@ -8,15 +8,13 @@
 
 **Tagline:** Foundation models for physics, learned from the equations themselves.
 
-Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it **behaves**, from the equations that govern it and with the accuracy that **engineering** and **science** require. Physics has no internet-scale corpus to learn from, so I build the full stack: **infrastructure**, **architecture** and **training**.
+Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it **behaves**, from the equations that govern it and with the accuracy that **engineering** and **science** require. Physics has no internet-scale corpus to learn from, so there is no settled training paradigm yet. Personally, I build the full stack: **infrastructure**, **architecture** and **training**.
 
 - **Based at:** [Seminar for Applied Mathematics](https://math.ethz.ch/sam), [ETH Zurich](https://ethz.ch/en.html), and the [ETH AI Center](https://ai.ethz.ch/). Advised by Prof. [Siddhartha Mishra](https://de.wikipedia.org/wiki/Siddhartha_Mishra).
-- **Open source:** [TensorMesh](https://www.tensor-mesh.com/), [GAOT](https://camlab-ethz.github.io/GAOT/), [torch-sla](https://www.torchsla.com/)
+- **Open source:** [GAOT](https://camlab-ethz.github.io/GAOT/), [flashslice](https://github.com/Shizheng-Wen/flashslice), [TensorMesh](https://www.tensor-mesh.com/), [torch-sla](https://www.torchsla.com/)
 - **Recognition:** ETH Medal, with papers at ICML, NeurIPS and ICLR
 
 ## Selected work
-
-Stat line: 2 NeurIPS, 1 ICML, 1 ICLR, ETH Medal.
 
 - **TensorMesh** (Infrastructure, ICML 2026). Differentiable, GPU-native finite elements in PyTorch. It generates training data and evaluates physics losses inside the training loop. [Project](https://www.tensor-mesh.com/) · [Paper](https://arxiv.org/abs/2602.05052) · [Code](https://github.com/camlab-ethz/TensorMesh)
 - **GAOT** (Architecture, NeurIPS 2025). A geometry-aware operator transformer: an efficient, accurate neural surrogate for PDEs on arbitrary domains. [Project](https://camlab-ethz.github.io/GAOT/) · [Paper](https://arxiv.org/abs/2505.18781) · [Code](https://github.com/shizheng-wen/GAOT)
