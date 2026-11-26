@@ -81,9 +81,12 @@ The page is a compact, pitch-style single page. Top to bottom:
   the `.lede` paragraph (key terms in `<b>`), `.cta` (`.cta-actions` with the email button and
   the `#copy-email` button, then `.social` links), and the `.facts` list
   (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
-  Right: `#field-panel`. Inside `#field-frame` sit the canvas, a mesh readout
-  (`#field-readout`, filled by the script) and the control bar `.field-hud-bar`
-  (Drops / Plane modes, Pulse, pause, reset); below it the caption `#field-note`.
+  Right: `#field-panel`, which has two views switched by `#view-switch` (Field / Research):
+  - **Field** (default): inside `#field-frame` sit the canvas, a mesh readout
+    (`#field-readout`, filled by the script) and the control bar `.field-hud-bar`
+    (Drops / Plane modes, Pulse, pause, reset); caption `.cap-field` with `#field-note`.
+  - **Research** (`#research-view`): the research map, an SVG built by the "Research map"
+    script block, with a detail area below it and the caption `.cap-research`.
 - **Selected work** (`#work`): `.work-grid` of four `.work-card`s covering the stack:
   GAOT, TensorMesh, torch-sla, Preconditioned PINO (in that order).
 - **News** (`#news`) and **Invited talks** (`#talks`), side by side. Both lists carry the
@@ -189,6 +192,15 @@ Keep these when editing, so the page stays one system:
   off-screen, and under `prefers-reduced-motion` shows a single still frame and hides the
   controls. The caption `#field-note` is rewritten by `updateNote()` per mode; keep its
   wording true to what the simulation does.
+- **Research map** — research drawn as one linear finite element. The three nodes are the
+  layers (infrastructure, architecture, training); each project is a point inside, placed by
+  barycentric weights `w: [infrastructure, architecture, training]` in the `ITEMS` array of the
+  script; the foundation model sits at the centroid. Hover or focus previews an item, click or
+  tap pins it; a layer dims projects that barely draw on it, a project draws ties to the three
+  nodes weighted by `w`. To add a project, add an entry to `ITEMS` (name, weights summing to 1,
+  one sentence, link, label offset) and check its label does not collide with a neighbour. The
+  weights are a qualitative placement chosen with Shizheng, not measurements; change them only
+  on his say. The field simulation pauses while this view is showing.
 - Light is the default theme; the toggle stores the visitor's choice in `localStorage`. In light
   mode the page background is a soft cool-to-warm gradient wash behind the top of the page
   (`:root[data-theme="light"] body`), fading into flat `--paper`; dark mode stays flat.

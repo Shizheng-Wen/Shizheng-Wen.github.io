@@ -401,9 +401,59 @@
     .field-frame.is-paused .hud-btn .icon-pause { display: none; }
     .field-frame.is-paused .hud-btn .icon-play { display: block; }
     .hud-sep { width: 1px; height: 0.9rem; background: var(--rule); margin: 0 0.1rem; flex: 0 0 auto; }
+    /* Panel views: the live field (default) and the research map share one frame */
+    .view-switch {
+      position: absolute; top: 0.6rem; right: 0.65rem; z-index: 3;
+      display: inline-flex; align-items: center; gap: 0.15rem;
+      padding: 0.2rem; border-radius: 999px;
+      background: var(--hud-bg);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      border: 1px solid color-mix(in srgb, var(--rule) 90%, transparent);
+      cursor: default;
+    }
+    .view-switch[hidden] { display: none; }
+    .field-frame > canvas, .field-hud-top, .field-hud-bar, .research-view { transition: opacity 220ms ease-out, visibility 220ms; }
+    .field-frame.is-research { cursor: default; }
+    .field-frame.is-research > canvas,
+    .field-frame.is-research .field-hud-top,
+    .field-frame.is-research .field-hud-bar { opacity: 0; visibility: hidden; pointer-events: none; }
+    .research-view {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; flex-direction: column;
+      padding: 2.9rem 1.1rem 1rem;
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .field-frame.is-research .research-view { opacity: 1; visibility: visible; pointer-events: auto; }
+    .rm-svg { flex: 1 1 auto; min-height: 0; width: 100%; overflow: visible; }
+    .rm-mesh { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .rm-edge { stroke: var(--muted); stroke-width: 1.2; fill: none; transition: stroke 160ms ease-out, stroke-width 160ms ease-out; }
+    .rm-edge.is-lit { stroke: var(--cool); stroke-width: 1.8; }
+    .rm-tie { stroke: var(--cool); stroke-linecap: round; pointer-events: none; transition: opacity 160ms ease-out; }
+    .rm-node { cursor: pointer; outline: none; transition: opacity 180ms ease-out; }
+    .rm-node.is-dim { opacity: 0.32; }
+    .rm-hit { fill: transparent; }
+    .rm-dot { fill: var(--ink); transition: fill 160ms ease-out, r 160ms ease-out; }
+    .rm-vertex .rm-dot { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+    .rm-goal .rm-dot { fill: var(--cool); }
+    .rm-halo { fill: none; stroke: var(--cool); stroke-width: 1.4; opacity: 0; transition: opacity 160ms ease-out; }
+    .rm-goal .rm-halo { opacity: 0.45; }
+    .rm-node.is-active .rm-dot { fill: var(--cool); stroke: var(--cool); }
+    .rm-node.is-active .rm-halo, .rm-node:focus-visible .rm-halo { opacity: 1; }
+    .rm-label { font-size: 11.5px; font-weight: 500; fill: var(--muted); letter-spacing: -0.005em; transition: fill 160ms ease-out; }
+    .rm-vertex .rm-label { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+    .rm-node.is-active .rm-label, .rm-node:hover .rm-label { fill: var(--ink); }
+    .rm-detail { flex: 0 0 auto; height: 7.9rem; padding-top: 0.75rem; border-top: 1px solid var(--rule); text-align: left; }
+    .rm-detail .label { color: var(--cool); }
+    .rm-title { margin-top: 0.1rem; font-size: 1rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.012em; }
+    .rm-text { margin-top: 0.2rem; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); }
+    .rm-link { display: inline-block; margin-top: 0.35rem; }
+    .rm-link[hidden] { display: none; }
+    .cap-research, .field-panel.is-research .cap-field { display: none; }
+    .field-panel.is-research .cap-research { display: block; }
+
     .field-panel figcaption { margin-top: 1rem; text-align: center; }
     .field-panel figcaption .label { color: var(--cool); }
-    #field-note { margin-top: 0.3rem; font-size: 0.875rem; color: var(--muted); }
+    #field-note, .cap-note { margin-top: 0.3rem; font-size: 0.875rem; color: var(--muted); }
 
     /* ── Blocks ── */
     .block { padding: 3.25rem 0; border-top: 1px solid var(--rule); }
@@ -641,6 +691,10 @@
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: minmax(0, 1fr); row-gap: 2.75rem; }
       .field-frame { aspect-ratio: 16 / 11; }
+      /* The research map needs more height than the short field frame, so it sets its own */
+      .field-frame.is-research { aspect-ratio: auto; }
+      .field-frame.is-research .research-view { position: relative; }
+      .field-frame.is-research .rm-svg { flex: 0 0 auto; aspect-ratio: 400 / 250; max-width: 30rem; margin: 0 auto; }
       .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .split, .triple, .pub-list { grid-template-columns: minmax(0, 1fr); }
       .scroll-list { height: auto; max-height: 24rem; }
@@ -766,7 +820,20 @@
             <div class="field-hud-top" aria-hidden="true">
               <span class="field-telemetry"><span class="field-dot"></span><span id="field-readout">P1 FEM · 104×52</span></span>
             </div>
+            <div class="view-switch" id="view-switch" role="group" aria-label="Panel view" hidden>
+              <button class="hud-btn" type="button" data-view="field" aria-pressed="true">Field</button>
+              <button class="hud-btn" type="button" data-view="research" aria-pressed="false">Research</button>
+            </div>
             <canvas id="field" aria-hidden="true"></canvas>
+            <div class="research-view" id="research-view">
+              <svg class="rm-svg" id="rm-svg" viewBox="0 0 400 250" role="group" aria-label="Research map: projects placed between three layers"></svg>
+              <div class="rm-detail" aria-live="polite">
+                <p class="label" id="rm-kind"></p>
+                <p class="rm-title" id="rm-title"></p>
+                <p class="rm-text" id="rm-text"></p>
+                <a class="pub-link rm-link" id="rm-link" target="_blank" rel="noopener noreferrer" hidden></a>
+              </div>
+            </div>
             <div class="field-hud-bar" role="toolbar" aria-label="Wave simulation controls">
               <button class="hud-btn" type="button" data-sim-mode="drops" aria-pressed="true" title="Point-source drops">Drops</button>
               <button class="hud-btn" type="button" data-sim-mode="plane" aria-pressed="false" title="Harmonic plane-wave diffraction">Plane</button>
@@ -784,8 +851,14 @@
             </div>
           </div>
           <figcaption>
-            <p class="label">Solved live in your browser</p>
-            <p id="field-note">A wave equation on a finite-element mesh, scattering off my initials. Click or move across it to make waves.</p>
+            <div class="cap-field">
+              <p class="label">Solved live in your browser</p>
+              <p id="field-note">A wave equation on a finite-element mesh, scattering off my initials. Click or move across it to make waves.</p>
+            </div>
+            <div class="cap-research">
+              <p class="label">Research map</p>
+              <p class="cap-note">One element, three nodes: each project sits where it draws on infrastructure, architecture and training. Hover or tap a point.</p>
+            </div>
           </figcaption>
         </figure>
       </div>
@@ -1497,6 +1570,143 @@
       document.fonts.ready.then(positionFilterInk);
     }
 
+    // ── Research map ──
+    // The second view of the hero panel. Research is drawn as one linear finite element: the three
+    // nodes are the layers of the stack, and every project is a point inside it, placed by
+    // barycentric weights [infrastructure, architecture, training] (a qualitative placement, not a
+    // measurement). Hover or focus previews an item; click or tap pins it.
+    (function () {
+      const svg = document.getElementById('rm-svg');
+      const frame = document.getElementById('field-frame');
+      const panel = document.getElementById('field-panel');
+      const switcher = document.getElementById('view-switch');
+      if (!svg || !frame || !switcher) return;
+
+      const NODES = [[56, 204], [344, 204], [200, 34]];   // infrastructure, architecture, training
+      const INTRO = {
+        kind: 'Research map', name: 'Three layers, one stack',
+        text: 'Physics has no internet-scale corpus to learn from, so the data, the architecture and the training method all have to be built.'
+      };
+      const ITEMS = [
+        { id: 'infrastructure', kind: 'Layer', name: 'Infrastructure', w: [1, 0, 0], label: [-16, 24, 'start'],
+          text: 'Differentiable, GPU-native solvers that generate training data and evaluate physics losses inside the training loop.' },
+        { id: 'architecture', kind: 'Layer', name: 'Architecture', w: [0, 1, 0], label: [16, 24, 'end'],
+          text: 'Neural operators for PDEs on arbitrary geometries, kept simple enough to be fast.' },
+        { id: 'training', kind: 'Layer', name: 'Training', w: [0, 0, 1], label: [0, -13, 'middle'],
+          text: 'Label-free training from the governing equations, so scale is not capped by labelled data.' },
+        { id: 'tensormesh', kind: 'Project', name: 'TensorMesh', w: [0.70, 0.06, 0.24], label: [12, 4, 'start'],
+          text: 'Finite elements in PyTorch. Mostly infrastructure, with a hand in training: it supplies the physics loss.',
+          href: 'https://www.tensor-mesh.com/', link: 'Project page' },
+        { id: 'torch-sla', kind: 'Project', name: 'torch-sla', w: [0.84, 0.06, 0.10], label: [12, 4, 'start'],
+          text: 'Differentiable sparse linear algebra: the solver layer underneath everything else.',
+          href: 'https://www.torchsla.com/', link: 'Project page' },
+        { id: 'flashslice', kind: 'Project', name: 'flashslice', w: [0.38, 0.56, 0.06], label: [0, -11, 'middle'],
+          text: 'Fused GPU kernels that make Transolver-style models simpler and faster: architecture meeting systems work.',
+          href: 'https://github.com/Shizheng-Wen/flashslice', link: 'Code' },
+        { id: 'gaot', kind: 'Project', name: 'GAOT', w: [0.16, 0.72, 0.12], label: [12, 4, 'start'],
+          text: 'A geometry-aware operator transformer: an efficient, accurate neural surrogate for PDEs on arbitrary domains.',
+          href: 'https://camlab-ethz.github.io/GAOT/', link: 'Project page' },
+        { id: 'rigno', kind: 'Project', name: 'RIGNO', w: [0.05, 0.74, 0.21], label: [-12, 4, 'end'],
+          text: 'A graph-based neural operator for robust, accurate learning of PDEs on arbitrary domains.',
+          href: 'https://arxiv.org/abs/2501.19205', link: 'Paper' },
+        { id: 'pino', kind: 'Project', name: 'Preconditioned PINO', short: 'Precond. PINO', w: [0.34, 0.06, 0.60], label: [12, 4, 'start'],
+          text: 'Physics-informed operator training. Multigrid preconditioning lets label-free training match supervised accuracy.',
+          href: 'https://arxiv.org/abs/2609.36216', link: 'Paper' },
+        { id: 'foundation', kind: 'Goal', name: 'Physics foundation model', short: 'Foundation model', w: [1 / 3, 1 / 3, 1 / 3], label: [0, -13, 'middle'], goal: true,
+          text: 'Where the three layers meet: one model pretrained across diverse physical systems. In progress.' }
+      ];
+
+      const NS = 'http://www.w3.org/2000/svg';
+      const el = (name, attrs, parent) => {
+        const node = document.createElementNS(NS, name);
+        for (const key in attrs) node.setAttribute(key, attrs[key]);
+        if (parent) parent.appendChild(node);
+        return node;
+      };
+      const at = w => [0, 1].map(c => w[0] * NODES[0][c] + w[1] * NODES[1][c] + w[2] * NODES[2][c]);
+      const along = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+
+      // The element, refined once into a small mesh
+      const [A, B, C] = NODES;
+      let mesh = '';
+      for (let k = 1; k < 6; k++) {
+        for (const [p, q] of [[along(A, C, k / 6), along(B, C, k / 6)], [along(A, B, k / 6), along(C, B, k / 6)], [along(B, A, k / 6), along(C, A, k / 6)]]) {
+          mesh += `M${p[0].toFixed(1)} ${p[1].toFixed(1)}L${q[0].toFixed(1)} ${q[1].toFixed(1)}`;
+        }
+      }
+      el('path', { class: 'rm-mesh', d: mesh, 'aria-hidden': 'true' }, svg);
+      const edges = [[0, 1], [1, 2], [2, 0]].map(([i, j]) =>
+        el('line', { class: 'rm-edge', x1: NODES[i][0], y1: NODES[i][1], x2: NODES[j][0], y2: NODES[j][1], 'aria-hidden': 'true' }, svg));
+      edges.forEach((e, n) => { e.ends = [[0, 1], [1, 2], [2, 0]][n]; });
+      const ties = NODES.map(() => el('line', { class: 'rm-tie', opacity: 0, 'aria-hidden': 'true' }, svg));
+
+      const kindEl = document.getElementById('rm-kind');
+      const titleEl = document.getElementById('rm-title');
+      const textEl = document.getElementById('rm-text');
+      const linkEl = document.getElementById('rm-link');
+      let pinned = null;
+
+      function show(item) {
+        const info = item || INTRO;
+        kindEl.textContent = info.kind;
+        titleEl.textContent = info.name;
+        textEl.textContent = info.text;
+        linkEl.hidden = !info.href;
+        if (info.href) { linkEl.href = info.href; linkEl.textContent = info.link; }
+
+        const isLayer = item && item.kind === 'Layer';
+        const layer = isLayer ? item.w.indexOf(1) : -1;
+        ITEMS.forEach(other => {
+          other.node.classList.toggle('is-active', other === item);
+          // a layer dims the projects that barely draw on it
+          other.node.classList.toggle('is-dim', isLayer && other !== item && other.w[layer] < 0.2);
+        });
+        edges.forEach(edge => edge.classList.toggle('is-lit', isLayer && edge.ends.includes(layer)));
+        ties.forEach((tie, n) => {
+          const on = item && !isLayer;
+          tie.setAttribute('opacity', on ? (0.12 + 0.88 * item.w[n]).toFixed(2) : 0);
+          if (!on) return;
+          const [x, y] = at(item.w);
+          tie.setAttribute('x1', x); tie.setAttribute('y1', y);
+          tie.setAttribute('x2', NODES[n][0]); tie.setAttribute('y2', NODES[n][1]);
+          tie.setAttribute('stroke-width', (0.8 + 2.4 * item.w[n]).toFixed(2));
+        });
+      }
+
+      ITEMS.forEach(item => {
+        const [x, y] = at(item.w);
+        const cls = 'rm-node' + (item.kind === 'Layer' ? ' rm-vertex' : '') + (item.goal ? ' rm-goal' : '');
+        const g = el('g', { class: cls, tabindex: 0, role: 'button', 'aria-label': `${item.kind}: ${item.name}` }, svg);
+        const r = item.kind === 'Layer' ? 5.5 : item.goal ? 5.5 : 4.2;
+        el('circle', { class: 'rm-hit', cx: x, cy: y, r: 15 }, g);
+        el('circle', { class: 'rm-halo', cx: x, cy: y, r: r + 4.5 }, g);
+        el('circle', { class: 'rm-dot', cx: x, cy: y, r }, g);
+        const label = el('text', { class: 'rm-label', x: x + item.label[0], y: y + item.label[1], 'text-anchor': item.label[2], 'aria-hidden': 'true' }, g);
+        label.textContent = item.short || item.name;
+        item.node = g;
+        g.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') show(item); });
+        g.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') show(pinned); });
+        g.addEventListener('focus', () => show(item));
+        g.addEventListener('blur', () => show(pinned));
+        const pin = () => { pinned = pinned === item ? null : item; show(pinned || item); };
+        g.addEventListener('click', pin);
+        g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pin(); } });
+      });
+      show(null);
+
+      // View switch: the field pauses while the map is showing
+      const buttons = switcher.querySelectorAll('[data-view]');
+      function setView(view) {
+        const research = view === 'research';
+        frame.classList.toggle('is-research', research);
+        panel.classList.toggle('is-research', research);
+        buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+        document.dispatchEvent(new CustomEvent('fieldview', { detail: view }));
+      }
+      buttons.forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+      switcher.hidden = false;
+    })();
+
     // ── Hero field ──
     // A damped wave equation  u_tt = c² Δu − γ u_t  on a structured triangular mesh,
     // discretised with linear (P1) finite elements and a lumped mass matrix, stepped
@@ -1525,7 +1735,7 @@
 
       let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp, solid;
       let palette = null, inkColor = '';
-      let running = false, visible = true, userPaused = false;
+      let running = false, visible = true, userPaused = false, viewHidden = false;
       let raf = 0, last = 0, acc = 0, nextDrop = 0, simStep = 0;
       let simMode = 'drops';  // 'drops' | 'plane'
       let pointerI = -1, pointerJ = -1;
@@ -1735,7 +1945,7 @@
       }
 
       function start() {
-        if (running || reduceMotion || userPaused || !visible || document.hidden) return;
+        if (running || reduceMotion || userPaused || viewHidden || !visible || document.hidden) return;
         running = true;
         last = performance.now();
         acc = 0;
@@ -1813,7 +2023,7 @@
       // Interactive pointer: click emits a sharp impulse; moving across creates wakes
       if (!reduceMotion) {
         hero.addEventListener('pointerdown', e => {
-          if (e.target.closest('.field-hud-bar')) return;
+          if (viewHidden || e.target.closest('.field-hud-bar, .view-switch')) return;
           const rect = canvas.getBoundingClientRect();
           const [i, j] = locate(e.clientX - rect.left, e.clientY - rect.top);
           if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) return;
@@ -1821,7 +2031,7 @@
           if (!running) draw();
         });
         hero.addEventListener('pointermove', e => {
-          if (e.target.closest('.field-hud-bar')) { pointerI = -1; return; }
+          if (viewHidden || e.target.closest('.field-hud-bar, .view-switch')) { pointerI = -1; return; }
           const rect = canvas.getBoundingClientRect();
           const [i, j] = locate(e.clientX - rect.left, e.clientY - rect.top);
           if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) { pointerI = -1; return; }
@@ -1845,13 +2055,24 @@
       }
       document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
       document.addEventListener('themechange', () => { buildPalette(); if (!running) draw(); });
+      // The research map takes over the panel: pause while it shows, and refit on the way back
+      // (on narrow screens the frame changes height between the two views)
+      document.addEventListener('fieldview', e => {
+        viewHidden = e.detail !== 'field';
+        if (viewHidden) { stop(); return; }
+        requestAnimationFrame(() => {
+          const rect = canvas.getBoundingClientRect();
+          if (Math.abs(rect.width - W) > 1 || Math.abs(rect.height - H) > 1) reset(); else draw();
+          start();
+        });
+      });
 
       let resizeTimer = 0, lastW = W;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           const w = canvas.getBoundingClientRect().width;
-          if (Math.abs(w - lastW) < 2) return;
+          if (viewHidden || Math.abs(w - lastW) < 2) return;
           lastW = w;
           reset();
         }, 150);
