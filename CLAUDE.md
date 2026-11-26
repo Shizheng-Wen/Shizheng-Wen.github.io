@@ -25,7 +25,7 @@ The previous al-folio Jekyll site is preserved on the **`al-folio-backup`** bran
 | `page-story.md` | The **source/brief** the page was generated from. Not served as the page; keep it in sync with `index.html` as the human-readable record. |
 | `avatar.jpeg` | Profile photo, referenced by `index.html` as `avatar.jpeg` (must stay at root). |
 | `fonts/` | Hanken Grotesk (variable, latin + latin-ext) and DM Mono 400 (`.woff2`, SIL OFL), loaded by `@font-face` in `index.html`. Self-hosted on purpose: the page makes no third-party requests. |
-| `media/` | 800×500 JPEG thumbnails for the "Selected work" cards: `tensormesh.jpg` and `torch-sla.jpg` (project logos on white), `gaot.jpg` (DrivAerML flow visualization), `pino.jpg` (Stokes samples from the paper). |
+| `media/` | 800×500 (16:10) thumbnails for the "Selected work" cards: `gaot.jpg` (DrivAerML flow visualization), `tensormesh.jpg` and `torch-sla.jpg` (project logos on white), `pino.svg` (a drawn multigrid V-cycle: an oscillatory field on a fine mesh, restricted to coarser meshes and prolonged back smooth). |
 | `shizheng-wen-cv.tex` | LaTeX source of the CV. |
 | `shizheng-wen-cv.pdf` | Compiled CV, kept in the repo (no longer linked from the website). |
 | `Makefile` | `make` compiles the `.tex` → `.pdf`; `make clean` removes LaTeX aux files. |
@@ -78,7 +78,7 @@ The page is a compact, pitch-style single page. Top to bottom:
   `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
   Right: `#field-panel`, the live simulation with its caption `#field-note`.
 - **Selected work** (`#work`): `.work-grid` of four `.work-card`s covering the stack:
-  TensorMesh, GAOT, Preconditioned PINO, torch-sla.
+  GAOT, TensorMesh, torch-sla, Preconditioned PINO (in that order).
 - **News** (`#news`) and **Invited talks** (`#talks`), side by side. Both lists carry the
   `scroll-list` class: the same fixed height, scrolling inside it to reach older items.
 - **Publications** (`#publications`), a two-column list with filter buttons in the heading row.

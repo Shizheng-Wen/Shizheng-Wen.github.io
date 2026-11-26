@@ -16,10 +16,10 @@ Hi, I'm Shizheng. Today's world models learn what the physical world looks like.
 
 ## Selected work
 
-- **TensorMesh** (Infrastructure, ICML 2026). Differentiable, GPU-native finite elements in PyTorch. It generates training data and evaluates physics losses inside the training loop. [Project](https://www.tensor-mesh.com/) · [Paper](https://arxiv.org/abs/2602.05052) · [Code](https://github.com/camlab-ethz/TensorMesh)
 - **GAOT** (Architecture, NeurIPS 2025). A geometry-aware operator transformer: an efficient, accurate neural surrogate for PDEs on arbitrary domains. [Project](https://camlab-ethz.github.io/GAOT/) · [Paper](https://arxiv.org/abs/2505.18781) · [Code](https://github.com/shizheng-wen/GAOT)
-- **Preconditioned PINO** (Training, arXiv 2026). Label-free training from the governing equations alone. Multigrid preconditioning lets it match supervised accuracy. [Paper](https://arxiv.org/abs/2609.36216) · [Code](https://github.com/camlab-ethz/TensorPILS)
+- **TensorMesh** (Infrastructure, ICML 2026). Differentiable, GPU-native finite elements in PyTorch. It generates training data and evaluates physics losses inside the training loop. [Project](https://www.tensor-mesh.com/) · [Paper](https://arxiv.org/abs/2602.05052) · [Code](https://github.com/camlab-ethz/TensorMesh)
 - **torch-sla** (Infrastructure, ICML WS 2026). Differentiable sparse linear algebra for PyTorch, with adjoint solvers and sparse tensor parallelism. [Project](https://www.torchsla.com/) · [Paper](https://arxiv.org/abs/2601.13994) · [Code](https://github.com/sparsexlab/torch-sla)
+- **Preconditioned PINO** (Training, arXiv 2026). Label-free training from the governing equations alone. Multigrid preconditioning lets it match supervised accuracy. [Paper](https://arxiv.org/abs/2609.36216) · [Code](https://github.com/camlab-ethz/TensorPILS)
 
 <!-- In the past, I have had the honor of working with Prof. [Earl Dowell](https://mems.duke.edu/faculty/earl-dowell) at Duke University, and Prof. [Wanlin Guo](https://ifs.nuaa.edu.cn/ifs/2021/1119/c16705a279074/page.htm) and Prof. [Xianglei Liu](https://scholar.google.com/citations?hl=en&user=RxW3otEAAAAJ&view_op=list_works&sortby=pubdate) at NUAA. -->
 
