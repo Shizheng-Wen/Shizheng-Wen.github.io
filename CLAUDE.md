@@ -144,7 +144,7 @@ Keep these when editing, so the page stays one system:
 
 - **Dense and short.** The whole page is about three screens. Small type (14–16px body), tight
   rows, a 70rem container. Prefer trimming copy to adding sections.
-- **Palette** lives in the `:root` (dark, the default) and `:root[data-theme="light"]` custom
+- **Palette** lives in the `:root` (dark) and `:root[data-theme="light"]` (light, the default) custom
   properties: `--paper`, `--panel`, `--ink`, `--muted`, `--faint`, `--rule`, and one accent,
   `--cool`. `--warm` is only for the field and the status / milestone markers.
 - **Type**: Hanken Grotesk for text and headings (400 / 600); DM Mono, small, uppercase and
@@ -158,7 +158,9 @@ Keep these when editing, so the page stays one system:
   off them. The script is the last block in
   `index.html`; it pauses off-screen, and shows a single still frame under
   `prefers-reduced-motion`. The caption `#field-note` says what it is; keep the two in sync.
-- Dark is the default theme; the toggle stores the visitor's choice in `localStorage`.
+- Light is the default theme; the toggle stores the visitor's choice in `localStorage`. In light
+  mode the page background is a soft cool-to-warm gradient wash behind the top of the page
+  (`:root[data-theme="light"] body`), fading into flat `--paper`; dark mode stays flat.
 
 ## Conventions
 
