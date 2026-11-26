@@ -45,10 +45,12 @@
       src: url('fonts/dm-mono-latin-400.woff2') format('woff2');
     }
 
-    /* ── Tokens ── dark is the default; one cool accent, with --warm kept for the field and status dots */
+    /* ── Tokens ── dark base, light default; one cool accent, with --warm kept for the field and status dots */
     :root {
       --paper:  #0C0E12;
       --panel:  #11141A;
+      --panel-hover: rgba(255, 255, 255, 0.028);
+      --hud-bg: rgba(15, 18, 25, 0.72);
       --ink:    #EEF0F4;
       --muted:  #979FAF;
       --faint:  #646C7B;
@@ -56,21 +58,38 @@
       --cool:   #93A7FF;
       --warm:   #FF8E73;
       --nav-bg: rgba(12, 14, 18, 0.78);
+      --frame-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
       --max-w:  70rem;
       --gutter: clamp(1.25rem, 4vw, 2.5rem);
+      --ease:   cubic-bezier(0.22, 1, 0.36, 1);
       --font: 'Hanken Grotesk', 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
       --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     }
     :root[data-theme="light"] {
       --paper:  #F7F8FA;
-      --panel:  rgba(255, 255, 255, 0.66);
+      --panel:  rgba(255, 255, 255, 0.72);
+      --panel-hover: rgba(15, 27, 45, 0.026);
+      --hud-bg: rgba(255, 255, 255, 0.78);
       --ink:    #0F1B2D;
       --muted:  #586377;
       --faint:  #8089A0;
       --rule:   #DCE1E9;
       --cool:   #3B4CC0;
       --warm:   #B40426;
-      --nav-bg: rgba(247, 248, 250, 0.82);
+      --nav-bg: rgba(247, 248, 250, 0.84);
+      --frame-shadow: 0 20px 48px -28px rgba(15, 27, 45, 0.16), 0 1px 2px rgba(15, 27, 45, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    /* Smooth theme transition only while user toggles theme */
+    html.is-theme-switching,
+    html.is-theme-switching body,
+    html.is-theme-switching #site-nav,
+    html.is-theme-switching .field-frame,
+    html.is-theme-switching .work-media,
+    html.is-theme-switching .btn,
+    html.is-theme-switching .btn-ghost,
+    html.is-theme-switching .pub-bib-box {
+      transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,6 +102,10 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+    }
+    ::selection {
+      background: color-mix(in srgb, var(--cool) 22%, transparent);
+      color: var(--ink);
     }
     /* Light theme: a soft cool-to-warm wash behind the top of the page, settling into flat paper */
     :root[data-theme="light"] body {
@@ -101,12 +124,12 @@
       color: inherit;
       text-decoration: underline;
       text-decoration-thickness: 1px;
-      text-underline-offset: 0.2em;
-      text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
-      transition: color 120ms ease-out, text-decoration-color 120ms ease-out;
+      text-underline-offset: 0.22em;
+      text-decoration-color: color-mix(in srgb, currentColor 28%, transparent);
+      transition: color 140ms ease-out, text-decoration-color 140ms ease-out;
     }
     a:hover { color: var(--cool); text-decoration-color: currentColor; }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--cool); outline-offset: 3px; border-radius: 2px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--cool); outline-offset: 3px; border-radius: 3px; }
 
     .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
 
@@ -133,7 +156,7 @@
     #site-nav {
       position: sticky; top: 0; z-index: 100;
       border-bottom: 1px solid transparent;
-      transition: background-color 200ms ease-out, border-color 200ms ease-out;
+      transition: background-color 220ms ease-out, border-color 220ms ease-out;
     }
     /* Clear at the top of the page so the background shows through; frosted once scrolled */
     #site-nav.is-scrolled {
@@ -142,24 +165,78 @@
       backdrop-filter: saturate(1.4) blur(14px);
       border-bottom-color: var(--rule);
     }
-    .nav-inner { height: 3rem; display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; }
+    .nav-inner { height: 3.15rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .nav-brand {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.875rem; font-weight: 600; letter-spacing: -0.015em;
+      color: var(--ink); text-decoration: none; white-space: nowrap;
+      opacity: 0; transform: translateY(-4px); pointer-events: none;
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease), color 140ms ease-out;
+    }
+    #site-nav.show-brand .nav-brand { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .nav-brand svg { width: 1.05rem; height: 1.05rem; flex: 0 0 auto; color: var(--cool); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links a {
-      display: inline-flex; align-items: center; height: 3rem;
+      position: relative;
+      display: inline-flex; align-items: center; height: 3.15rem;
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
       color: var(--faint); text-decoration: none; white-space: nowrap;
+      transition: color 140ms ease-out;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
+      background: var(--cool); border-radius: 1px;
+      transform: scaleX(0); transform-origin: center;
+      transition: transform 220ms var(--ease);
     }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-links a.active::after { transform: scaleX(1); }
     .theme-toggle {
       display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
-      width: 2.25rem; height: 2.25rem; margin-right: -0.55rem;
+      width: 2.15rem; height: 2.15rem; margin-right: -0.45rem;
       border: 0; border-radius: 50%; background: transparent; color: var(--faint); cursor: pointer;
-      transition: color 120ms ease-out;
+      transition: color 140ms ease-out, background-color 140ms ease-out, transform 180ms var(--ease);
     }
-    .theme-toggle:hover { color: var(--ink); }
-    .theme-toggle svg { width: 1rem; height: 1rem; }
+    .theme-toggle:hover { color: var(--ink); background: var(--panel-hover); }
+    .theme-toggle:active { transform: scale(0.92); }
+    .theme-toggle svg { width: 1rem; height: 1rem; transition: transform 260ms var(--ease); }
+    .theme-toggle:hover svg { transform: rotate(-14deg); }
     :root[data-theme="light"] .icon-sun { display: none; }
     :root:not([data-theme="light"]) .icon-moon { display: none; }
+
+    /* Razor-thin reading progress hairline on the bottom edge of sticky nav */
+    .read-progress {
+      position: absolute; left: 0; right: 0; bottom: -1px; height: 1.5px;
+      background: var(--cool); transform: scaleX(0); transform-origin: 0 50%;
+      opacity: 0; pointer-events: none;
+      transition: opacity 220ms ease-out;
+      will-change: transform;
+    }
+    #site-nav.is-scrolled .read-progress { opacity: 0.85; }
+
+    /* ── Subtle entrance & scroll reveal ── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text > * {
+      animation: riseIn 460ms var(--ease) both;
+    }
+    .hero-text > *:nth-child(1) { animation-delay: 20ms; }
+    .hero-text > *:nth-child(2) { animation-delay: 70ms; }
+    .hero-text > *:nth-child(3) { animation-delay: 120ms; }
+    .hero-text > *:nth-child(4) { animation-delay: 170ms; }
+    .hero-text > *:nth-child(5) { animation-delay: 220ms; }
+    .field-panel { animation: riseIn 540ms var(--ease) 110ms both; }
+
+    .reveal {
+      opacity: 1; transform: none;
+      transition: opacity 480ms var(--ease), transform 480ms var(--ease);
+    }
+    html.js-reveal .reveal:not(.is-visible) {
+      opacity: 0; transform: translateY(12px);
+    }
 
     /* ── Hero: pitch on the left, live field on the right ── */
     .hero { padding: 1.75rem 0 3.75rem; }
@@ -172,12 +249,20 @@
     .id { display: flex; align-items: center; gap: 0.9rem; }
     .avatar {
       width: 3.25rem; height: 3.25rem; flex: 0 0 auto;
-      border-radius: 50%; object-fit: cover; border: 1px solid var(--rule);
+      border-radius: 50%; object-fit: cover;
+      border: 1px solid var(--rule);
+      box-shadow: 0 2px 10px -4px rgba(15, 27, 45, 0.16);
+      transition: transform 240ms var(--ease), border-color 200ms ease-out;
     }
+    .avatar:hover { transform: scale(1.04); border-color: color-mix(in srgb, var(--cool) 50%, var(--rule)); }
     .profile-name { font-size: 1.375rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; }
     .name-zh { margin-left: 0.4rem; font-size: 0.9375rem; font-weight: 400; letter-spacing: 0.02em; color: var(--muted); }
     .status { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem; }
-    .status::before { content: ''; width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--warm); }
+    .status::before {
+      content: ''; width: 0.375rem; height: 0.375rem; border-radius: 50%;
+      background: var(--warm);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--warm) 18%, transparent);
+    }
     .tagline {
       margin-top: 2.25rem;
       font-size: clamp(2rem, 3.7vw, 2.875rem);
@@ -189,18 +274,47 @@
     .tagline .tone { color: var(--cool); }
     .lede { margin-top: 1.5rem; max-width: 35rem; color: var(--muted); text-wrap: pretty; }
     .lede b { font-weight: 600; color: var(--ink); }
-    .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.75rem; }
+    .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1.75rem; }
+    .cta-actions { display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn {
-      display: inline-flex; align-items: center; gap: 0.55rem;
-      padding: 0.65rem 1rem; border-radius: 4px;
+      display: inline-flex; align-items: center; gap: 0.48rem;
+      padding: 0.62rem 0.98rem; border-radius: 5px;
       background: var(--ink); color: var(--paper);
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
       text-decoration: none;
-      transition: background 120ms ease-out;
+      transition: background-color 150ms ease-out, color 150ms ease-out, transform 160ms var(--ease), box-shadow 180ms ease-out;
     }
-    .btn:hover { background: var(--cool); color: var(--paper); }
-    .social { display: flex; flex-wrap: wrap; gap: 0.4rem 1.15rem; }
+    .btn:hover {
+      background: var(--cool); color: var(--paper);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--cool) 65%, transparent);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn svg, .btn-ghost svg { width: 0.82rem; height: 0.82rem; flex: 0 0 auto; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.42rem;
+      padding: 0.58rem 0.82rem; border-radius: 5px;
+      border: 1px solid var(--rule); background: transparent; color: var(--muted);
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer;
+      transition: color 140ms ease-out, border-color 140ms ease-out, background-color 140ms ease-out, transform 160ms var(--ease);
+    }
+    .btn-ghost:hover {
+      color: var(--ink); border-color: color-mix(in srgb, var(--ink) 32%, var(--rule));
+      background: var(--panel-hover);
+    }
+    .btn-ghost:active { transform: scale(0.97); }
+    .btn-ghost.is-copied {
+      color: var(--cool);
+      border-color: color-mix(in srgb, var(--cool) 50%, var(--rule));
+      background: color-mix(in srgb, var(--cool) 8%, transparent);
+    }
+    .btn-ghost .icon-check { display: none; }
+    .btn-ghost.is-copied .icon-copy { display: none; }
+    .btn-ghost.is-copied .icon-check { display: block; }
+    .social { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; }
     .social a {
+      position: relative;
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
       color: var(--muted); text-decoration: none;
     }
@@ -214,21 +328,81 @@
     .facts dd { color: var(--muted); }
     .facts dd b, .facts dd a { font-weight: 600; color: var(--ink); }
     .facts dd a { text-decoration: none; }
-    .facts dd a:hover { color: var(--cool); }
+    .facts dd a:hover { color: var(--cool); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--cool) 45%, transparent); }
 
+    /* ── Live FEM Field Panel & Scientific HUD ── */
     .field-panel { margin-top: 0.5rem; }
     .field-frame {
       position: relative; aspect-ratio: 1 / 1;
       border: 1px solid var(--rule); border-radius: 14px;
       background: var(--panel); overflow: hidden;
+      box-shadow: var(--frame-shadow);
+      cursor: crosshair;
+      touch-action: pan-y;
+      transition: border-color 220ms ease-out, box-shadow 240ms ease-out;
+    }
+    .field-frame:hover {
+      border-color: color-mix(in srgb, var(--cool) 34%, var(--rule));
     }
     #field {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 2%, #000 26%, #000 78%, transparent 99%);
-      mask-image: linear-gradient(to bottom, transparent 2%, #000 26%, #000 78%, transparent 99%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 2%, #000 24%, #000 78%, transparent 99%);
+      mask-image: linear-gradient(to bottom, transparent 2%, #000 24%, #000 78%, transparent 99%);
     }
+    .field-hud-top {
+      position: absolute; top: 0.7rem; left: 0.75rem; right: 0.75rem; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      pointer-events: none;
+    }
+    .field-telemetry {
+      display: inline-flex; align-items: center; gap: 0.42rem;
+      padding: 0.24rem 0.56rem; border-radius: 999px;
+      background: var(--hud-bg);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      border: 1px solid color-mix(in srgb, var(--rule) 85%, transparent);
+      font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+    }
+    .field-dot {
+      width: 0.36rem; height: 0.36rem; border-radius: 50%; background: var(--cool);
+      transition: background-color 180ms ease, opacity 180ms ease;
+    }
+    .field-frame.is-paused .field-dot { background: var(--faint); opacity: 0.55; }
+    .field-hud-bar {
+      position: absolute; bottom: 0.7rem; left: 50%; transform: translateX(-50%); z-index: 2;
+      display: inline-flex; align-items: center; gap: 0.2rem;
+      padding: 0.22rem; border-radius: 999px;
+      background: var(--hud-bg);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border: 1px solid color-mix(in srgb, var(--rule) 90%, transparent);
+      box-shadow: 0 6px 20px -12px rgba(0, 0, 0, 0.25);
+      opacity: 0.88;
+      transition: opacity 180ms ease-out, border-color 180ms ease-out;
+      cursor: default;
+    }
+    .field-frame:hover .field-hud-bar,
+    .field-hud-bar:focus-within { opacity: 1; }
+    .hud-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem;
+      height: 1.65rem; padding: 0 0.55rem; border: 0; border-radius: 999px;
+      background: transparent; color: var(--muted); cursor: pointer;
+      font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.07em; text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 140ms ease, background-color 140ms ease;
+    }
+    .hud-btn:hover { color: var(--ink); background: var(--panel-hover); }
+    .hud-btn[aria-pressed="true"] {
+      color: var(--cool);
+      background: color-mix(in srgb, var(--cool) 13%, transparent);
+    }
+    .hud-btn.is-icon { width: 1.65rem; padding: 0; }
+    .hud-btn svg { width: 0.76rem; height: 0.76rem; flex: 0 0 auto; }
+    .hud-btn .icon-play { display: none; }
+    .field-frame.is-paused .hud-btn .icon-pause { display: none; }
+    .field-frame.is-paused .hud-btn .icon-play { display: block; }
+    .hud-sep { width: 1px; height: 0.9rem; background: var(--rule); margin: 0 0.1rem; flex: 0 0 auto; }
     .field-panel figcaption { margin-top: 1rem; text-align: center; }
-    .field-panel .label { color: var(--cool); }
+    .field-panel figcaption .label { color: var(--cool); }
     #field-note { margin-top: 0.3rem; font-size: 0.875rem; color: var(--muted); }
 
     /* ── Blocks ── */
@@ -236,6 +410,10 @@
     .block-head {
       display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
       gap: 0.5rem 2rem; margin-bottom: 1.5rem;
+    }
+    .col-head {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      margin-bottom: 1.1rem;
     }
     .section-heading { font-size: 1.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.022em; }
     .block > .section-heading, .col > .section-heading { margin-bottom: 1.1rem; }
@@ -247,8 +425,17 @@
     .work-media {
       display: block; aspect-ratio: 16 / 10; overflow: hidden;
       border: 1px solid var(--rule); border-radius: 8px; background: var(--panel);
+      transition: border-color 220ms ease-out, box-shadow 240ms var(--ease), transform 240ms var(--ease);
     }
-    .work-media img { width: 100%; height: 100%; object-fit: cover; }
+    .work-media img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 380ms var(--ease);
+    }
+    .work-card:hover .work-media {
+      border-color: color-mix(in srgb, var(--cool) 40%, var(--rule));
+      box-shadow: 0 10px 24px -16px rgba(15, 27, 45, 0.28);
+    }
+    .work-card:hover .work-media img { transform: scale(1.03); }
     .work-media.is-upcoming {
       display: flex; align-items: center; justify-content: center;
       border-style: dashed; border-color: color-mix(in srgb, var(--cool) 45%, var(--rule));
@@ -264,15 +451,24 @@
     .work-links a, .pub-link {
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em;
       color: var(--cool); text-decoration: none;
+      transition: color 140ms ease-out;
     }
-    .work-links a:hover, .pub-link:hover { color: var(--ink); }
+    .work-links a:hover, .pub-link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
 
     /* ── Timeline rows (News + Talks) ── */
+    .list-toggle {
+      padding: 0.15rem 0; border: 0; background: none; cursor: pointer;
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--faint); transition: color 140ms ease-out;
+    }
+    .list-toggle:hover { color: var(--cool); }
     .timeline-item {
       display: grid; grid-template-columns: 5rem minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 1rem; align-items: start;
-      padding: 0.75rem 0; border-top: 1px solid var(--rule);
+      padding: 0.75rem 0.45rem; margin: 0 -0.45rem; border-top: 1px solid var(--rule); border-radius: 4px;
       font-size: 0.875rem; line-height: 1.5;
+      transition: background-color 160ms ease-out;
     }
+    .timeline-item:hover { background: var(--panel-hover); }
     .tl-date {
       grid-column: 1; grid-row: 1;
       font-family: var(--mono); font-size: 0.6875rem; line-height: 1.9; letter-spacing: 0.04em;
@@ -290,15 +486,27 @@
     .tl-content strong { font-weight: 600; }
     .tl-talk-title { display: block; font-weight: 600; line-height: 1.4; color: var(--ink); }
     .tl-venue { display: block; margin-top: 0.15rem; font-size: 0.8125rem; }
-    /* News and talks share one fixed height and scroll inside it; the bottom fades while more is below */
+    /* News and talks share one fixed height and scroll inside it; top & bottom fade softly while overflow exists */
     .scroll-list {
-      height: 25rem; overflow-y: auto; padding-right: 0.9rem;
+      height: 25rem; overflow-y: auto; padding: 0 0.9rem 0 0.45rem; margin-left: -0.45rem;
       border-top: 1px solid var(--rule);
       scrollbar-width: thin; scrollbar-color: var(--rule) transparent;
     }
-    .scroll-list.has-more {
-      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
-      mask-image: linear-gradient(to bottom, #000 calc(100% - 3.5rem), transparent);
+    .scroll-list.is-expanded {
+      height: auto; max-height: none; overflow: visible; padding-right: 0.45rem;
+      -webkit-mask-image: none !important; mask-image: none !important;
+    }
+    .scroll-list.has-more:not(.has-top) {
+      -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 3.25rem), transparent);
+      mask-image: linear-gradient(to bottom, #000 calc(100% - 3.25rem), transparent);
+    }
+    .scroll-list.has-top:not(.has-more) {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 2.5rem);
+      mask-image: linear-gradient(to bottom, transparent, #000 2.5rem);
+    }
+    .scroll-list.has-top.has-more {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 2.5rem, #000 calc(100% - 3.25rem), transparent);
+      mask-image: linear-gradient(to bottom, transparent, #000 2.5rem, #000 calc(100% - 3.25rem), transparent);
     }
     .scroll-list > .timeline-item:first-child { border-top: 0; }
     .scroll-list::-webkit-scrollbar { width: 6px; }
@@ -306,49 +514,128 @@
     .scroll-list:focus-visible { outline: 2px solid var(--cool); outline-offset: 4px; border-radius: 2px; }
 
     /* ── Publications ── */
-    .pub-filters { display: flex; flex-wrap: wrap; gap: 0.25rem 1.35rem; }
+    .pub-filters {
+      position: relative;
+      display: flex; flex-wrap: wrap; gap: 0.25rem 1.35rem;
+    }
     .pub-filters[hidden] { display: none; }
     .pub-filter {
-      padding: 0.2rem 0; border: 0; border-bottom: 1px solid transparent; background: none; cursor: pointer;
+      position: relative;
+      display: inline-flex; align-items: baseline; gap: 0.35rem;
+      padding: 0.25rem 0; border: 0; border-bottom: 1.5px solid transparent; background: none; cursor: pointer;
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase;
-      color: var(--faint); transition: color 120ms ease-out, border-color 120ms ease-out;
+      color: var(--faint); transition: color 140ms ease-out, border-color 140ms ease-out;
     }
     .pub-filter:hover { color: var(--ink); }
-    .pub-filter[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--cool); }
+    .pub-filter[aria-pressed="true"] { color: var(--ink); }
+    .pub-filters:not(.has-ink) .pub-filter[aria-pressed="true"] { border-bottom-color: var(--cool); }
+    .pub-filter-count {
+      font-size: 0.625rem; letter-spacing: 0.02em; color: var(--faint);
+      opacity: 0.8; transition: color 140ms ease-out;
+    }
+    .pub-filter[aria-pressed="true"] .pub-filter-count { color: var(--cool); opacity: 1; }
+    .pub-filter-ink {
+      position: absolute; bottom: 0; left: 0; height: 1.5px; width: 0;
+      background: var(--cool); border-radius: 1px; pointer-events: none;
+      transition: transform 240ms var(--ease), width 240ms var(--ease), opacity 160ms ease;
+    }
     .pub-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.5rem; }
-    .pub-item { padding: 1rem 0 1.1rem; border-top: 1px solid var(--rule); }
+    .pub-item {
+      padding: 1rem 0.55rem 1.1rem; margin: 0 -0.55rem;
+      border-top: 1px solid var(--rule); border-radius: 4px;
+      transition: background-color 160ms ease-out;
+    }
+    .pub-item:hover { background: var(--panel-hover); }
     .pub-item[hidden] { display: none; }
+    @keyframes pubIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .pub-item.is-entering { animation: pubIn 260ms var(--ease) both; }
     .pub-title { font-size: 0.9688rem; font-weight: 600; line-height: 1.38; letter-spacing: -0.008em; text-wrap: pretty; }
     .pub-authors { margin-top: 0.3rem; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); }
     .pub-authors .me { font-weight: 600; color: var(--ink); }
     .pub-authors sup { font-size: 0.7em; line-height: 0; }
-    .pub-meta, .teaching-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.95rem; margin-top: 0.5rem; }
+    .pub-meta, .teaching-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.85rem; margin-top: 0.55rem; }
     .pub-venue, .teaching-term, .teaching-code {
       font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--muted);
     }
     .pub-venue { color: var(--ink); }
+    .pub-venue.is-top {
+      display: inline-flex; align-items: center; gap: 0.36rem;
+      padding: 0.08rem 0.45rem; border-radius: 4px;
+      background: color-mix(in srgb, var(--cool) 10%, transparent);
+      color: var(--cool); font-weight: 500;
+    }
+    .pub-venue.is-top::before {
+      content: ''; width: 0.32rem; height: 0.32rem; border-radius: 50%; background: var(--cool);
+    }
+    .pub-bib-btn {
+      padding: 0; border: 0; background: none; cursor: pointer;
+    }
+    .pub-bib-btn[aria-expanded="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+    .pub-bib-box {
+      margin-top: 0.7rem; border: 1px solid var(--rule); border-radius: 6px;
+      background: var(--panel); overflow: hidden;
+      animation: pubIn 200ms var(--ease) both;
+    }
+    .pub-bib-box[hidden] { display: none; }
+    .pub-bib-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+      padding: 0.35rem 0.65rem; border-bottom: 1px solid var(--rule);
+    }
+    .pub-bib-key {
+      font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.06em; color: var(--faint);
+    }
+    .pub-bib-copy {
+      padding: 0.12rem 0.48rem; border: 1px solid var(--rule); border-radius: 4px;
+      background: transparent; color: var(--muted); cursor: pointer;
+      font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 140ms ease, border-color 140ms ease, background-color 140ms ease;
+    }
+    .pub-bib-copy:hover { color: var(--ink); border-color: color-mix(in srgb, var(--ink) 30%, var(--rule)); }
+    .pub-bib-copy.is-copied {
+      color: var(--cool); border-color: color-mix(in srgb, var(--cool) 50%, var(--rule));
+      background: color-mix(in srgb, var(--cool) 10%, transparent);
+    }
+    .pub-bib-code {
+      padding: 0.6rem 0.7rem; overflow-x: auto;
+      font-family: var(--mono); font-size: 0.6875rem; line-height: 1.5; color: var(--muted);
+      white-space: pre-wrap; overflow-wrap: break-word; scrollbar-width: thin;
+    }
     .pub-footnote { margin-top: 1rem; font-size: 0.75rem; color: var(--faint); }
 
     /* ── Awards / Teaching / Service ── */
     .award-list li {
       display: flex; justify-content: space-between; align-items: baseline; gap: 1.25rem;
-      padding: 0.7rem 0; border-top: 1px solid var(--rule); font-size: 0.875rem; color: var(--muted);
+      padding: 0.7rem 0.45rem; margin: 0 -0.45rem; border-top: 1px solid var(--rule); border-radius: 4px;
+      font-size: 0.875rem; color: var(--muted);
+      transition: background-color 160ms ease-out;
     }
+    .award-list li:hover { background: var(--panel-hover); }
     .col-awards .award-list li { color: var(--ink); }
     .award-year { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--faint); }
-    .teaching-item { padding: 0.7rem 0 0.8rem; border-top: 1px solid var(--rule); }
+    .teaching-item {
+      padding: 0.7rem 0.45rem 0.8rem; margin: 0 -0.45rem; border-top: 1px solid var(--rule); border-radius: 4px;
+      transition: background-color 160ms ease-out;
+    }
+    .teaching-item:hover { background: var(--panel-hover); }
     .teaching-title { font-size: 0.875rem; font-weight: 600; line-height: 1.4; }
     .teaching-ects { font-weight: 400; color: var(--muted); }
     .teaching-meta { margin-top: 0.3rem; }
 
     /* ── Footer ── */
     .footer-inner {
-      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 2rem;
       padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--rule);
       font-size: 0.8125rem; color: var(--faint);
     }
+    .footer-right { display: inline-flex; align-items: center; gap: 1.25rem; }
     .footer-inner a { color: var(--muted); text-decoration: none; }
     .footer-inner a:hover { color: var(--cool); }
+    .back-top {
+      font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 960px) {
@@ -359,8 +646,9 @@
       .scroll-list { height: auto; max-height: 24rem; }
     }
     @media (max-width: 600px) {
-      .nav-inner { justify-content: space-between; }
-      .nav-links { flex: 1 1 auto; min-width: 0; gap: 1.15rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-brand { display: none; }
+      .nav-right { flex: 1 1 auto; width: 100%; justify-content: space-between; gap: 0.5rem; }
+      .nav-links { flex: 1 1 auto; min-width: 0; gap: 0.9rem; overflow-x: auto; scrollbar-width: none; }
       .nav-links::-webkit-scrollbar { display: none; }
       .hero { padding-top: 1rem; }
       .tagline { margin-top: 1.75rem; }
@@ -368,16 +656,20 @@
       .facts dd { margin-bottom: 0.6rem; }
       .work-grid { grid-template-columns: minmax(0, 1fr); }
       .block { padding: 2.5rem 0; }
+      .field-hud-bar { bottom: 0.5rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+      html.js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
+      .field-hud-bar { display: none; }
     }
     @media print {
-      #site-nav, .field-panel, .pub-filters, .cta .btn { display: none !important; }
+      #site-nav, .field-panel, .pub-filters, .cta .btn, .cta .btn-ghost, .list-toggle, .pub-bib-btn, .pub-bib-box, .back-top { display: none !important; }
       .pub-item[hidden] { display: block !important; }
       .scroll-list { height: auto; max-height: none; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+      html.js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -387,23 +679,32 @@
 
   <nav id="site-nav" aria-label="Site navigation">
     <div class="wrap nav-inner">
-      <ul class="nav-links" role="list">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#talks">Talks</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#teaching">Teaching</a></li>
-      </ul>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light mode" aria-pressed="false" title="Toggle light / dark">
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+      <a class="nav-brand" href="#top" aria-label="Shizheng Wen, back to top">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 23 16 8l9 15zM11.5 15.5h9L16 23z"/>
         </svg>
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
-        </svg>
-      </button>
+        <span>Shizheng Wen</span>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links" role="list">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#talks">Talks</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light mode" aria-pressed="false" title="Toggle light / dark">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
     </div>
+    <div class="read-progress" id="read-progress" aria-hidden="true"></div>
   </nav>
 
   <main id="main-content" tabindex="-1">
@@ -424,7 +725,25 @@
             Hi, I'm Shizheng. Today's world models learn what the physical world looks like. I build models that compute how it <b>behaves</b>, from the equations that govern it and with the accuracy that <b>engineering</b> and <b>science</b> require. Physics has no internet-scale corpus to learn from, so there is no settled training paradigm yet. Personally, I build the full stack: <b>infrastructure</b>, <b>architecture</b> and <b>training</b>.
           </p>
           <div class="cta">
-            <a class="btn" href="mailto:shizheng.wen@sam.math.ethz.ch">Get in touch</a>
+            <div class="cta-actions">
+              <a class="btn" href="mailto:shizheng.wen@sam.math.ethz.ch">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+                <span>Get in touch</span>
+              </a>
+              <button class="btn-ghost" id="copy-email" type="button" data-email="shizheng.wen@sam.math.ethz.ch" aria-label="Copy email address" title="Copy shizheng.wen@sam.math.ethz.ch">
+                <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                <span class="copy-label">Copy email</span>
+              </button>
+            </div>
             <ul class="social" role="list" aria-label="Profiles">
               <li><a href="https://scholar.google.com/citations?user=PV4NVPgAAAAJ" target="_blank" rel="noopener noreferrer">Scholar</a></li>
               <li><a href="https://github.com/Shizheng-Wen" target="_blank" rel="noopener noreferrer">GitHub</a></li>
@@ -443,10 +762,30 @@
         </div>
 
         <figure class="field-panel" id="field-panel">
-          <div class="field-frame"><canvas id="field" aria-hidden="true"></canvas></div>
+          <div class="field-frame" id="field-frame">
+            <div class="field-hud-top" aria-hidden="true">
+              <span class="field-telemetry"><span class="field-dot"></span><span id="field-readout">P1 FEM · 104×52</span></span>
+            </div>
+            <canvas id="field" aria-hidden="true"></canvas>
+            <div class="field-hud-bar" role="toolbar" aria-label="Wave simulation controls">
+              <button class="hud-btn" type="button" data-sim-mode="drops" aria-pressed="true" title="Point-source drops">Drops</button>
+              <button class="hud-btn" type="button" data-sim-mode="plane" aria-pressed="false" title="Harmonic plane-wave diffraction">Plane</button>
+              <span class="hud-sep" aria-hidden="true"></span>
+              <button class="hud-btn" type="button" id="sim-pulse" title="Emit wave pulse">Pulse</button>
+              <button class="hud-btn is-icon" type="button" id="sim-toggle" aria-label="Pause simulation" aria-pressed="false" title="Pause / resume">
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5.5v13l11-6.5z"/></svg>
+              </button>
+              <button class="hud-btn is-icon" type="button" id="sim-reset" aria-label="Reset simulation" title="Reset field">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>
+                </svg>
+              </button>
+            </div>
+          </div>
           <figcaption>
             <p class="label">Solved live in your browser</p>
-            <p id="field-note">A wave equation on a finite-element mesh, scattering off my initials. Move across it to make waves.</p>
+            <p id="field-note">A wave equation on a finite-element mesh, scattering off my initials. Click or move across it to make waves.</p>
           </figcaption>
         </figure>
       </div>
@@ -454,7 +793,7 @@
 
     <!-- Selected work: the stack -->
     <section id="work" class="wrap" aria-labelledby="heading-work">
-      <div class="block">
+      <div class="block reveal">
         <div class="block-head">
           <h2 id="heading-work" class="section-heading">Selected work</h2>
         </div>
@@ -493,9 +832,12 @@
 
     <!-- News + Invited talks -->
     <div class="wrap">
-      <div class="block split">
+      <div class="block split reveal">
         <section id="news" class="col" aria-labelledby="heading-news">
-          <h2 id="heading-news" class="section-heading">News</h2>
+          <div class="col-head">
+            <h2 id="heading-news" class="section-heading">News</h2>
+            <button type="button" class="list-toggle" data-target="news-list" aria-expanded="false">Expand</button>
+          </div>
           <ul class="timeline scroll-list" id="news-list" role="list" tabindex="0" aria-label="News, newest first; scroll for earlier items">
             <li class="timeline-item">
               <span class="tl-date">Sep 2026</span>
@@ -591,7 +933,10 @@
           </ul>
         </section>
         <section id="talks" class="col" aria-labelledby="heading-talks">
-          <h2 id="heading-talks" class="section-heading">Invited talks</h2>
+          <div class="col-head">
+            <h2 id="heading-talks" class="section-heading">Invited talks</h2>
+            <button type="button" class="list-toggle" data-target="talks-list" aria-expanded="false">Expand</button>
+          </div>
           <ul class="timeline scroll-list" id="talks-list" role="list" tabindex="0" aria-label="Invited talks, newest first; scroll for earlier talks">
             <li class="timeline-item">
               <span class="tl-date">Nov 2026</span>
@@ -642,7 +987,7 @@
 
     <!-- Publications -->
     <section id="publications" class="wrap" aria-labelledby="heading-pubs">
-      <div class="block">
+      <div class="block reveal">
         <div class="block-head">
           <h2 id="heading-pubs" class="section-heading">Publications</h2>
           <div class="pub-filters" role="group" aria-label="Filter publications" hidden>
@@ -651,6 +996,7 @@
             <button type="button" class="pub-filter" data-filter="neural-operator" aria-pressed="false">Neural Operators</button>
             <button type="button" class="pub-filter" data-filter="solver" aria-pressed="false">Differentiable Solvers</button>
             <button type="button" class="pub-filter" data-filter="application" aria-pressed="false">Applications</button>
+            <span class="pub-filter-ink" aria-hidden="true"></span>
           </div>
         </div>
         <ol class="pub-list" role="list">
@@ -767,7 +1113,7 @@
 
     <!-- Awards + Teaching + Service -->
     <div class="wrap">
-      <div class="block triple">
+      <div class="block triple reveal">
         <section id="awards" class="col col-awards" aria-labelledby="heading-awards">
           <h2 id="heading-awards" class="section-heading">Awards</h2>
           <ul class="award-list" role="list">
@@ -812,21 +1158,63 @@
   <footer class="wrap site-footer">
     <div class="footer-inner">
       <p>© 2026 Shizheng Wen</p>
-      <p><a href="mailto:shizheng.wen@sam.math.ethz.ch">shizheng.wen@sam.math.ethz.ch</a></p>
+      <div class="footer-right">
+        <a href="mailto:shizheng.wen@sam.math.ethz.ch">shizheng.wen@sam.math.ethz.ch</a>
+        <a class="back-top" href="#top">↑ Top</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    // ── Nav: hairline once scrolled, active-section highlight ──
-    const nav = document.getElementById('site-nav');
-    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Helper: clipboard copy with fallback for non-HTTPS / local preview
+    async function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    // ── Nav: frosted bar, brand reveal, reading progress hairline, active section ──
+    const nav = document.getElementById('site-nav');
+    const progressBar = document.getElementById('read-progress');
+    const heroId = document.querySelector('.hero .id');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
+
+    function updateScrollChrome() {
+      const y = window.scrollY;
+      nav.classList.toggle('is-scrolled', y > 8);
+      if (progressBar) {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, y / max))})`;
+      }
+      if (y < 120) navLinks.forEach(a => a.classList.remove('active'));
+    }
+    updateScrollChrome();
+    window.addEventListener('scroll', updateScrollChrome, { passive: true });
+    window.addEventListener('resize', updateScrollChrome, { passive: true });
+
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
+      if (heroId) {
+        new IntersectionObserver(entries => {
+          nav.classList.toggle('show-brand', !entries[0].isIntersecting);
+        }, { threshold: 0 }).observe(heroId);
+      }
+
+      const sectionObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             navLinks.forEach(a => a.classList.remove('active'));
@@ -835,12 +1223,12 @@
           }
         });
       }, { rootMargin: '-40% 0px -55% 0px' });
-      sections.forEach(s => observer.observe(s));
+      sections.forEach(s => sectionObserver.observe(s));
     }
 
-    // ── Theme toggle ──
+    // ── Theme toggle (smooth transition only during explicit toggle) ──
     const toggle = document.getElementById('theme-toggle');
-    const root = document.documentElement;
+    let themeSwitchTimer = 0;
     function syncToggle() {
       const isDark = root.getAttribute('data-theme') === 'dark';
       toggle.setAttribute('aria-pressed', String(!isDark));
@@ -849,6 +1237,11 @@
     syncToggle();
     toggle.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      if (!reduceMotion) {
+        clearTimeout(themeSwitchTimer);
+        root.classList.add('is-theme-switching');
+        themeSwitchTimer = setTimeout(() => root.classList.remove('is-theme-switching'), 260);
+      }
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch (e) {}
       syncToggle();
@@ -856,27 +1249,234 @@
       document.dispatchEvent(new Event('themechange'));
     });
 
-    // ── News / talks: fade the bottom edge of each scrolling list while more lies below ──
-    document.querySelectorAll('.scroll-list').forEach(list => {
-      const update = () => list.classList.toggle('has-more', list.scrollTop + list.clientHeight < list.scrollHeight - 4);
-      list.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    });
-
-    // ── Publication filters (default: Featured) ──
-    const pubFilterBar = document.querySelector('.pub-filters');
-    const pubFilters = document.querySelectorAll('.pub-filter');
-    const pubItems = document.querySelectorAll('.pub-item');
-    function applyPubFilter(filter) {
-      pubFilters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
-      pubItems.forEach(li => {
-        li.hidden = filter !== 'all' && !li.dataset.tags.split(' ').includes(filter);
+    // ── One-click copy email ──
+    const copyEmailBtn = document.getElementById('copy-email');
+    if (copyEmailBtn) {
+      let emailResetTimer = 0;
+      const copyLabel = copyEmailBtn.querySelector('.copy-label');
+      copyEmailBtn.addEventListener('click', async () => {
+        const email = copyEmailBtn.dataset.email || 'shizheng.wen@sam.math.ethz.ch';
+        const ok = await copyText(email);
+        if (!ok) return;
+        clearTimeout(emailResetTimer);
+        copyEmailBtn.classList.add('is-copied');
+        if (copyLabel) copyLabel.textContent = 'Copied';
+        emailResetTimer = setTimeout(() => {
+          copyEmailBtn.classList.remove('is-copied');
+          if (copyLabel) copyLabel.textContent = 'Copy email';
+        }, 1800);
       });
     }
-    pubFilters.forEach(b => b.addEventListener('click', () => applyPubFilter(b.dataset.filter)));
+
+    // ── Subtle scroll reveal for below-the-fold sections ──
+    const revealNodes = document.querySelectorAll('.reveal');
+    if (!reduceMotion && 'IntersectionObserver' in window && revealNodes.length) {
+      root.classList.add('js-reveal');
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+      revealNodes.forEach(el => revealObs.observe(el));
+    }
+
+    // ── News / talks: top & bottom fade masks + Expand / Collapse toggle ──
+    document.querySelectorAll('.scroll-list').forEach(list => {
+      const btn = document.querySelector(`.list-toggle[data-target="${list.id}"]`);
+      const count = list.querySelectorAll('.timeline-item').length;
+      const updateMask = () => {
+        if (list.classList.contains('is-expanded')) {
+          list.classList.remove('has-top', 'has-more');
+          return;
+        }
+        const overflows = list.scrollHeight > list.clientHeight + 4;
+        list.classList.toggle('has-top', overflows && list.scrollTop > 4);
+        list.classList.toggle('has-more', overflows && list.scrollTop + list.clientHeight < list.scrollHeight - 4);
+        if (btn) btn.hidden = !overflows;
+      };
+      if (btn) {
+        btn.textContent = `All (${count})`;
+        btn.addEventListener('click', () => {
+          const expanded = list.classList.toggle('is-expanded');
+          btn.setAttribute('aria-expanded', String(expanded));
+          btn.textContent = expanded ? 'Collapse' : `All (${count})`;
+          updateMask();
+        });
+      }
+      list.addEventListener('scroll', updateMask, { passive: true });
+      window.addEventListener('resize', updateMask, { passive: true });
+      updateMask();
+    });
+
+    // ── Publications: counts, sliding filter indicator, top-venue badges, BibTeX drawer ──
+    const pubFilterBar = document.querySelector('.pub-filters');
+    const pubFilters = document.querySelectorAll('.pub-filter');
+    const pubInk = document.querySelector('.pub-filter-ink');
+    const pubItems = document.querySelectorAll('.pub-item');
+
+    // Venue highlighting (main-track NeurIPS / ICML / ICLR)
+    const TOP_VENUE_RE = /\b(NeurIPS|ICML|ICLR)\s+\d{4}\b/i;
+    pubItems.forEach(li => {
+      const venueEl = li.querySelector('.pub-venue');
+      if (venueEl && TOP_VENUE_RE.test(venueEl.textContent) && !/workshop/i.test(venueEl.textContent)) {
+        venueEl.classList.add('is-top');
+      }
+    });
+
+    // Auto-generate clean BibTeX from each publication's DOM metadata
+    function buildBibTeX(li) {
+      const title = (li.querySelector('.pub-title')?.textContent || '').trim();
+      const rawAuthors = (li.querySelector('.pub-authors')?.textContent || '')
+        .replace(/\*/g, '')
+        .replace(/,\s+and\s+/g, ', ')
+        .replace(/\s+and\s+/g, ', ');
+      const authors = rawAuthors.split(',').map(s => s.trim()).filter(Boolean);
+      const venue = (li.querySelector('.pub-venue')?.textContent || '').trim();
+      const yearMatch = venue.match(/\b(20\d{2})\b/);
+      const year = yearMatch ? yearMatch[1] : '2026';
+
+      const firstLast = (authors[0] || 'wen')
+        .split(/\s+/).pop()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase().replace(/[^a-z]/g, '') || 'wen';
+      const stop = new Set(['a', 'an', 'the', 'of', 'for', 'on', 'in', 'to', 'with', 'by', 'and', 'does']);
+      const titleWord = (title.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/).find(w => w.length > 1 && !stop.has(w)) || 'paper')
+        .replace(/-/g, '');
+      const key = `${firstLast}${year}${titleWord}`;
+
+      const arxivHref = li.querySelector('a[href*="arxiv.org/abs/"]')?.getAttribute('href') || '';
+      const arxivId = arxivHref.match(/arxiv\.org\/abs\/([^?#]+)/)?.[1] || '';
+      const doiHref = li.querySelector('a[href*="doi.org/"]')?.getAttribute('href') || '';
+      const doi = doiHref.match(/doi\.org\/(.+)/)?.[1] || '';
+
+      const isArxiv = /arxiv/i.test(venue);
+      const isConf = /\b(NeurIPS|ICML|ICLR|Workshop)\b/i.test(venue);
+      let entryType = isConf ? 'inproceedings' : 'article';
+      const lines = [`@${entryType}{${key},`];
+      lines.push(`  title     = {${title}},`);
+      lines.push(`  author    = {${authors.join(' and ')}},`);
+
+      if (isConf) {
+        let booktitle = venue.replace(/\b20\d{2}\b/, '').replace(/\s+/g, ' ').trim();
+        if (/NeurIPS/i.test(venue)) booktitle = 'Advances in Neural Information Processing Systems (NeurIPS)';
+        else if (/ICML.*Workshop/i.test(venue)) booktitle = 'ICML Workshop on AI4Physics';
+        else if (/ICML/i.test(venue)) booktitle = 'International Conference on Machine Learning (ICML)';
+        else if (/ICLR/i.test(venue)) booktitle = 'International Conference on Learning Representations (ICLR)';
+        lines.push(`  booktitle = {${booktitle}},`);
+      } else if (isArxiv) {
+        lines.push(`  journal   = {arXiv preprint arXiv:${arxivId}},`);
+      } else {
+        const journal = venue.replace(/,\s*20\d{2}\s*$/, '').trim();
+        lines.push(`  journal   = {${journal}},`);
+      }
+      lines.push(`  year      = {${year}}${doi || (arxivId && !isArxiv) ? ',' : ''}`);
+      if (doi) lines.push(`  doi       = {${doi}}`);
+      else if (arxivId && !isArxiv) lines.push(`  eprint    = {${arxivId}}`);
+      lines.push('}');
+      return { key, bib: lines.join('\n') };
+    }
+
+    pubItems.forEach(li => {
+      const meta = li.querySelector('.pub-meta');
+      if (!meta) return;
+      const { key, bib } = buildBibTeX(li);
+
+      const bibBtn = document.createElement('button');
+      bibBtn.type = 'button';
+      bibBtn.className = 'pub-link pub-bib-btn';
+      bibBtn.textContent = 'BibTeX';
+      bibBtn.setAttribute('aria-expanded', 'false');
+      meta.appendChild(bibBtn);
+
+      const box = document.createElement('div');
+      box.className = 'pub-bib-box';
+      box.hidden = true;
+      box.innerHTML =
+        `<div class="pub-bib-head">` +
+          `<span class="pub-bib-key">@${key}</span>` +
+          `<button type="button" class="pub-bib-copy">Copy</button>` +
+        `</div>` +
+        `<pre class="pub-bib-code"></pre>`;
+      box.querySelector('.pub-bib-code').textContent = bib;
+      li.appendChild(box);
+
+      const copyBtn = box.querySelector('.pub-bib-copy');
+      let copyTimer = 0;
+      copyBtn.addEventListener('click', async () => {
+        const ok = await copyText(bib);
+        if (!ok) return;
+        clearTimeout(copyTimer);
+        copyBtn.classList.add('is-copied');
+        copyBtn.textContent = 'Copied ✓';
+        copyTimer = setTimeout(() => {
+          copyBtn.classList.remove('is-copied');
+          copyBtn.textContent = 'Copy';
+        }, 1600);
+      });
+
+      bibBtn.addEventListener('click', () => {
+        const opening = box.hidden;
+        box.hidden = !opening;
+        bibBtn.setAttribute('aria-expanded', String(opening));
+      });
+    });
+
+    // Inject category counts on filter buttons
+    pubFilters.forEach(btn => {
+      const f = btn.dataset.filter;
+      let count = 0;
+      pubItems.forEach(li => {
+        if (f === 'all' || li.dataset.tags.split(' ').includes(f)) count++;
+      });
+      const badge = document.createElement('span');
+      badge.className = 'pub-filter-count';
+      badge.textContent = String(count);
+      btn.appendChild(badge);
+    });
+
+    function positionFilterInk() {
+      if (!pubInk || !pubFilterBar) return;
+      const active = pubFilterBar.querySelector('.pub-filter[aria-pressed="true"]');
+      if (!active) return;
+      const wrapped = pubFilterBar.scrollHeight > active.offsetHeight * 1.75;
+      pubFilterBar.classList.toggle('has-ink', !wrapped);
+      if (wrapped) {
+        pubInk.style.opacity = '0';
+        return;
+      }
+      pubInk.style.opacity = '1';
+      pubInk.style.width = `${active.offsetWidth}px`;
+      pubInk.style.transform = `translateX(${active.offsetLeft}px)`;
+    }
+
+    function applyPubFilter(filter, animate) {
+      pubFilters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+      let visibleIdx = 0;
+      pubItems.forEach(li => {
+        const show = filter === 'all' || li.dataset.tags.split(' ').includes(filter);
+        li.hidden = !show;
+        li.classList.remove('is-entering');
+        if (show && animate && !reduceMotion) {
+          void li.offsetWidth;
+          li.style.animationDelay = `${Math.min(visibleIdx * 24, 140)}ms`;
+          li.classList.add('is-entering');
+          visibleIdx++;
+        } else {
+          li.style.animationDelay = '';
+        }
+      });
+      positionFilterInk();
+    }
+    pubFilters.forEach(b => b.addEventListener('click', () => applyPubFilter(b.dataset.filter, true)));
     pubFilterBar.hidden = false;
-    applyPubFilter('featured');
+    applyPubFilter('featured', false);
+    window.addEventListener('resize', positionFilterInk, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(positionFilterInk);
+    }
 
     // ── Hero field ──
     // A damped wave equation  u_tt = c² Δu − γ u_t  on a structured triangular mesh,
@@ -884,29 +1484,36 @@
     // explicitly (leapfrog). On this mesh the P1 stiffness matrix reduces to the
     // 5-point stencil used below. The boundary is clamped (u = 0), and so are the nodes
     // under the initials "SW": they act as rigid obstacles that the waves scatter off.
+    // Supports two modes: point-source drops and harmonic plane-wave diffraction.
     // Lines are coloured by displacement with ParaView's cool-to-warm map.
     (function () {
       const canvas = document.getElementById('field');
-      const hero = document.getElementById('field-panel');
+      const hero = document.getElementById('field-frame') || document.getElementById('field-panel');
+      const readoutEl = document.getElementById('field-readout');
+      const noteEl = document.getElementById('field-note');
+      const modeBtns = document.querySelectorAll('[data-sim-mode]');
+      const pulseBtn = document.getElementById('sim-pulse');
+      const toggleBtn = document.getElementById('sim-toggle');
+      const resetBtn = document.getElementById('sim-reset');
       if (!canvas || !canvas.getContext || !hero) return;
       const ctx = canvas.getContext('2d');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const C2 = 0.24;        // (c·dt/h)², below the CFL limit of 0.5
       const DAMPING = 0.014;  // γ·dt
       const BINS = 12;        // colour bins on each side of zero
       const U_MAX = 0.24;     // displacement mapped to full colour
-
       const INITIALS = 'SW';
 
       let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp, solid;
       let palette = null, inkColor = '';
-      let running = false, visible = true, raf = 0, last = 0, acc = 0, nextDrop = 0;
+      let running = false, visible = true, userPaused = false;
+      let raf = 0, last = 0, acc = 0, nextDrop = 0, simStep = 0;
+      let simMode = 'drops';  // 'drops' | 'plane'
       let pointerI = -1, pointerJ = -1;
-      let drawCost = 0, skipNext = false;   // on slow devices, draw every other frame
+      let drawCost = 0, skipNext = false;
 
       // Projection: the mesh lies flat and is seen from a low angle.
-      const NEAR = 1.0, FAR = 0.7;            // scale at the near and far edge
+      const NEAR = 1.0, FAR = 0.7;
       const depthOf = z => FAR + (NEAR - FAR) * z;
       const rowOf = z => (FAR * z + 0.5 * (NEAR - FAR) * z * z) / (0.5 * (NEAR + FAR));
       let spanX, top0, spanY;
@@ -923,7 +1530,7 @@
           const t = Math.abs(b) / BINS;
           const end = b < 0 ? cool : warm;
           const rgb = base.map((v, i) => Math.round(v + (end[i] - v) * Math.pow(t, 0.8)));
-          const alpha = baseAlpha + (0.95 - baseAlpha) * Math.pow(t, 1.15);  // faint ripples stay quiet
+          const alpha = baseAlpha + (0.95 - baseAlpha) * Math.pow(t, 1.15);
           palette.push(`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha.toFixed(3)})`);
         }
       }
@@ -947,7 +1554,7 @@
         amp = new Float32Array(NY);
         solid = new Uint8Array(NX * NY);
 
-        spanX = W * 1.52;      // width of the near edge; the far edge still overshoots the panel
+        spanX = W * 1.52;
         top0 = H * 0.04;
         spanY = H * 0.95;
         for (let j = 0; j < NY; j++) {
@@ -961,10 +1568,9 @@
         }
         markInitials();
         buildPalette();
+        if (readoutEl) readoutEl.textContent = `P1 FEM · ${NX}×${NY}`;
       }
 
-      // Rasterise the initials in screen space and clamp every mesh node that falls under
-      // them, so the letters read upright whatever the perspective.
       function markInitials() {
         const mask = document.createElement('canvas');
         mask.width = Math.ceil(W);
@@ -982,7 +1588,6 @@
         }
       }
 
-      // Screen → mesh coordinates (inverse of the projection above, ignoring displacement)
       function locate(px, py) {
         const v = Math.min(1, Math.max(0, (py - top0) / spanY)) * 0.5 * (NEAR + FAR);
         const a = 0.5 * (NEAR - FAR);
@@ -991,7 +1596,6 @@
         return [((px - W / 2) / (spanX * d) + 0.5) * (NX - 1), z * (NY - 1)];
       }
 
-      // A smooth bump added to both time levels: a displaced membrane, released at rest
       function drop(ci, cj, strength, radius) {
         const r = Math.ceil(radius * 3);
         for (let j = Math.max(1, Math.floor(cj - r)); j <= Math.min(NY - 2, Math.ceil(cj + r)); j++) {
@@ -1005,12 +1609,23 @@
       }
 
       function step() {
+        simStep++;
+        const isPlane = simMode === 'plane';
+        const drive = isPlane ? Math.sin(simStep * 0.20) * 0.24 : 0;
         for (let j = 1; j < NY - 1; j++) {
+          const edgeTaper = isPlane ? Math.sin(Math.PI * j / (NY - 1)) : 0;
           for (let i = 1; i < NX - 1; i++) {
             const k = j * NX + i;
             if (solid[k]) { uNext[k] = 0; continue; }
+            if (isPlane && i === 2) {
+              uNext[k] = drive * edgeTaper;
+              continue;
+            }
             const lap = u[k - 1] + u[k + 1] + u[k - NX] + u[k + NX] - 4 * u[k];
-            uNext[k] = 2 * u[k] - uPrev[k] + C2 * lap - DAMPING * (u[k] - uPrev[k]);
+            // Gentle sponge damping near the far-right edge in plane-wave mode to reduce reflection
+            const sponge = isPlane && i > NX - 10 ? 0.016 * (i - (NX - 10)) : 0;
+            const damp = (isPlane ? 0.008 : DAMPING) + sponge;
+            uNext[k] = 2 * u[k] - uPrev[k] + C2 * lap - damp * (u[k] - uPrev[k]);
           }
         }
         const t = uPrev; uPrev = u; u = uNext; uNext = t;
@@ -1020,7 +1635,7 @@
         ctx.clearRect(0, 0, W, H);
         const paths = [];
         for (let b = 0; b <= 2 * BINS; b++) paths.push(new Path2D());
-        const ink = new Path2D();   // edges inside the initials
+        const ink = new Path2D();
         const seg = (a, b) => {
           if (solid[a] && solid[b]) { ink.moveTo(sx[a], sy[a]); ink.lineTo(sx[b], sy[b]); return; }
           const ja = (a / NX) | 0, jb = (b / NX) | 0;
@@ -1035,9 +1650,9 @@
         for (let j = 0; j < NY; j++) {
           for (let i = 0; i < NX; i++) {
             const k = j * NX + i;
-            if (i < NX - 1) seg(k, k + 1);                       // edge along x
-            if (j < NY - 1) seg(k, k + NX);                      // edge along y
-            if (i < NX - 1 && j < NY - 1) seg(k, k + NX + 1);    // diagonal: two triangles per cell
+            if (i < NX - 1) seg(k, k + 1);
+            if (j < NY - 1) seg(k, k + NX);
+            if (i < NX - 1 && j < NY - 1) seg(k, k + NX + 1);
           }
         }
         ctx.lineWidth = 0.7;
@@ -1050,12 +1665,12 @@
         ctx.stroke(ink);
       }
 
-      function randomDrop(strength) {
+      function randomDrop(strength, attempt) {
+        if ((attempt || 0) > 12) return;
         const i = 6 + Math.random() * (NX - 12);
         const j = 5 + Math.random() * (NY - 10);
-        // keep ambient drops inside the visible part of the mesh
         const k = Math.round(j) * NX + Math.round(i);
-        if (sx[k] < 0 || sx[k] > W || solid[k]) return randomDrop(strength);
+        if (sx[k] < 0 || sx[k] > W || solid[k]) return randomDrop(strength, (attempt || 0) + 1);
         drop(i, j, strength, 3.6 + Math.random() * 1.8);
       }
 
@@ -1067,7 +1682,7 @@
         acc += dt;
         let n = 0;
         while (acc >= 1 / 60 && n < 3) { step(); acc -= 1 / 60; n++; }
-        if (now > nextDrop) {
+        if (simMode === 'drops' && now > nextDrop) {
           randomDrop((Math.random() < 0.5 ? -1 : 1) * (0.55 + Math.random() * 0.35));
           nextDrop = now + 2600 + Math.random() * 2600;
         }
@@ -1082,8 +1697,26 @@
         raf = requestAnimationFrame(frame);
       }
 
+      function updateNote() {
+        if (!noteEl) return;
+        if (reduceMotion) {
+          noteEl.textContent = 'A wave equation on a finite-element mesh, scattering off my initials.';
+        } else {
+          noteEl.textContent = simMode === 'plane'
+            ? 'A harmonic plane wave on a finite-element mesh, diffracting around my initials. Click or move across it to disturb the field.'
+            : 'A wave equation on a finite-element mesh, scattering off my initials. Click or move across it to make waves.';
+        }
+      }
+
+      function syncPauseUI() {
+        hero.classList.toggle('is-paused', userPaused || reduceMotion);
+        if (!toggleBtn) return;
+        toggleBtn.setAttribute('aria-pressed', String(userPaused));
+        toggleBtn.setAttribute('aria-label', userPaused ? 'Resume simulation' : 'Pause simulation');
+      }
+
       function start() {
-        if (running || reduceMotion || !visible || document.hidden) return;
+        if (running || reduceMotion || userPaused || !visible || document.hidden) return;
         running = true;
         last = performance.now();
         acc = 0;
@@ -1097,11 +1730,16 @@
       }
 
       function initialState() {
-        // Opening disturbance: a crest in front of the initials, a shallower trough behind them
-        drop(NX * 0.5, NY * 0.86, 1.0, 4.6);
-        drop(NX * 0.3, NY * 0.13, -0.7, 4.0);
+        simStep = 0;
+        u.fill(0); uPrev.fill(0); uNext.fill(0);
+        if (simMode === 'drops') {
+          drop(NX * 0.5, NY * 0.86, 1.0, 4.6);
+          drop(NX * 0.3, NY * 0.13, -0.7, 4.0);
+        } else {
+          for (let n = 0; n < 36; n++) step();
+        }
         if (reduceMotion) {
-          for (let n = 0; n < 60; n++) step();   // a single still frame, mid-propagation
+          for (let n = 0; n < 60; n++) step();
         }
       }
 
@@ -1109,18 +1747,62 @@
         setup();
         initialState();
         draw();
+        updateNote();
+      }
+
+      function setMode(mode) {
+        if (simMode === mode) return;
+        simMode = mode;
+        modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.simMode === mode)));
+        updateNote();
+        initialState();
+        draw();
+        if (userPaused) { userPaused = false; syncPauseUI(); start(); }
       }
 
       reset();
+      syncPauseUI();
       start();
-      // The initials are drawn with the page typeface; redo the mask once it has loaded
       if (document.fonts && document.fonts.load) {
         document.fonts.load('700 64px "Hanken Grotesk"').then(() => { markInitials(); if (!running) draw(); });
       }
 
-      // Disturb the membrane under the pointer (works for mouse, pen and touch)
+      // HUD controls
+      modeBtns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.simMode)));
+      if (pulseBtn) {
+        pulseBtn.addEventListener('click', () => {
+          drop(NX * 0.5, NY * 0.84, 1.05, 4.2);
+          drop(NX * 0.25, NY * 0.22, -0.8, 3.6);
+          if (userPaused) { userPaused = false; syncPauseUI(); start(); }
+          else if (!running) draw();
+        });
+      }
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          userPaused = !userPaused;
+          syncPauseUI();
+          userPaused ? stop() : start();
+        });
+      }
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          initialState();
+          draw();
+        });
+      }
+
+      // Interactive pointer: click emits a sharp impulse; moving across creates wakes
       if (!reduceMotion) {
+        hero.addEventListener('pointerdown', e => {
+          if (e.target.closest('.field-hud-bar')) return;
+          const rect = canvas.getBoundingClientRect();
+          const [i, j] = locate(e.clientX - rect.left, e.clientY - rect.top);
+          if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) return;
+          drop(i, j, 0.95, 3.6);
+          if (!running) draw();
+        });
         hero.addEventListener('pointermove', e => {
+          if (e.target.closest('.field-hud-bar')) { pointerI = -1; return; }
           const rect = canvas.getBoundingClientRect();
           const [i, j] = locate(e.clientX - rect.left, e.clientY - rect.top);
           if (i < 1 || i > NX - 2 || j < 1 || j > NY - 2) { pointerI = -1; return; }
@@ -1128,13 +1810,11 @@
             const dist = Math.hypot(i - pointerI, j - pointerJ);
             if (dist < 1) return;
             drop(i, j, -Math.min(0.5, 0.1 + dist * 0.045), 2.7);
+            if (!running) draw();
           }
           pointerI = i; pointerJ = j;
         }, { passive: true });
         hero.addEventListener('pointerleave', () => { pointerI = -1; });
-      } else {
-        document.getElementById('field-note').textContent =
-          'A wave equation on a finite-element mesh, scattering off my initials.';
       }
 
       // Run only while the hero is on screen and the tab is visible
@@ -1152,7 +1832,7 @@
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           const w = canvas.getBoundingClientRect().width;
-          if (Math.abs(w - lastW) < 2) return;   // ignore mobile URL-bar height changes
+          if (Math.abs(w - lastW) < 2) return;
           lastW = w;
           reset();
         }, 150);
