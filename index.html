@@ -1326,7 +1326,19 @@
       }
     });
 
-    // Auto-generate clean BibTeX from each publication's DOM metadata
+    // Auto-generate BibTeX from each publication's DOM metadata. These entries are built from
+    // what the page shows (title, authors, venue, arXiv / DOI links), so they carry no pages
+    // or volume; a paper that needs its official entry should get it by hand.
+
+    // Accented letters as LaTeX escapes, e.g. "Raonić" -> "Raoni{\'c}", so classic BibTeX copes
+    const TEX_ACCENTS = { '\u0300': '`', '\u0301': "'", '\u0302': '^', '\u0303': '~', '\u0308': '"', '\u030c': 'v ', '\u0327': 'c ' };
+    function texEscape(text) {
+      return text.normalize('NFD')
+        .replace(/([A-Za-z])([\u0300-\u036f])/g, (m, ch, mark) => TEX_ACCENTS[mark] ? `{\\${TEX_ACCENTS[mark]}${ch}}` : ch)
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/([&%#])/g, '\\$1');
+    }
+
     function buildBibTeX(li) {
       const title = (li.querySelector('.pub-title')?.textContent || '').trim();
       const rawAuthors = (li.querySelector('.pub-authors')?.textContent || '')
@@ -1356,25 +1368,32 @@
       const isConf = /\b(NeurIPS|ICML|ICLR|Workshop)\b/i.test(venue);
       let entryType = isConf ? 'inproceedings' : 'article';
       const lines = [`@${entryType}{${key},`];
-      lines.push(`  title     = {${title}},`);
-      lines.push(`  author    = {${authors.join(' and ')}},`);
+      // Double braces keep the title's capitalisation exactly as written (PDEs, TensorGalerkin,
+      // RIGNO, ...); without them many bibliography styles would lowercase it.
+      lines.push(`  title     = {{${texEscape(title)}}},`);
+      lines.push(`  author    = {${texEscape(authors.join(' and '))}},`);
 
       if (isConf) {
         let booktitle = venue.replace(/\b20\d{2}\b/, '').replace(/\s+/g, ' ').trim();
-        if (/NeurIPS/i.test(venue)) booktitle = 'Advances in Neural Information Processing Systems (NeurIPS)';
-        else if (/ICML.*Workshop/i.test(venue)) booktitle = 'ICML Workshop on AI4Physics';
+        if (/Workshop/i.test(venue)) {
+          // "ICML 2026 Workshop (AI4Physics)" -> "ICML Workshop on AI4Physics": the name comes from the page
+          const topic = venue.match(/\(([^)]+)\)/)?.[1];
+          const conf = booktitle.replace(/\s*\([^)]*\)/, '').trim();
+          booktitle = topic ? `${conf} on ${topic}` : conf;
+        }
+        else if (/NeurIPS/i.test(venue)) booktitle = 'Advances in Neural Information Processing Systems (NeurIPS)';
         else if (/ICML/i.test(venue)) booktitle = 'International Conference on Machine Learning (ICML)';
         else if (/ICLR/i.test(venue)) booktitle = 'International Conference on Learning Representations (ICLR)';
-        lines.push(`  booktitle = {${booktitle}},`);
+        lines.push(`  booktitle = {${texEscape(booktitle)}},`);
       } else if (isArxiv) {
         lines.push(`  journal   = {arXiv preprint arXiv:${arxivId}},`);
       } else {
         const journal = venue.replace(/,\s*20\d{2}\s*$/, '').trim();
-        lines.push(`  journal   = {${journal}},`);
+        lines.push(`  journal   = {${texEscape(journal)}},`);
       }
       lines.push(`  year      = {${year}}${doi || (arxivId && !isArxiv) ? ',' : ''}`);
       if (doi) lines.push(`  doi       = {${doi}}`);
-      else if (arxivId && !isArxiv) lines.push(`  eprint    = {${arxivId}}`);
+      else if (arxivId && !isArxiv) lines.push(`  eprint    = {${arxivId}},`, `  archivePrefix = {arXiv}`);
       lines.push('}');
       return { key, bib: lines.join('\n') };
     }

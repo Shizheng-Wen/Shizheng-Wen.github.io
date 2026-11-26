@@ -72,16 +72,28 @@ When the user describes a change in natural language:
 
 The page is a compact, pitch-style single page. Top to bottom:
 
+- **Nav** (`#site-nav`, sticky): `.nav-brand` (name, fades in once the hero identity row has
+  scrolled away), `.nav-links`, the theme toggle, and `#read-progress`, a thin reading-progress
+  line along the bottom edge.
+
 - **Hero** (`<header class="hero" id="top">`), two columns. Left: `.id` (avatar, name as the
   `<h1>`, status label), the `.tagline` (the accent-coloured half is `<span class="tone">`),
-  the `.lede` paragraph (key terms in `<b>`), `.cta` (email button + `.social` links), and the
-  `.facts` list (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
-  Right: `#field-panel`, the live simulation with its caption `#field-note`.
+  the `.lede` paragraph (key terms in `<b>`), `.cta` (`.cta-actions` with the email button and
+  the `#copy-email` button, then `.social` links), and the `.facts` list
+  (`<dt class="label">` / `<dd>` pairs: Based at, Open source, Recognition).
+  Right: `#field-panel`. Inside `#field-frame` sit the canvas, a mesh readout
+  (`#field-readout`, filled by the script) and the control bar `.field-hud-bar`
+  (Drops / Plane modes, Pulse, pause, reset); below it the caption `#field-note`.
 - **Selected work** (`#work`): `.work-grid` of four `.work-card`s covering the stack:
   GAOT, TensorMesh, torch-sla, Preconditioned PINO (in that order).
 - **News** (`#news`) and **Invited talks** (`#talks`), side by side. Both lists carry the
-  `scroll-list` class: the same fixed height, scrolling inside it to reach older items.
+  `scroll-list` class: the same fixed height, scrolling inside it to reach older items. Each
+  heading sits in a `.col-head` with a `.list-toggle` button ("All (N)" / "Collapse", labelled
+  by the script) that expands the list to full height.
 - **Publications** (`#publications`), a two-column list with filter buttons in the heading row.
+  The script adds, for every paper: the count on each filter button, a highlight on main-track
+  NeurIPS / ICML / ICLR venues (`.pub-venue.is-top`), and a "BibTeX" link that opens a
+  copyable entry.
 - **Awards** (`#awards`), **Teaching** (`#teaching`), **Service** (`#service`), three columns.
 
 **Work card**
@@ -136,6 +148,15 @@ Each `pub-item` carries `data-tags` (space-separated: `featured`, `neural-operat
 Give every new paper at least one category tag (and `featured` if it should appear by
 default), and record the tags in `page-story.md`.
 
+The BibTeX entry is **generated from this markup** by `buildBibTeX()` in the script, so the
+markup has to stay regular:
+- authors separated by commas (a final "and" is fine), `<sup>*</sup>` for equal contribution;
+- venue written as `Conf YYYY` (e.g. `NeurIPS 2025`), `Conf YYYY Workshop (Name)`,
+  `arXiv preprint, YYYY`, or `Journal Name, YYYY`;
+- an `arxiv.org/abs/…` and/or `doi.org/…` link among the `pub-link`s.
+The generated entry has no pages or volume, and the title is double-braced to keep its
+capitalisation. After adding a paper, open its BibTeX on the page and check it reads right.
+
 **Awards** — `<li>Award name <span class="award-year">2026</span></li>` in `.award-list`.
 
 ## Design
@@ -150,20 +171,33 @@ Keep these when editing, so the page stays one system:
 - **Type**: Hanken Grotesk for text and headings (400 / 600); DM Mono, small, uppercase and
   letter-spaced (class `label`), for metadata: dates, venues, link rows, nav.
 - **Rules, not boxes**: rows are separated by 1px `--rule` lines. The only framed elements are
-  the field panel and the work thumbnails.
+  the field panel, the work thumbnails and an open BibTeX drawer. List rows (news, talks,
+  publications, awards, teaching) get a faint `--panel-hover` background on hover; they use a
+  small negative side margin for that, so their rules run slightly wider than the headings.
+- **Motion**: the hero text and field panel rise in once on load; each `.block` carrying the
+  `reveal` class fades in the first time it scrolls into view (give new blocks that class);
+  publication rows animate when the filter changes. All of it is switched off under
+  `prefers-reduced-motion`, and nothing is hidden when JavaScript is unavailable.
 - **Hero field** — the `<canvas id="field">` is a live simulation, not decoration: a damped
   wave equation on a structured triangular mesh (P1 finite elements, lumped mass, explicit
   time stepping), coloured with a cool-to-warm map. The nodes under the initials "SW"
   (`INITIALS` in the script) are clamped and drawn in the accent colour, so the waves scatter
-  off them. The script is the last block in
-  `index.html`; it pauses off-screen, and shows a single still frame under
-  `prefers-reduced-motion`. The caption `#field-note` says what it is; keep the two in sync.
+  off them. Two modes: **Drops** (point disturbances; the default) and **Plane** (a harmonic
+  source along the left edge, with a damping layer on the right, so a plane wave diffracts
+  around the letters). Clicking or moving over the panel adds disturbances; the control bar
+  can pulse, pause and reset. The script is the last block in `index.html`; it pauses
+  off-screen, and under `prefers-reduced-motion` shows a single still frame and hides the
+  controls. The caption `#field-note` is rewritten by `updateNote()` per mode; keep its
+  wording true to what the simulation does.
 - Light is the default theme; the toggle stores the visitor's choice in `localStorage`. In light
   mode the page background is a soft cool-to-warm gradient wash behind the top of the page
   (`:root[data-theme="light"] body`), fading into flat `--paper`; dark mode stays flat.
 
 ## Conventions
 
+- This repo is also edited outside these sessions (e.g. from an IDE agent). Start by pulling
+  `main`, and when a change alters the page's structure or behaviour, update this file in the
+  same commit so the next session reads an accurate description.
 - Equal contribution: `<sup>*</sup>` in HTML, `\eq` macro in LaTeX.
 - Own name highlighted: `<span class="me">` in HTML, `\me{…}` in LaTeX.
 - Prefer arXiv `…/abs/…` URLs (not `…/pdf/…`).
