@@ -830,8 +830,8 @@
               <span class="field-telemetry"><span class="field-dot"></span><span id="field-readout">P1 FEM · 104×52</span></span>
             </div>
             <div class="view-switch" id="view-switch" role="group" aria-label="Panel view" hidden>
-              <button class="hud-btn" type="button" data-view="field" aria-pressed="true">Field</button>
               <button class="hud-btn" type="button" data-view="research" aria-pressed="false">Research</button>
+              <button class="hud-btn" type="button" data-view="field" aria-pressed="false">Simulation</button>
             </div>
             <canvas id="field" aria-hidden="true"></canvas>
             <div class="research-view" id="research-view">
@@ -1721,7 +1721,7 @@
       });
       show(null);
 
-      // View switch: the field pauses while the map is showing
+      // View switch (Research / Simulation): the simulation pauses while the map is showing
       const buttons = switcher.querySelectorAll('[data-view]');
       function setView(view) {
         const research = view === 'research';
@@ -1732,6 +1732,7 @@
       }
       buttons.forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
       switcher.hidden = false;
+      setView('research');   // the map is the default view; the simulation starts when it is opened
     })();
 
     // ── Hero field ──
@@ -1762,7 +1763,8 @@
 
       let NX, NY, W, H, u, uPrev, uNext, sx, sy, amp, solid;
       let palette = null, inkColor = '';
-      let running = false, visible = true, userPaused = false, viewHidden = false;
+      let running = false, visible = true, userPaused = false;
+      let viewHidden = hero.classList.contains('is-research');   // the research map opens first
       let raf = 0, last = 0, acc = 0, nextDrop = 0, simStep = 0;
       let simMode = 'drops';  // 'drops' | 'plane'
       let pointerI = -1, pointerJ = -1;
