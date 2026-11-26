@@ -195,7 +195,9 @@ Keep these when editing, so the page stays one system:
 - **Research map** — research drawn as one linear finite element. The three nodes are the
   layers (infrastructure, architecture, training); each project is a point inside, placed by
   barycentric weights `w: [infrastructure, architecture, training]` in the `ITEMS` array of the
-  script; the foundation model sits at the centroid. Hover or focus previews an item, click or
+  script; the foundation model sits at the centroid. The element is shaded by blending one
+  colour per node (`--rm-a`, `--rm-b`, `--rm-c`, set per theme) across its cells, and the view
+  has a soft wash in the same three colours behind it. Hover or focus previews an item, click or
   tap pins it; a layer dims projects that barely draw on it, a project draws ties to the three
   nodes weighted by `w`. To add a project, add an entry to `ITEMS` (name, weights summing to 1,
   one sentence, link, label offset) and check its label does not collide with a neighbour. The

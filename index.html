@@ -59,6 +59,8 @@
       --warm:   #FF8E73;
       --nav-bg: rgba(12, 14, 18, 0.78);
       --frame-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      /* research map: one colour per node of the element, blended across it */
+      --rm-a: #93A7FF; --rm-b: #B79CFF; --rm-c: #FF9478; --rm-shade: 0.26; --rm-wash: 0.09;
       --max-w:  70rem;
       --gutter: clamp(1.25rem, 4vw, 2.5rem);
       --ease:   cubic-bezier(0.22, 1, 0.36, 1);
@@ -78,6 +80,7 @@
       --warm:   #B40426;
       --nav-bg: rgba(247, 248, 250, 0.84);
       --frame-shadow: 0 20px 48px -28px rgba(15, 27, 45, 0.16), 0 1px 2px rgba(15, 27, 45, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      --rm-a: #3B4CC0; --rm-b: #8A5FE6; --rm-c: #F06A48; --rm-shade: 0.2; --rm-wash: 0.13;
     }
 
     /* Smooth theme transition only while user toggles theme */
@@ -422,10 +425,16 @@
       display: flex; flex-direction: column;
       padding: 2.9rem 1.1rem 1rem;
       opacity: 0; visibility: hidden; pointer-events: none;
+      /* a soft wash in the node colours: cool from the infrastructure corner, warm from the top */
+      background:
+        radial-gradient(85% 70% at 0% 62%, color-mix(in srgb, var(--rm-a) calc(var(--rm-wash) * 100%), transparent), transparent 70%),
+        radial-gradient(85% 70% at 100% 62%, color-mix(in srgb, var(--rm-b) calc(var(--rm-wash) * 100%), transparent), transparent 70%),
+        radial-gradient(70% 55% at 50% 0%, color-mix(in srgb, var(--rm-c) calc(var(--rm-wash) * 100%), transparent), transparent 72%);
     }
     .field-frame.is-research .research-view { opacity: 1; visibility: visible; pointer-events: auto; }
     .rm-svg { flex: 1 1 auto; min-height: 0; width: 100%; overflow: visible; }
-    .rm-mesh { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .rm-shade polygon { fill-opacity: var(--rm-shade); stroke: none; }
+    .rm-mesh { stroke: var(--paper); stroke-width: 1; stroke-opacity: 0.85; fill: none; }
     .rm-edge { stroke: var(--muted); stroke-width: 1.2; fill: none; transition: stroke 160ms ease-out, stroke-width 160ms ease-out; }
     .rm-edge.is-lit { stroke: var(--cool); stroke-width: 1.8; }
     .rm-tie { stroke: var(--cool); stroke-linecap: round; pointer-events: none; transition: opacity 160ms ease-out; }
@@ -1595,7 +1604,7 @@
         { id: 'training', kind: 'Layer', name: 'Training', w: [0, 0, 1], label: [0, -13, 'middle'],
           text: 'Label-free training from the governing equations, so scale is not capped by labelled data.' },
         { id: 'tensormesh', kind: 'Project', name: 'TensorMesh', w: [0.70, 0.06, 0.24], label: [12, 4, 'start'],
-          text: 'Finite elements in PyTorch. Mostly infrastructure, with a hand in training: it supplies the physics loss.',
+          text: 'Finite elements in PyTorch. Mostly infrastructure, with a hand in training through physics loss evaluation.',
           href: 'https://www.tensor-mesh.com/', link: 'Project page' },
         { id: 'torch-sla', kind: 'Project', name: 'torch-sla', w: [0.84, 0.06, 0.10], label: [12, 4, 'start'],
           text: 'Differentiable sparse linear algebra: the solver layer underneath everything else.',
@@ -1613,7 +1622,7 @@
           text: 'Physics-informed operator training. Multigrid preconditioning lets label-free training match supervised accuracy.',
           href: 'https://arxiv.org/abs/2609.36216', link: 'Paper' },
         { id: 'foundation', kind: 'Goal', name: 'Physics foundation model', short: 'Foundation model', w: [1 / 3, 1 / 3, 1 / 3], label: [0, -13, 'middle'], goal: true,
-          text: 'Where the three layers meet: one model pretrained across diverse physical systems. In progress.' }
+          text: 'Where the three layers meet: one model pretrained across diverse physical systems. Release soon.' }
       ];
 
       const NS = 'http://www.w3.org/2000/svg';
@@ -1626,11 +1635,29 @@
       const at = w => [0, 1].map(c => w[0] * NODES[0][c] + w[1] * NODES[1][c] + w[2] * NODES[2][c]);
       const along = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
 
-      // The element, refined once into a small mesh
+      // The element, refined into a small mesh. Each cell is shaded with the blend of the three node
+      // colours at its centre: linear interpolation over the element, drawn piecewise constant.
       const [A, B, C] = NODES;
+      const N = 6;
+      const shade = el('g', { class: 'rm-shade', 'aria-hidden': 'true' }, svg);
+      const lattice = (i, j) => at([(N - i - j) / N, i / N, j / N]);
+      const cell = corners => {
+        const w = [0, 0, 0];
+        corners.forEach(([i, j]) => { w[0] += (N - i - j) / N / 3; w[1] += i / N / 3; w[2] += j / N / 3; });
+        const ab = w[0] + w[1] > 0 ? (w[0] / (w[0] + w[1])) * 100 : 50;
+        const fill = `color-mix(in srgb, var(--rm-c) ${(w[2] * 100).toFixed(1)}%, color-mix(in srgb, var(--rm-a) ${ab.toFixed(1)}%, var(--rm-b)))`;
+        const poly = el('polygon', { points: corners.map(c => lattice(c[0], c[1]).map(v => v.toFixed(1)).join(',')).join(' ') }, shade);
+        poly.style.fill = fill;
+      };
+      for (let j = 0; j < N; j++) {
+        for (let i = 0; i + j < N; i++) {
+          cell([[i, j], [i + 1, j], [i, j + 1]]);
+          if (i + j < N - 1) cell([[i + 1, j], [i + 1, j + 1], [i, j + 1]]);
+        }
+      }
       let mesh = '';
-      for (let k = 1; k < 6; k++) {
-        for (const [p, q] of [[along(A, C, k / 6), along(B, C, k / 6)], [along(A, B, k / 6), along(C, B, k / 6)], [along(B, A, k / 6), along(C, A, k / 6)]]) {
+      for (let k = 1; k < N; k++) {
+        for (const [p, q] of [[along(A, C, k / N), along(B, C, k / N)], [along(A, B, k / N), along(C, B, k / N)], [along(B, A, k / N), along(C, A, k / N)]]) {
           mesh += `M${p[0].toFixed(1)} ${p[1].toFixed(1)}L${q[0].toFixed(1)} ${q[1].toFixed(1)}`;
         }
       }
